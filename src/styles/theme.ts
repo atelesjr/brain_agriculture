@@ -1,3 +1,5 @@
+import { breakpoints, media } from './media_queries';
+
 export const theme = {
 	colors: {
 		primary: '#00793cff',
@@ -26,6 +28,8 @@ export const theme = {
 		md: '1rem',
 		lg: '1.125rem',
 	},
+	breakpoints,
+	media,
 } as const;
 
 export type Theme = typeof theme;

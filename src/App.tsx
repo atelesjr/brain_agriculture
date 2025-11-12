@@ -1,7 +1,12 @@
 function App() {
 	return (
 		<div>
-			<h1>Brain Agriculture</h1>
+			<header>
+				<h1>Brain Agriculture</h1>
+			</header>
+			<main>
+				<p>Welcome to the Brain Agriculture app!</p>
+			</main>
 		</div>
 	);
 }

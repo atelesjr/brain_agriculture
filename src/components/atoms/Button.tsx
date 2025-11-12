@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import { StyledButton } from './Button.styles';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
@@ -18,7 +18,7 @@ export interface ButtonProps
  * - Simples, acessível, com variantes e tamanhos
  * - Usa forwardRef para compatibilidade com formulários e testes
  */
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 	(props, ref) => {
 		const {
 			variant = 'primary',
