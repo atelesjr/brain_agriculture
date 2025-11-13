@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { StyledButton } from './Button.styles';
+import { StyledButton } from './styles';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';

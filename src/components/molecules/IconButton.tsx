@@ -1,5 +1,5 @@
 import React from 'react';
-import Button, { type ButtonProps } from '../atoms/Button';
+import Button, { type ButtonProps } from '../atoms/Buttons';
 
 interface IconButtonProps extends Omit<ButtonProps, 'children'> {
 	icon: React.ReactNode;
