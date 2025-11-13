@@ -1,0 +1,446 @@
+{
+	"produtores": [
+		{
+			"id": 1,
+			"document": "111.222.333-44",
+			"documentType": "CPF",
+			"name": "João da Silva",
+			"farms": [
+				{
+					"id": "f-1-1",
+					"name": "Fazenda Boa Vista",
+					"city": "Uberlândia",
+					"state": "MG",
+					"areaTotal": 120.0,
+					"cultivableLand": 80.0,
+					"vegetatedArea": 30.0,
+					"safras": [
+						{
+							"year": 2021,
+							"name": "Safra 2021",
+							"cultures": [
+								{ "name": "Soja", "areaPlanted": 50.0 },
+								{ "name": "Milho", "areaPlanted": 20.0 }
+							]
+						},
+						{
+							"year": 2022,
+							"name": "Safra 2022",
+							"cultures": [{ "name": "Algodão", "areaPlanted": 30.0 }]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": 2,
+			"document": "55.666.777/0001-88",
+			"documentType": "CNPJ",
+			"name": "Agropecuária Verde LTDA.",
+			"farms": [
+				{
+					"id": "f-2-1",
+					"name": "Sítio Verde",
+					"city": "Cascavel",
+					"state": "PR",
+					"areaTotal": 500.0,
+					"cultivableLand": 350.0,
+					"vegetatedArea": 100.0,
+					"safras": [
+						{
+							"year": 2022,
+							"name": "Safra 2022",
+							"cultures": [
+								{ "name": "Soja", "areaPlanted": 200.0 },
+								{ "name": "Milho", "areaPlanted": 120.0 }
+							]
+						},
+						{
+							"year": 2023,
+							"name": "Safra 2023",
+							"cultures": [
+								{ "name": "Soja", "areaPlanted": 180.0 },
+								{ "name": "Feijão", "areaPlanted": 50.0 }
+							]
+						}
+					]
+				},
+				{
+					"id": "f-2-2",
+					"name": "Fazenda Bela Vista",
+					"city": "Paranavaí",
+					"state": "PR",
+					"areaTotal": 220.0,
+					"cultivableLand": 150.0,
+					"vegetatedArea": 50.0,
+					"safras": [
+						{
+							"year": 2021,
+							"name": "Safra 2021",
+							"cultures": [{ "name": "Milho", "areaPlanted": 90.0 }]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": 3,
+			"document": "222.333.444-55",
+			"documentType": "CPF",
+			"name": "Mariana Rocha",
+			"farms": []
+		},
+		{
+			"id": 4,
+			"document": "99.888.777/0001-22",
+			"documentType": "CNPJ",
+			"name": "Fazendas União S/A",
+			"farms": [
+				{
+					"id": "f-4-1",
+					"name": "Fazenda Horizonte",
+					"city": "Ribeirão Preto",
+					"state": "SP",
+					"areaTotal": 1500.0,
+					"cultivableLand": 1200.0,
+					"vegetatedArea": 200.0,
+					"safras": [
+						{
+							"year": 2020,
+							"name": "Safra 2020",
+							"cultures": [
+								{ "name": "Cana-de-açúcar", "areaPlanted": 800.0 },
+								{ "name": "Soja", "areaPlanted": 200.0 }
+							]
+						},
+						{
+							"year": 2021,
+							"name": "Safra 2021",
+							"cultures": [
+								{ "name": "Cana-de-açúcar", "areaPlanted": 700.0 },
+								{ "name": "Milho", "areaPlanted": 250.0 }
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": 5,
+			"document": "333.444.555-66",
+			"documentType": "CPF",
+			"name": "Lucas Pereira",
+			"farms": [
+				{
+					"id": "f-5-1",
+					"name": "Sítio do Lucas",
+					"city": "Juazeiro",
+					"state": "BA",
+					"areaTotal": 45.0,
+					"cultivableLand": 30.0,
+					"vegetatedArea": 10.0,
+					"safras": [
+						{
+							"year": 2022,
+							"name": "Safra 2022",
+							"cultures": [
+								{ "name": "Café", "areaPlanted": 8.0 },
+								{ "name": "Feijão", "areaPlanted": 10.0 }
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": 6,
+			"document": "44.555.666/0001-00",
+			"documentType": "CNPJ",
+			"name": "Cooperativa Campo Forte",
+			"farms": [
+				{
+					"id": "f-6-1",
+					"name": "Fazenda Campo Forte I",
+					"city": "Cuiabá",
+					"state": "MT",
+					"areaTotal": 800.0,
+					"cultivableLand": 600.0,
+					"vegetatedArea": 150.0,
+					"safras": [
+						{
+							"year": 2021,
+							"name": "Safra 2021",
+							"cultures": [
+								{ "name": "Soja", "areaPlanted": 350.0 },
+								{ "name": "Milho", "areaPlanted": 180.0 }
+							]
+						}
+					]
+				},
+				{
+					"id": "f-6-2",
+					"name": "Fazenda Campo Forte II",
+					"city": "Cuiabá",
+					"state": "MT",
+					"areaTotal": 320.0,
+					"cultivableLand": 200.0,
+					"vegetatedArea": 100.0,
+					"safras": []
+				}
+			]
+		},
+		{
+			"id": 7,
+			"document": "444.555.666-77",
+			"documentType": "CPF",
+			"name": "Ana Beatriz",
+			"farms": [
+				{
+					"id": "f-7-1",
+					"name": "Recanto das Flores",
+					"city": "Campos dos Goytacazes",
+					"state": "RJ",
+					"areaTotal": 60.0,
+					"cultivableLand": 40.0,
+					"vegetatedArea": 15.0,
+					"safras": [
+						{
+							"year": 2023,
+							"name": "Safra 2023",
+							"cultures": [{ "name": "Hortaliças", "areaPlanted": 10.0 }]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": 8,
+			"document": "77.111.222/0001-33",
+			"documentType": "CNPJ",
+			"name": "AgroTech Soluções",
+			"farms": [
+				{
+					"id": "f-8-1",
+					"name": "Fazenda Experimental",
+					"city": "Pelotas",
+					"state": "RS",
+					"areaTotal": 30.0,
+					"cultivableLand": 20.0,
+					"vegetatedArea": 5.0,
+					"safras": [
+						{
+							"year": 2021,
+							"name": "Safra 2021",
+							"cultures": [{ "name": "Trigo", "areaPlanted": 12.0 }]
+						},
+						{
+							"year": 2022,
+							"name": "Safra 2022",
+							"cultures": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": 9,
+			"document": "555.666.777-88",
+			"documentType": "CPF",
+			"name": "Raimundo Oliveira",
+			"farms": [
+				{
+					"id": "f-9-1",
+					"name": "Sitio São José",
+					"city": "Teresina",
+					"state": "PI",
+					"areaTotal": 95.0,
+					"cultivableLand": 60.0,
+					"vegetatedArea": 30.0,
+					"safras": [
+						{
+							"year": 2020,
+							"name": "Safra 2020",
+							"cultures": [{ "name": "Milho", "areaPlanted": 40.0 }]
+						},
+						{
+							"year": 2021,
+							"name": "Safra 2021",
+							"cultures": [{ "name": "Soja", "areaPlanted": 50.0 }]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": 10,
+			"document": "88.999.000/0001-11",
+			"documentType": "CNPJ",
+			"name": "Fazenda Nova Era LTDA.",
+			"farms": [
+				{
+					"id": "f-10-1",
+					"name": "Nova Era",
+					"city": "Goiânia",
+					"state": "GO",
+					"areaTotal": 360.0,
+					"cultivableLand": 200.0,
+					"vegetatedArea": 150.0,
+					"safras": [
+						{
+							"year": 2022,
+							"name": "Safra 2022",
+							"cultures": [
+								{ "name": "Soja", "areaPlanted": 120.0 },
+								{ "name": "Cana-de-açúcar", "areaPlanted": 60.0 }
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": 11,
+			"document": "666.777.888-99",
+			"documentType": "CPF",
+			"name": "Sérgio Martins",
+			"farms": [
+				{
+					"id": "f-11-1",
+					"name": "Fazendinha",
+					"city": "Natal",
+					"state": "RN",
+					"areaTotal": 12.0,
+					"cultivableLand": 8.0,
+					"vegetatedArea": 3.0,
+					"safras": [
+						{
+							"year": 2023,
+							"name": "Safra 2023",
+							"cultures": [{ "name": "Hortaliças", "areaPlanted": 5.0 }]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": 12,
+			"document": "12.345.678/0001-90",
+			"documentType": "CNPJ",
+			"name": "Produtores Unidos",
+			"farms": [
+				{
+					"id": "f-12-1",
+					"name": "Área 1",
+					"city": "Campo Grande",
+					"state": "MS",
+					"areaTotal": 410.0,
+					"cultivableLand": 300.0,
+					"vegetatedArea": 80.0,
+					"safras": [
+						{
+							"year": 2021,
+							"name": "Safra 2021",
+							"cultures": [
+								{ "name": "Soja", "areaPlanted": 210.0 },
+								{ "name": "Milho", "areaPlanted": 70.0 }
+							]
+						}
+					]
+				},
+				{
+					"id": "f-12-2",
+					"name": "Área 2",
+					"city": "Dourados",
+					"state": "MS",
+					"areaTotal": 95.0,
+					"cultivableLand": 60.0,
+					"vegetatedArea": 30.0,
+					"safras": []
+				}
+			]
+		},
+		{
+			"id": 13,
+			"document": "777.888.999-00",
+			"documentType": "CPF",
+			"name": "Beatriz Almeida",
+			"farms": [
+				{
+					"id": "f-13-1",
+					"name": "Pomar Esperança",
+					"city": "Maceió",
+					"state": "AL",
+					"areaTotal": 25.0,
+					"cultivableLand": 15.0,
+					"vegetatedArea": 8.0,
+					"safras": [
+						{
+							"year": 2022,
+							"name": "Safra 2022",
+							"cultures": [{ "name": "Fruticultura", "areaPlanted": 12.0 }]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": 14,
+			"document": "101.202.303/0001-44",
+			"documentType": "CNPJ",
+			"name": "AgroSul Export",
+			"farms": [
+				{
+					"id": "f-14-1",
+					"name": "Fazenda Rio Branco",
+					"city": "Rio Branco",
+					"state": "AC",
+					"areaTotal": 950.0,
+					"cultivableLand": 700.0,
+					"vegetatedArea": 200.0,
+					"safras": [
+						{
+							"year": 2020,
+							"name": "Safra 2020",
+							"cultures": [
+								{ "name": "Soja", "areaPlanted": 400.0 },
+								{ "name": "Milho", "areaPlanted": 200.0 }
+							]
+						},
+						{
+							"year": 2021,
+							"name": "Safra 2021",
+							"cultures": [{ "name": "Soja", "areaPlanted": 380.0 }]
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": 15,
+			"document": "888.999.000-11",
+			"documentType": "CPF",
+			"name": "Pedro Gonçalves",
+			"farms": [
+				{
+					"id": "f-15-1",
+					"name": "Recanto Verde",
+					"city": "Belém",
+					"state": "PA",
+					"areaTotal": 200.0,
+					"cultivableLand": 120.0,
+					"vegetatedArea": 70.0,
+					"safras": [
+						{
+							"year": 2023,
+							"name": "Safra 2023",
+							"cultures": [
+								{ "name": "Café", "areaPlanted": 30.0 },
+								{ "name": "Soja", "areaPlanted": 60.0 }
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
