@@ -1,16 +1,15 @@
 import { AppRoutes } from '@/routes';
-import { Link } from 'react-router-dom';
+import Header from '@/components/organisms/Header';
 
 const App = () => {
+	const nav = [
+		{ to: '/', label: 'Início' },
+		{ to: '/dashboard', label: 'Painel' },
+	];
+
 	return (
 		<div>
-			<header>
-				<h1>Brain Agriculture</h1>
-				<nav>
-					<Link to="/">Home</Link>
-					<Link to="/dashboard">Dashboard</Link>
-				</nav>
-			</header>
+			<Header title="Brain Agriculture" nav={nav} />
 			<main>
 				<AppRoutes />
 			</main>

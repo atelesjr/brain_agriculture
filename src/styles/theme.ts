@@ -12,6 +12,7 @@ export const theme = {
 		disabledBg: '#E6EDF8',
 		disabledText: '#9CA3AF',
 		background_main: '#dadada',
+		muted: '#a7a7a7ff',
 	},
 	spacing: {
 		sm: '8px',
