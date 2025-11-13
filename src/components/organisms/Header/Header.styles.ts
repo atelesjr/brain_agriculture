@@ -4,9 +4,17 @@ export const HeaderRoot = styled.header`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 1rem 1.25rem;
+	padding: 1rem 4rem;
 	background: ${({ theme }) => theme.colors?.background_main ?? '#fff'};
 	border-bottom: 1px solid ${({ theme }) => theme.colors?.muted ?? '#eee'};
+
+	/* keep header fixed at top */
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 64px;
+	z-index: 1000;
 `;
 
 export const Brand = styled.h1`

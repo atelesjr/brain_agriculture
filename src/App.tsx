@@ -1,5 +1,6 @@
 import { AppRoutes } from '@/routes';
 import Header from '@/components/organisms/Header';
+import { Container, Content } from './components/atoms';
 
 const App = () => {
 	const nav = [
@@ -8,12 +9,12 @@ const App = () => {
 	];
 
 	return (
-		<div>
+		<Container>
 			<Header title="Brain Agriculture" nav={nav} />
-			<main>
+			<Content>
 				<AppRoutes />
-			</main>
-		</div>
+			</Content>
+		</Container>
 	);
 };
 
