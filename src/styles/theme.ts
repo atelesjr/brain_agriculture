@@ -3,12 +3,13 @@ import { breakpoints, media } from './media_queries';
 export const theme = {
 	colors: {
 		primary: '#00793cff',
-		primaryHover: '#01974cff',
+		primaryHover: 'rgba(0, 121, 61, 0.1)',
 		secondary: '#a19700ff',
 		secondaryHover: '#b3ad60ff',
 		ghost: 'transparent',
 		textOnPrimary: '#FFFFFF',
 		text: '#0F172A',
+		textSecondary: '#353535ff',
 		disabledBg: '#E6EDF8',
 		disabledText: '#9CA3AF',
 		background_main: '#dadada',

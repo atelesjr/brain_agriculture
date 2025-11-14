@@ -32,6 +32,10 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.primary};
   }
 
+  h1 {
+    margin-bottom: 15px;
+  }
+
   p {
     margin: 0;
   }

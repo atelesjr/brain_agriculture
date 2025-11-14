@@ -12,8 +12,8 @@ interface StyledButtonProps {
 
 const variantStyles = {
 	primary: css`
-		background: ${({ theme }) => theme.colors.primary};
-		color: ${({ theme }) => theme.colors.textOnPrimary};
+		background: ${({ theme }) => theme.colors.ghost};
+		color: ${({ theme }) => theme.colors.primary};
 		&:hover:not(:disabled) {
 			background: ${({ theme }) => theme.colors.primaryHover};
 		}
@@ -75,6 +75,14 @@ export const StyledButton = styled.button<StyledButtonProps>`
   &:active:not(:disabled) {
 		transform: translateY(1px);
 	}
+
+	/* & span {
+		color: ${({ theme }) => theme.colors.primary};
+	} */
+	/* 
+	&:hover {
+		background: ${({ theme }) => theme.colors.primaryHover};
+	} */
 
 	&:disabled {
 		cursor: not-allowed;

@@ -44,3 +44,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = 'Button';
 export default Button;
+
+// export IconButton for atom usage
+export { default as IconButton } from './IconButton';
