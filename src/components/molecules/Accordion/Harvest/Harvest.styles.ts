@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
-export const FarmRoot = styled.div`
+export const HarvestRoot = styled.div`
 	display: flex;
-	flex-direction: column;
+	gap: 16px;
 `;
 
-export const FarmProperty = styled.div`
+export const HarvestProperty = styled.div`
 	display: flex;
 	flex-direction: column;
 
-	border-bottom: 1px solid
+	border-right: 1px solid
 		${({ theme }) => theme?.colors?.secondary ?? '#0F172A'};
 	padding: 12px 0px;
 `;
@@ -33,17 +33,17 @@ export const FarmDetails = styled.div`
 	gap: 12px;
 `;
 
-export const FarmLabel = styled.div`
+export const HarvestLabel = styled.div`
 	font-weight: 400;
 	margin-right: 8px;
 `;
 
-export const FarmValue = styled.div`
+export const HarvestValue = styled.div`
 	font-weight: 600;
 	margin-right: 16px;
 `;
 
-export const FarmInfo = styled.div`
+export const HarvestInfo = styled.div`
 	display: flex;
 	gap: 8px;
 	margin-right: 16px;

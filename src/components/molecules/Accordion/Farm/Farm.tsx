@@ -10,7 +10,7 @@ import {
 	FarmCity,
 	FarmHeader,
 } from './Farm.styles';
-import Harvest from '../Harvest/Haverst';
+import Harvest from '../Harvest/Harvest';
 
 interface FarmsProps {
 	farms: Farm[];
@@ -35,18 +35,18 @@ const Farms = ({ farms }: FarmsProps) => {
 					<FarmDetails>
 						<FarmInfo>
 							<FarmLabel>Área total:</FarmLabel>
-							<FarmValue>{farm?.areaTotal || 'N/A'} ha</FarmValue>
+							<FarmValue>{farm?.areaTotal || 'N/A'}ha</FarmValue>
 						</FarmInfo>
 						<FarmInfo>
 							<FarmLabel>Área cultivável:</FarmLabel>{' '}
-							<FarmValue>{farm?.cultivableLand || 'N/A'} ha</FarmValue>
+							<FarmValue>{farm?.cultivableLand || 'N/A'}ha</FarmValue>
 						</FarmInfo>
 						<FarmInfo>
 							<FarmLabel>Área vegetada:</FarmLabel>{' '}
-							<FarmValue>{farm?.vegetatedArea || 'N/A'} ha</FarmValue>
+							<FarmValue>{farm?.vegetatedArea || 'N/A'}ha</FarmValue>
 						</FarmInfo>
 					</FarmDetails>
-					<Harvest />
+					<Harvest harvests={farm.safras} />
 				</FarmProperty>
 			))}
 		</FarmRoot>
