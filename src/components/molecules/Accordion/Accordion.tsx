@@ -10,15 +10,10 @@ import {
 	HeaderLeft,
 } from './Accordion.styles';
 import { IconButton } from '@/components/atoms/Buttons';
+import type { Farmer } from '@/types/producer';
+import Farms from './Farm/Farm';
 
-type Item = {
-	id: string | number;
-	name: string;
-	documentType: string;
-	document: string;
-};
-
-const Accordion: React.FC<{ item: Item }> = ({ item }) => {
+const Accordion: React.FC<{ item: Farmer }> = ({ item }) => {
 	const [open, setOpen] = useState(false);
 
 	return (
@@ -68,7 +63,7 @@ const Accordion: React.FC<{ item: Item }> = ({ item }) => {
 			</AccordionHeader>
 
 			<AccordionContent hidden={!open} aria-hidden={!open}>
-				<p>Conteúdo do acordeão para {item.name}.</p>
+				<Farms farms={item.farms} />
 			</AccordionContent>
 		</AccordionRoot>
 	);

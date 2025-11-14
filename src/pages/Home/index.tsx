@@ -28,14 +28,7 @@ const Home: React.FC = () => {
 			<h1>Cadastro de Produtores Rurais</h1>
 			{/* Render apenas um exemplo (data[1]) conforme solicitado */}
 			{example ? (
-				<Accordion
-					item={{
-						id: example.id,
-						name: example.name,
-						documentType: example.documentType,
-						document: example.document,
-					}}
-				/>
+				<Accordion item={example} />
 			) : (
 				<p>Carregando exemplo do produtor (data[1])...</p>
 			)}
