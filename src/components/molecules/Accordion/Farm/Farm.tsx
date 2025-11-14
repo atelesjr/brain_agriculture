@@ -16,9 +16,10 @@ import Harvest from '../Harvests/Harvests';
 
 interface FarmsProps {
 	farms: Farm[];
+	resetCounter?: number;
 }
 
-const Farms = ({ farms }: FarmsProps) => {
+const Farms = ({ farms, resetCounter }: FarmsProps) => {
 	if (farms.length === 0) {
 		return <FarmRoot>Nenhuma propriedade cadastrada.</FarmRoot>;
 	}
@@ -55,7 +56,7 @@ const Farms = ({ farms }: FarmsProps) => {
 						</FarmContent>
 					</FarmInfo>
 
-					<Harvest farm={farm} />
+					<Harvest farm={farm} resetCounter={resetCounter} />
 				</FarmProperty>
 			))}
 		</FarmRoot>

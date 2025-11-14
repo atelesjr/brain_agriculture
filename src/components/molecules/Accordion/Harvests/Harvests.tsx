@@ -11,14 +11,21 @@ import {
 	HarvestValue,
 } from './Harvests.styles';
 import Dropdown from '@/components/atoms/Dropdown';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface HarvestProps {
 	farm: Farm & { safras: Safra[] };
+	resetCounter?: number;
 }
 
-const Harvest = ({ farm }: HarvestProps) => {
+const Harvest = ({ farm, resetCounter }: HarvestProps) => {
 	const [selectedHarvest, setSelectedHarvest] = useState<Safra | null>(null);
+
+	useEffect(() => {
+		if (typeof resetCounter !== 'undefined') {
+			setSelectedHarvest(null);
+		}
+	}, [resetCounter]);
 	return (
 		<HarvestRoot>
 			<Col>
@@ -29,12 +36,6 @@ const Harvest = ({ farm }: HarvestProps) => {
 						label: String(harvest.year),
 						onSelect: () => {
 							setSelectedHarvest(harvest);
-							console.log(
-								'Safra selecionada',
-								harvest.year,
-								'na fazenda',
-								farm.id
-							);
 						},
 					}))}
 				/>

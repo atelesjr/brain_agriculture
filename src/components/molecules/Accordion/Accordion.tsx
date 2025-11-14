@@ -15,17 +15,31 @@ import Farms from './Farm/Farm';
 
 const Accordion: React.FC<{ item: Farmer }> = ({ item }) => {
 	const [open, setOpen] = useState(false);
+	const [resetCounter, setResetCounter] = useState(0);
 
 	return (
 		<AccordionRoot>
 			<AccordionHeader
 				role="button"
 				tabIndex={0}
-				onClick={() => setOpen((s) => !s)}
+				onClick={() => {
+					setOpen((s) => {
+						const next = !s;
+						if (!next) {
+							// accordion is closing -> bump reset counter to instruct children to reset
+							setResetCounter((c) => c + 1);
+						}
+						return next;
+					});
+				}}
 				onKeyDown={(e) => {
 					if (e.key === 'Enter' || e.key === ' ') {
 						e.preventDefault();
-						setOpen((s) => !s);
+						setOpen((s) => {
+							const next = !s;
+							if (!next) setResetCounter((c) => c + 1);
+							return next;
+						});
 					}
 				}}
 				aria-expanded={open}
@@ -63,7 +77,7 @@ const Accordion: React.FC<{ item: Farmer }> = ({ item }) => {
 			</AccordionHeader>
 
 			<AccordionContent hidden={!open} aria-hidden={!open}>
-				<Farms farms={item.farms} />
+				<Farms farms={item.farms} resetCounter={resetCounter} />
 			</AccordionContent>
 		</AccordionRoot>
 	);
