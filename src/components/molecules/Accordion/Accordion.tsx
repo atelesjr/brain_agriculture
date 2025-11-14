@@ -65,6 +65,16 @@ const Accordion: React.FC<{ item: Farmer }> = ({ item }) => {
 				</HeaderLeft>
 
 				<IconButton
+					action="edit"
+					label="Editar"
+					variant="primary"
+					size="sm"
+					onClick={(e) => {
+						e.stopPropagation();
+						console.log('Editar', item.id);
+					}}
+				/>
+				<IconButton
 					action="delete"
 					label="Excluir"
 					variant="primary"
