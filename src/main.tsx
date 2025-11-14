@@ -5,14 +5,18 @@ import App from './App.tsx';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
 import { GlobalStyles } from './styles/GlobalStyles.tsx';
+import { Provider } from 'react-redux';
+import store from './store';
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<BrowserRouter>
-			<ThemeProvider theme={theme}>
-				<GlobalStyles />
-				<App />
-			</ThemeProvider>
-		</BrowserRouter>
+		<Provider store={store}>
+			<BrowserRouter>
+				<ThemeProvider theme={theme}>
+					<GlobalStyles />
+					<App />
+				</ThemeProvider>
+			</BrowserRouter>
+		</Provider>
 	</StrictMode>
 );

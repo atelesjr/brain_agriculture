@@ -1,37 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import producersService from '@/services/producers';
-import Accordion from '@/components/molecules/Accordion/Accordion';
-import type { Farmer } from '@/types/producer';
+import React, { useEffect } from 'react';
 import { PageContent } from '@/components/atoms';
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState, AppDispatch } from '@/store';
+import { fetchProducers } from '@/store/producersSlice';
+import Producers from '../../components/organisms/Producers/producers';
 
 const Home: React.FC = () => {
-	const [producers, setProducers] = useState<Farmer[] | null>(null);
+	const dispatch = useDispatch<AppDispatch>();
+	const producersState = useSelector((s: RootState) => s.producers);
 
 	useEffect(() => {
-		producersService
-			.listProducers()
-			.then((data) => {
-				// apenas logar o resultado da API no console
-				console.log('producers:', data);
-				setProducers(Array.isArray(data) ? data : []);
-			})
-			.catch((err) => {
-				console.error('failed to load producers', err);
-				setProducers([]);
-			});
-	}, []);
-
-	const example = producers && producers.length > 1 ? producers[1] : null;
+		if (producersState.status === 'idle') {
+			void dispatch(fetchProducers());
+		}
+	}, [dispatch, producersState.status]);
 
 	return (
 		<PageContent>
 			<h1>Cadastro de Produtores Rurais</h1>
-			{/* Render apenas um exemplo (data[1]) conforme solicitado */}
-			{example ? (
-				<Accordion item={example} />
-			) : (
-				<p>Carregando exemplo do produtor (data[1])...</p>
-			)}
+
+			<Producers producersState={producersState} />
 		</PageContent>
 	);
 };

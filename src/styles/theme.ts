@@ -13,6 +13,10 @@ export const theme = {
 		disabledBg: '#E6EDF8',
 		disabledText: '#9CA3AF',
 		background_main: '#dadada',
+		// surface: neutral surface color for cards, panels and skeleton backgrounds
+		surface: 'rgba(0, 94, 47, 0.27)',
+		// surfaceAlt: alternative (lighter) surface, useful for highlights
+		surfaceAlt: '#ffffff',
 		muted: '#a7a7a7ff',
 	},
 	spacing: {
