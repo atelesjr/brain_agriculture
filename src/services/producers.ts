@@ -1,9 +1,34 @@
 import type { Farmer } from '@/types/producer';
 
+type ImportMetaWithEnv = ImportMeta & {
+	readonly env?: {
+		VITE_API_URL?: string;
+	};
+};
+
+export type ProducersService = {
+	listProducers: () => Promise<Farmer[]>;
+	getProducer: (id: number) => Promise<Farmer>;
+	createProducer: (payload: Omit<Farmer, 'id'>) => Promise<Farmer>;
+	updateProducer: (
+		id: number,
+		payload: Partial<Omit<Farmer, 'id'>>
+	) => Promise<Farmer>;
+	deleteProducer: (id: number) => Promise<void>;
+};
+
 const DEFAULT_BASE = 'http://localhost:3001';
 // Use `import.meta.env` in Vite/browser and fall back to `process.env` for Node/test environments.
-const apiFromImportMeta = typeof import.meta !== 'undefined' ? ( (import.meta as any).env?.VITE_API_URL as string | undefined) : undefined;
-const apiFromProcess = typeof process !== 'undefined' ? (process.env.REACT_APP_API_URL as string | undefined) : undefined;
+const apiFromImportMeta =
+	typeof import.meta !== 'undefined'
+		? ((import.meta as ImportMetaWithEnv).env?.VITE_API_URL as
+				| string
+				| undefined)
+		: undefined;
+const apiFromProcess =
+	typeof process !== 'undefined'
+		? (process.env.REACT_APP_API_URL as string | undefined)
+		: undefined;
 const API_BASE = apiFromImportMeta || apiFromProcess || DEFAULT_BASE;
 const RESOURCE = 'producers';
 
@@ -70,7 +95,7 @@ export async function deleteProducer(id: number): Promise<void> {
 	if (!res.ok) throw new Error(`Failed to delete producer ${id}`);
 }
 
-const producersService = {
+const producersService: ProducersService = {
 	listProducers,
 	getProducer,
 	createProducer,
