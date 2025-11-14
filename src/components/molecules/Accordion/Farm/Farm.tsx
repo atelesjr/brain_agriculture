@@ -5,12 +5,14 @@ import {
 	FarmValue,
 	FarmLabel,
 	FarmInfo,
+	FarmCol,
 	FarmName,
 	FarmDetails,
 	FarmCity,
 	FarmHeader,
+	FarmContent,
 } from './Farm.styles';
-import Harvest from '../Harvest/Harvest';
+import Harvest from '../Harvests/Harvests';
 
 interface FarmsProps {
 	farms: Farm[];
@@ -18,35 +20,42 @@ interface FarmsProps {
 
 const Farms = ({ farms }: FarmsProps) => {
 	if (farms.length === 0) {
-		return <div>Nenhuma propriedade cadastrada.</div>;
+		return <FarmRoot>Nenhuma propriedade cadastrada.</FarmRoot>;
 	}
 
 	return (
 		<FarmRoot>
 			{farms.map((farm) => (
-				<FarmProperty>
-					<FarmHeader>
-						<FarmName>{farm?.name || 'N/A'}</FarmName> -{' '}
-						<FarmCity>
-							{`${farm?.city || 'N/A'} - ${farm?.state || 'N/A'}`}
-						</FarmCity>
-					</FarmHeader>
+				<FarmProperty key={farm.id}>
+					<FarmInfo>
+						<FarmHeader>
+							<FarmName>{farm?.name || 'N/A'}</FarmName> -{' '}
+							<FarmCity>
+								{`${farm?.city || 'N/A'} - ${farm?.state || 'N/A'}`}
+							</FarmCity>
+						</FarmHeader>
 
-					<FarmDetails>
-						<FarmInfo>
-							<FarmLabel>Área total:</FarmLabel>
-							<FarmValue>{farm?.areaTotal || 'N/A'}ha</FarmValue>
-						</FarmInfo>
-						<FarmInfo>
-							<FarmLabel>Área cultivável:</FarmLabel>{' '}
-							<FarmValue>{farm?.cultivableLand || 'N/A'}ha</FarmValue>
-						</FarmInfo>
-						<FarmInfo>
-							<FarmLabel>Área vegetada:</FarmLabel>{' '}
-							<FarmValue>{farm?.vegetatedArea || 'N/A'}ha</FarmValue>
-						</FarmInfo>
-					</FarmDetails>
-					<Harvest harvests={farm.safras} />
+						<FarmContent>
+							<FarmDetails>
+								<FarmCol>
+									<FarmLabel>Área total:</FarmLabel>
+									<FarmValue>{farm?.areaTotal || 'N/A'}ha</FarmValue>
+								</FarmCol>
+
+								<FarmCol>
+									<FarmLabel>Área cultivável:</FarmLabel>{' '}
+									<FarmValue>{farm?.cultivableLand || 'N/A'}ha</FarmValue>
+								</FarmCol>
+
+								<FarmCol>
+									<FarmLabel>Área vegetada:</FarmLabel>{' '}
+									<FarmValue>{farm?.vegetatedArea || 'N/A'}ha</FarmValue>
+								</FarmCol>
+							</FarmDetails>
+						</FarmContent>
+					</FarmInfo>
+
+					<Harvest farm={farm} />
 				</FarmProperty>
 			))}
 		</FarmRoot>

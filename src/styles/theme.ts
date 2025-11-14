@@ -5,7 +5,7 @@ export const theme = {
 		primary: '#00793cff',
 		primaryHover: 'rgba(0, 121, 61, 0.1)',
 		secondary: '#a19700ff',
-		secondaryHover: '#b3ad60ff',
+		secondaryHover: '#aaa4565b',
 		ghost: 'transparent',
 		textOnPrimary: '#FFFFFF',
 		text: '#0F172A',

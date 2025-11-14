@@ -7,15 +7,27 @@ export const FarmRoot = styled.div`
 
 export const FarmProperty = styled.div`
 	display: flex;
-	flex-direction: column;
+	align-items: flex-start;
 
 	border-bottom: 1px solid
 		${({ theme }) => theme?.colors?.secondary ?? '#0F172A'};
 	padding: 12px 0px;
 `;
 
+export const FarmInfo = styled.div`
+	display: flex;
+	flex-direction: column;
+	margin-right: 24px;
+	width: 490px;
+`;
+
 export const FarmHeader = styled.div`
 	display: flex;
+`;
+export const FarmContent = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 8px;
 `;
 
 export const FarmName = styled.div`
@@ -31,6 +43,7 @@ export const FarmCity = styled.div`
 export const FarmDetails = styled.div`
 	display: flex;
 	gap: 12px;
+	font-size: 14px;
 `;
 
 export const FarmLabel = styled.div`
@@ -43,8 +56,9 @@ export const FarmValue = styled.div`
 	margin-right: 16px;
 `;
 
-export const FarmInfo = styled.div`
+export const FarmCol = styled.div`
 	display: flex;
 	gap: 8px;
-	margin-right: 16px;
 `;
+
+export const FarmHarvest = styled.div``;
