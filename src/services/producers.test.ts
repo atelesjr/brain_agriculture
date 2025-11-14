@@ -52,7 +52,7 @@ describe('producers service', () => {
 
     const res = await producersService.createProducer(payload);
     expect(res).toEqual(created);
-    expect(globalThis.fetch as Mock).toHaveBeenCalledWith(expect.stringContaining('/producer'), expect.objectContaining({ method: 'POST' }));
+    expect(globalThis.fetch as Mock).toHaveBeenCalledWith(expect.stringContaining('/producers'), expect.objectContaining({ method: 'POST' }));
   });
 
   it('updateProducer puts and returns updated', async () => {

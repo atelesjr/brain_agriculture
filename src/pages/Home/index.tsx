@@ -1,47 +1,28 @@
-import { Button, LeafIcon } from '@/components/atoms';
-import IconButton from '@/components/molecules/IconButton';
+import React, { useEffect } from 'react';
+import producersService from '@/services/producers';
 
-const Home = () => {
+const Home: React.FC = () => {
+	useEffect(() => {
+		producersService
+			.listProducers()
+			.then((data) => {
+				// apenas logar o resultado da API no console
+				// você pode abrir as devtools para ver o array de produtores
+				console.log('producers:', data);
+			})
+			.catch((err) => {
+				console.error('failed to load producers', err);
+			});
+	}, []);
+
 	return (
-		<div style={{ padding: '20px' }}>
-			<main>
-				<p>Welcome to the Brain Agriculture app!</p>
-				<div
-					style={{
-						display: 'flex',
-						gap: '10px',
-						flexWrap: 'wrap',
-						marginTop: '20px',
-					}}
-				>
-					<Button variant="primary" size="md">
-						Primary
-					</Button>
-					<Button variant="secondary" size="md">
-						Secondary
-					</Button>
-					<Button variant="ghost" size="md">
-						Ghost
-					</Button>
+		<div>
+			<p>Welcome to the Brain Agriculture app!</p>
 
-					<Button variant="primary" size="lg" fullWidth>
-						Full width
-					</Button>
-
-					<IconButton
-						variant="primary"
-						size="sm"
-						icon={<LeafIcon />}
-						aria-label="Adicionar"
-					/>
-					<IconButton
-						variant="ghost"
-						size="md"
-						icon={<LeafIcon />}
-						label="Adicionar"
-					/>
-				</div>
-			</main>
+			<div className="accordion">
+				<div className="header">Header</div>
+				<div className="content"></div>
+			</div>
 		</div>
 	);
 };

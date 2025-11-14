@@ -18,10 +18,12 @@ export default defineConfig({
 		environment: 'jsdom',
 		setupFiles: './src/setupTests.ts',
 		include: ['src/**/*.test.{ts,tsx}', 'src/**/*.spec.{ts,tsx}'],
+		// Run tests in-process on environments where spawning workers fails
+		threads: false,
 		coverage: {
 			provider: 'v8',
 			reporter: ['text', 'lcov'],
 			reportsDirectory: 'coverage',
 		},
-	},
+	} as any,
 });
