@@ -1,79 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="28" failures="0" errors="0" time="10.3661707">
-    <testsuite name="src/App.test.tsx" timestamp="2025-11-15T19:29:50.719Z" hostname="vostro-5510-jr" tests="1" failures="0" errors="0" skipped="0" time="0.8355214">
-        <testcase classname="src/App.test.tsx" name="App &gt; renderiza o título principal" time="0.8325907">
+<testsuites name="vitest tests" tests="2" failures="0" errors="0" time="0.2864089">
+    <testsuite name="src/components/organisms/Modal/Modal.test.tsx" timestamp="2025-11-15T19:55:02.388Z" hostname="vostro-5510-jr" tests="2" failures="0" errors="0" skipped="0" time="0.2864089">
+        <testcase classname="src/components/organisms/Modal/Modal.test.tsx" name="Modal &gt; renders content when open and closes on overlay click" time="0.168695">
         </testcase>
-    </testsuite>
-    <testsuite name="src/services/producers.test.ts" timestamp="2025-11-15T19:29:50.722Z" hostname="vostro-5510-jr" tests="6" failures="0" errors="0" skipped="0" time="0.0172317">
-        <testcase classname="src/services/producers.test.ts" name="producers service &gt; listProducers returns array" time="0.0065333">
-        </testcase>
-        <testcase classname="src/services/producers.test.ts" name="producers service &gt; getProducer returns item" time="0.0007403">
-        </testcase>
-        <testcase classname="src/services/producers.test.ts" name="producers service &gt; createProducer posts payload and returns created" time="0.0039891">
-        </testcase>
-        <testcase classname="src/services/producers.test.ts" name="producers service &gt; updateProducer puts and returns updated" time="0.0006312">
-        </testcase>
-        <testcase classname="src/services/producers.test.ts" name="producers service &gt; deleteProducer deletes without error" time="0.001329">
-        </testcase>
-        <testcase classname="src/services/producers.test.ts" name="producers service &gt; throws when response not ok" time="0.0018845">
-        </testcase>
-    </testsuite>
-    <testsuite name="src/components/atoms/Dropdown/Dropdown.test.tsx" timestamp="2025-11-15T19:29:50.725Z" hostname="vostro-5510-jr" tests="2" failures="0" errors="0" skipped="0" time="1.6758531">
-        <testcase classname="src/components/atoms/Dropdown/Dropdown.test.tsx" name="Dropdown atom &gt; opens menu when toggle is clicked and calls onSelect when item clicked" time="1.2472063">
-        </testcase>
-        <testcase classname="src/components/atoms/Dropdown/Dropdown.test.tsx" name="Dropdown atom &gt; closes when clicking outside" time="0.4244123">
-        </testcase>
-    </testsuite>
-    <testsuite name="src/components/atoms/Input/Input.test.tsx" timestamp="2025-11-15T19:29:50.727Z" hostname="vostro-5510-jr" tests="3" failures="0" errors="0" skipped="0" time="0.6467807">
-        <testcase classname="src/components/atoms/Input/Input.test.tsx" name="Input atom &gt; renders label and required star when required" time="0.1425264">
-        </testcase>
-        <testcase classname="src/components/atoms/Input/Input.test.tsx" name="Input atom &gt; renders error text and applies error styling" time="0.4931488">
-        </testcase>
-        <testcase classname="src/components/atoms/Input/Input.test.tsx" name="Input atom &gt; forwards ref to the underlying input" time="0.0076664">
-        </testcase>
-    </testsuite>
-    <testsuite name="src/components/molecules/Accordion/Accordion.test.tsx" timestamp="2025-11-15T19:29:50.730Z" hostname="vostro-5510-jr" tests="2" failures="0" errors="0" skipped="0" time="3.0137648">
-        <testcase classname="src/components/molecules/Accordion/Accordion.test.tsx" name="Accordion component &gt; toggles open/closed and shows farms content" time="1.7693333">
-        </testcase>
-        <testcase classname="src/components/molecules/Accordion/Accordion.test.tsx" name="Accordion component &gt; child harvest selection resets when accordion closes" time="1.2411475">
-        </testcase>
-    </testsuite>
-    <testsuite name="src/components/molecules/DocumentInput/DocumentInput.test.tsx" timestamp="2025-11-15T19:29:50.732Z" hostname="vostro-5510-jr" tests="3" failures="0" errors="0" skipped="0" time="1.637126">
-        <testcase classname="src/components/molecules/DocumentInput/DocumentInput.test.tsx" name="DocumentInput &gt; shows required error when submitted empty" time="0.7063825">
-        </testcase>
-        <testcase classname="src/components/molecules/DocumentInput/DocumentInput.test.tsx" name="DocumentInput &gt; formats CPF while typing and submits digits-only value" time="0.5974234">
-        </testcase>
-        <testcase classname="src/components/molecules/DocumentInput/DocumentInput.test.tsx" name="DocumentInput &gt; identifies cnpj type when more than 11 digits" time="0.3297062">
-        </testcase>
-    </testsuite>
-    <testsuite name="src/components/organisms/Header/Header.test.tsx" timestamp="2025-11-15T19:29:50.735Z" hostname="vostro-5510-jr" tests="1" failures="0" errors="0" skipped="0" time="0.4487939">
-        <testcase classname="src/components/organisms/Header/Header.test.tsx" name="Header &gt; renderiza título e links de navegação" time="0.4450776">
-        </testcase>
-    </testsuite>
-    <testsuite name="src/components/organisms/Producers/Producers.test.tsx" timestamp="2025-11-15T19:29:50.736Z" hostname="vostro-5510-jr" tests="4" failures="0" errors="0" skipped="0" time="0.0367206">
-        <testcase classname="src/components/organisms/Producers/Producers.test.tsx" name="Producers component &gt; renders skeleton when loading" time="0.0210775">
-        </testcase>
-        <testcase classname="src/components/organisms/Producers/Producers.test.tsx" name="Producers component &gt; renders error message when failed" time="0.0078682">
-        </testcase>
-        <testcase classname="src/components/organisms/Producers/Producers.test.tsx" name="Producers component &gt; renders empty message when no producers" time="0.0027275">
-        </testcase>
-        <testcase classname="src/components/organisms/Producers/Producers.test.tsx" name="Producers component &gt; renders an accordion for each producer" time="0.0032425">
-        </testcase>
-    </testsuite>
-    <testsuite name="src/components/molecules/Accordion/Farm/Farm.test.tsx" timestamp="2025-11-15T19:29:50.739Z" hostname="vostro-5510-jr" tests="3" failures="0" errors="0" skipped="0" time="0.3447979">
-        <testcase classname="src/components/molecules/Accordion/Farm/Farm.test.tsx" name="Farms component &gt; shows message when no farms are provided" time="0.0818502">
-        </testcase>
-        <testcase classname="src/components/molecules/Accordion/Farm/Farm.test.tsx" name="Farms component &gt; renders farm details and harvest placeholder" time="0.237675">
-        </testcase>
-        <testcase classname="src/components/molecules/Accordion/Farm/Farm.test.tsx" name="Farms component &gt; renders multiple farms" time="0.0216902">
-        </testcase>
-    </testsuite>
-    <testsuite name="src/components/molecules/Accordion/Harvests/Harvests.test.tsx" timestamp="2025-11-15T19:29:50.741Z" hostname="vostro-5510-jr" tests="3" failures="0" errors="0" skipped="0" time="1.7095806">
-        <testcase classname="src/components/molecules/Accordion/Harvests/Harvests.test.tsx" name="Harvests component &gt; shows placeholder when no safra selected" time="0.2434745">
-        </testcase>
-        <testcase classname="src/components/molecules/Accordion/Harvests/Harvests.test.tsx" name="Harvests component &gt; opens dropdown and selects a safra showing details" time="1.0401008">
-        </testcase>
-        <testcase classname="src/components/molecules/Accordion/Harvests/Harvests.test.tsx" name="Harvests component &gt; resets selection when resetCounter changes" time="0.4227476">
+        <testcase classname="src/components/organisms/Modal/Modal.test.tsx" name="Modal &gt; does not close when clicking inside dialog and closes with close button" time="0.1158206">
         </testcase>
     </testsuite>
 </testsuites>
