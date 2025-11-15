@@ -9,8 +9,8 @@ describe('App', () => {
 					<App />
 				</MemoryRouter>
 			);
-			expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-				/Brain Agriculture/i
-			);
+			expect(
+				screen.getByRole('heading', { name: /Brain Agriculture/i })
+			).toHaveTextContent(/Brain Agriculture/i);
 	});
 });

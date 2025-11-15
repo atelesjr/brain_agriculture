@@ -3,7 +3,7 @@ import { PageContent } from '@/components/atoms';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState, AppDispatch } from '@/store';
 import { fetchProducers } from '@/store/producersSlice';
-import Producers from '../../components/organisms/Producers/producers';
+import Producers from '@/components/organisms/Producers/Producers';
 import { IconButton } from '@/components/atoms/Buttons';
 import { HomeAddProducer } from './Home.styles';
 
