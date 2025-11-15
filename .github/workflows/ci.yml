@@ -62,5 +62,7 @@ jobs:
         uses: dorny/test-reporter@v1
         with:
           name: vitest
+          reporter: junit
           path: test-results/junit.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
           fail-on-error: false
