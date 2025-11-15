@@ -1,4 +1,4 @@
-import { ProducerForm } from './ProducerForm.styles';
+import { Field, ProducerForm, Row } from './ProducerForm.styles';
 import Input from '@/components/atoms/Input';
 import DocumentInput from '@/components/molecules/DocumentInput/DocumentInput';
 import { useForm } from 'react-hook-form';
@@ -6,8 +6,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { producerSchema } from './ProducerFromScheme';
 import type z from 'zod';
+import FarmsForm from './FarmsForm/FarmsForm';
 
-type ProducerFormValues = z.infer<typeof producerSchema>;
+export type ProducerFormValues = z.infer<typeof producerSchema>;
 
 const ProducerFormComponent = () => {
 	const {
@@ -18,7 +19,7 @@ const ProducerFormComponent = () => {
 		control,
 	} = useForm<ProducerFormValues>({
 		resolver: zodResolver(producerSchema),
-		defaultValues: { nome: '' },
+		defaultValues: { name: '' },
 	});
 
 	// trigger validation on mount so the error UI is visible for review
@@ -38,22 +39,23 @@ const ProducerFormComponent = () => {
 
 			<form onSubmit={handleSubmit(onSubmit)}>
 				{/* Nome do produtor using Input atom (registered via react-hook-form) */}
-				<Input
-					label="Nome do produtor"
-					placeholder="Digite o nome completo"
-					required
-					error={errors.nome?.message as string}
-					{...register('nome')}
-				/>
-
-				{/* componente DocumentInput */}
-				<DocumentInput control={control} name="documento" />
-				<div className="label">Nome da propriedade:</div>
-				<div className="label">Cidade</div>
-				<div className="label">Estado</div>
-				<div className="label">Área total da fazenda (em hectares)</div>
-				<div className="label">Área agricultável (em hectares)</div>
-				<div className="label">Área de vegetação (em hectares)</div>
+				<Row>
+					<Field width={'500px'}>
+						<Input
+							label="Nome do produtor"
+							placeholder="Digite o nome completo"
+							required
+							error={errors.name?.message as string}
+							{...register('name')}
+						/>
+					</Field>
+					<Field width={'200px'}>
+						<DocumentInput control={control} name="document" />
+					</Field>
+				</Row>
+				<Row>
+					<FarmsForm register={register} errors={errors} />
+				</Row>
 
 				<div className="label">Safras (ex: Safra 2021, Safra 2022)</div>
 				<div className="label">
