@@ -1,5 +1,7 @@
 # React + TypeScript + Vite
 
+[![CI](https://github.com/atelesjr/brain_agriculture/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/atelesjr/brain_agriculture/actions/workflows/ci.yml)
+
 ````
 
 ## Mock API / Producers

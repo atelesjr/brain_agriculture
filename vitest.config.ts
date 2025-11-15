@@ -9,7 +9,12 @@ export default defineConfig({
 	},
 	test: {
 		// enable hanging-process reporter to diagnose hanging handles/processes
-		reporters: ['default', 'hanging-process'],
+		// also add junit reporter writing to test-results/junit.xml so CI can consume it
+		reporters: [
+			'default',
+			['junit', { outputFile: 'test-results/junit.xml' }],
+			'hanging-process',
+		],
 		globals: true,
 		environment: 'jsdom',
 		setupFiles: path.resolve(__dirname, 'src/setupTests.ts'),

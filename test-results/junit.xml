@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="6" failures="0" errors="0" time="0.0087171">
+    <testsuite name="src/services/producers.test.ts" timestamp="2025-11-15T09:46:59.819Z" hostname="vostro-5510-jr" tests="6" failures="0" errors="0" skipped="0" time="0.0087171">
+        <testcase classname="src/services/producers.test.ts" name="producers service &gt; listProducers returns array" time="0.0026795">
+        </testcase>
+        <testcase classname="src/services/producers.test.ts" name="producers service &gt; getProducer returns item" time="0.0003757">
+        </testcase>
+        <testcase classname="src/services/producers.test.ts" name="producers service &gt; createProducer posts payload and returns created" time="0.0021945">
+        </testcase>
+        <testcase classname="src/services/producers.test.ts" name="producers service &gt; updateProducer puts and returns updated" time="0.0003715">
+        </testcase>
+        <testcase classname="src/services/producers.test.ts" name="producers service &gt; deleteProducer deletes without error" time="0.0007613">
+        </testcase>
+        <testcase classname="src/services/producers.test.ts" name="producers service &gt; throws when response not ok" time="0.0011071">
+        </testcase>
+    </testsuite>
+</testsuites>
