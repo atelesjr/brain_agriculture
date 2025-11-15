@@ -7,6 +7,7 @@
 ## Mock API / Producers
 
 This project includes a small mock REST API used for development, served by `json-server` from the `server/db.json` file.
+<!-- ci: trigger -->
 
 - Start the mock API server:
 
