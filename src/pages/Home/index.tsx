@@ -7,12 +7,13 @@ import Producers from '@/components/organisms/Producers/Producers';
 import { IconButton } from '@/components/atoms/Buttons';
 import { HomeAddProducer } from './Home.styles';
 import { openModal } from '@/store/modalSlice';
+import ProducerForm from '@/components/organisms/ProducerForm/ProducerForm';
 
 const Home: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const producersState = useSelector((s: RootState) => s.producers);
 
-	const addNewProducer = <h2>Adicionar Novo Produtor</h2>;
+	const addNewProducer = <ProducerForm />;
 
 	useEffect(() => {
 		if (producersState.status === 'idle') {

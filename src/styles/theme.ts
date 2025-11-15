@@ -18,6 +18,7 @@ export const theme = {
 		// surfaceAlt: alternative (lighter) surface, useful for highlights
 		surfaceAlt: '#ffffff',
 		muted: '#a7a7a7ff',
+		alert: '#ca281fff',
 	},
 	spacing: {
 		sm: '8px',
