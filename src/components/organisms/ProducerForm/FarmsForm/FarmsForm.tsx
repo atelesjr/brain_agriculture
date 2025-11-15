@@ -20,6 +20,7 @@ const FarmsForm = ({ register, errors }: FarmsFormProps) => {
 						error={errors.farms?.message as string}
 					/>
 				</Field>
+				{/*         
 				<Field width={'250px'}>
 					<Input
 						label="Cidade"
@@ -62,7 +63,7 @@ const FarmsForm = ({ register, errors }: FarmsFormProps) => {
 						{...register('area_vegetation')}
 						error={errors.area_vegetation?.message as string}
 					/>
-				</Field>
+				</Field> */}
 			</Row>
 		</>
 	);
