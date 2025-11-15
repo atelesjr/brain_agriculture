@@ -6,10 +6,13 @@ import { fetchProducers } from '@/store/producersSlice';
 import Producers from '@/components/organisms/Producers/Producers';
 import { IconButton } from '@/components/atoms/Buttons';
 import { HomeAddProducer } from './Home.styles';
+import { openModal } from '@/store/modalSlice';
 
 const Home: React.FC = () => {
 	const dispatch = useDispatch<AppDispatch>();
 	const producersState = useSelector((s: RootState) => s.producers);
+
+	const addNewProducer = <h2>Adicionar Novo Produtor</h2>;
 
 	useEffect(() => {
 		if (producersState.status === 'idle') {
@@ -29,7 +32,7 @@ const Home: React.FC = () => {
 					size="md"
 					onClick={(e) => {
 						e.stopPropagation();
-						console.log('Adicionar Produtor');
+						dispatch(openModal(addNewProducer));
 					}}
 				/>
 			</HomeAddProducer>
