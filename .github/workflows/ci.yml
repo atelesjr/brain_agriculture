@@ -57,12 +57,9 @@ jobs:
           name: coverage-report
           path: coverage
 
-      - name: Publish JUnit to Actions Test Report
+      - name: Upload JUnit XML
         if: always()
-        uses: dorny/test-reporter@v1
+        uses: actions/upload-artifact@v4
         with:
-          name: vitest
-          reporter: junit
+          name: junit-report
           path: test-results/junit.xml
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fail-on-error: false
