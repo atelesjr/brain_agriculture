@@ -1,5 +1,5 @@
 import { render, screen } from '@/test-utils';
-import Producers from './producers';
+import Producers from './Producers';
 import { vi } from 'vitest';
 
 // Mock the ProducersSkeleton to render a test id

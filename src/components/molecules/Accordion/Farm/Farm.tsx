@@ -15,18 +15,18 @@ import {
 import Harvest from '../Harvests/Harvests';
 
 interface FarmsProps {
-	farms: Farm[];
+	farms?: Farm[];
 	resetCounter?: number;
 }
 
 const Farms = ({ farms, resetCounter }: FarmsProps) => {
-	if (farms.length === 0) {
+	if (!farms || farms.length === 0) {
 		return <FarmRoot>Nenhuma propriedade cadastrada.</FarmRoot>;
 	}
 
 	return (
 		<FarmRoot>
-			{farms.map((farm) => (
+			{(farms || []).map((farm) => (
 				<FarmProperty key={farm.id}>
 					<FarmInfo>
 						<FarmHeader>

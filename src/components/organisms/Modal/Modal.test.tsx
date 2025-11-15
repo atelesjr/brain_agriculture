@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect } from 'vitest';
@@ -12,7 +11,7 @@ import { theme } from '@/styles/theme';
 function renderWithStore(
 	initialState = { modal: { isOpen: true, content: <div>Hi</div> } }
 ) {
-	const store = configureStore({
+	const store = configureStore<{ modal: any }>({
 		reducer: { modal: modalReducer },
 		preloadedState: initialState as any,
 	});

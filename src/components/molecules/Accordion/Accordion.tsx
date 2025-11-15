@@ -87,7 +87,13 @@ const Accordion: React.FC<{ item: Farmer }> = ({ item }) => {
 			</AccordionHeader>
 
 			<AccordionContent hidden={!open} aria-hidden={!open}>
-				<Farms farms={item.farms} resetCounter={resetCounter} />
+				<Farms
+					farms={(item.farms || []).map((f) => ({
+						...f,
+						safras: f.safras || [],
+					}))}
+					resetCounter={resetCounter}
+				/>
 			</AccordionContent>
 		</AccordionRoot>
 	);
