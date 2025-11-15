@@ -1,5 +1,6 @@
 import { ProducerForm } from './ProducerForm.styles';
 import Input from '@/components/atoms/Input';
+import DocumentInput from '@/components/molecules/DocumentInput/DocumentInput';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
@@ -14,6 +15,7 @@ const ProducerFormComponent = () => {
 		handleSubmit,
 		formState: { errors },
 		trigger,
+		control,
 	} = useForm<ProducerFormValues>({
 		resolver: zodResolver(producerSchema),
 		defaultValues: { nome: '' },
@@ -44,8 +46,8 @@ const ProducerFormComponent = () => {
 					{...register('nome')}
 				/>
 
-				{/* coloque o componente InputCPF aqui */}
-				<div className="label">Documento: (CPF/CNPJ)</div>
+				{/* componente DocumentInput */}
+				<DocumentInput control={control} name="documento" />
 				<div className="label">Nome da propriedade:</div>
 				<div className="label">Cidade</div>
 				<div className="label">Estado</div>

@@ -9,7 +9,7 @@ export const InputWrapper = styled.div`
 
 export const Label = styled.label`
 	font-size: 13px;
-	color: ${({ theme }) => theme.colors.text};
+	color: ${({ theme }) => theme.colors.textSecondary};
 	font-weight: 600;
 	display: flex;
 	align-items: center;
@@ -25,9 +25,9 @@ export const StyledInput = styled.input<{ $hasError?: boolean }>`
 	box-sizing: border-box;
 	padding: 8px 12px;
 	border-radius: ${({ theme }) => theme.radius.md};
-	border: 1px solid
+	border: 2px solid
 		${({ $hasError, theme }) =>
-			$hasError ? theme.colors.alert : 'rgba(0,0,0,0.12)'};
+			$hasError ? theme.colors.alert : theme.colors.muted};
 	font-size: 14px;
 	transition: border-color 120ms ease-out, box-shadow 120ms ease-out;
 
