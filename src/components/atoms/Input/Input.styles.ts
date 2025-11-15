@@ -8,7 +8,7 @@ export const InputWrapper = styled.div`
 `;
 
 export const Label = styled.label`
-	font-size: 14px;
+	font-size: 13px;
 	color: ${({ theme }) => theme.colors.text};
 	font-weight: 600;
 	display: flex;
@@ -35,7 +35,8 @@ export const StyledInput = styled.input<{ $hasError?: boolean }>`
 	box-shadow: ${({ $hasError, theme }) =>
 		$hasError ? `0 0 0 3px ${theme.colors.alert}22` : 'none'};
 
-	&:focus {
+	&:focus,
+	&:hover {
 		outline: none;
 		border-color: ${({ $hasError, theme }) =>
 			$hasError ? theme.colors.alert : theme.colors.primary};

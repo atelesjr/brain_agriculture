@@ -22,7 +22,7 @@ const ProducerFormComponent = () => {
 	// trigger validation on mount so the error UI is visible for review
 	useEffect(() => {
 		// run validation for 'nome' to populate errors on first render
-		trigger('nome');
+		//trigger('nome');
 	}, [trigger]);
 
 	const onSubmit = (data: ProducerFormValues) => {
@@ -44,6 +44,7 @@ const ProducerFormComponent = () => {
 					{...register('nome')}
 				/>
 
+				{/* coloque o componente InputCPF aqui */}
 				<div className="label">Documento: (CPF/CNPJ)</div>
 				<div className="label">Nome da propriedade:</div>
 				<div className="label">Cidade</div>
