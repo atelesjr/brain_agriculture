@@ -1,13 +1,50 @@
 import { ProducerForm } from './ProducerForm.styles';
+import Input from '@/components/atoms/Input';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect } from 'react';
+import { producerSchema } from './ProducerFromScheme';
+import type z from 'zod';
+
+type ProducerFormValues = z.infer<typeof producerSchema>;
 
 const ProducerFormComponent = () => {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		trigger,
+	} = useForm<ProducerFormValues>({
+		resolver: zodResolver(producerSchema),
+		defaultValues: { nome: '' },
+	});
+
+	// trigger validation on mount so the error UI is visible for review
+	useEffect(() => {
+		// run validation for 'nome' to populate errors on first render
+		trigger('nome');
+	}, [trigger]);
+
+	const onSubmit = (data: ProducerFormValues) => {
+		// TODO: replace with real submission logic
+		console.log('Producer submit:', data);
+	};
+
 	return (
 		<ProducerForm>
 			<h2>Formulário de Produtor</h2>
 
-			<section>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				{/* Nome do produtor using Input atom (registered via react-hook-form) */}
+				<Input
+					label="Nome do produtor"
+					placeholder="Digite o nome completo"
+					required
+					error={errors.nome?.message as string}
+					{...register('nome')}
+				/>
+
 				<div className="label">Documento: (CPF/CNPJ)</div>
-				<div className="label">Nome do produtor</div>
 				<div className="label">Nome da propriedade:</div>
 				<div className="label">Cidade</div>
 				<div className="label">Estado</div>
@@ -17,9 +54,12 @@ const ProducerFormComponent = () => {
 
 				<div className="label">Safras (ex: Safra 2021, Safra 2022)</div>
 				<div className="label">
-					Culturas plantadas (ex.: Soja na Safra 2021, Milho na Safra 2021, Café na Safra 2022)
+					Culturas plantadas (ex.: Soja na Safra 2021, Milho na Safra 2021, Café
+					na Safra 2022)
 				</div>
-			</section>
+
+				<button type="submit">Salvar</button>
+			</form>
 		</ProducerForm>
 	);
 };
