@@ -9,5 +9,5 @@
 		"types": ["vite/client", "vitest/globals"]
 	},
 	"include": ["src"],
-	"exclude": ["src/**/*.d.ts"]
+	"exclude": ["src/**/*.d.ts", "types/**"]
 }
