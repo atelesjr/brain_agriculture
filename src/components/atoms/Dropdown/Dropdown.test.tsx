@@ -1,6 +1,6 @@
 import { render, screen } from '@/test-utils';
 import userEvent from '@testing-library/user-event';
-import { vi } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import Dropdown from './Dropdown';
 
 describe('Dropdown atom', () => {
