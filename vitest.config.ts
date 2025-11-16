@@ -1,11 +1,5 @@
-import { defineConfig } from 'vitest/config';
 import path from 'path';
-
-// Reporters: include junit only in CI environments to avoid local OneDrive I/O locks
-const reporters: any[] = ['default', 'hanging-process'];
-if (process.env.CI === 'true' || process.env.CI === '1') {
-	reporters.splice(1, 0, ['junit', { outputFile: 'test-results/junit.xml' }]);
-}
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
 	resolve: {
@@ -14,19 +8,14 @@ export default defineConfig({
 		},
 	},
 	test: {
-		// enable hanging-process reporter to diagnose hanging handles/processes
-		// also add junit reporter writing to test-results/junit.xml so CI can consume it
-		reporters,
 		globals: true,
-		environment: 'jsdom',
+		// use a lighter DOM for faster environment setup
+		environment: 'happy-dom',
 		setupFiles: path.resolve(__dirname, 'src/setupTests.ts'),
 		include: ['src/**/*.test.{ts,tsx}', 'src/**/*.spec.{ts,tsx}'],
-		// force single-process mode to avoid forks/timeouts on Windows/OneDrive
+		// force single-process mode (stable and reliable); parallel workers caused queued runs
+		// @ts-expect-error: some Vitest versions' types don't include `threads` on InlineConfig
 		threads: false,
-		// also disable the worker pool forks explicitly (Vitest >4 uses a pool)
-		pool: {
-			fork: false,
-		},
 		// global timeout for tests (ms) to reduce false negatives on slow filesystems
 		timeout: 20000,
 	},
