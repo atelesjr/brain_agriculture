@@ -1,7 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="1" failures="0" errors="0" time="0.3428441">
-    <testsuite name="src/App.test.tsx" timestamp="2025-11-15T20:46:26.204Z" hostname="vostro-5510-jr" tests="1" failures="0" errors="0" skipped="0" time="0.3428441">
-        <testcase classname="src/App.test.tsx" name="App &gt; renderiza o título principal" time="0.3417816">
+<testsuites name="vitest tests" tests="16" failures="0" errors="0" time="12.0070833">
+    <testsuite name="src/App.test.tsx" timestamp="2025-11-16T12:45:04.308Z" hostname="vostro-5510-jr" tests="1" failures="0" errors="0" skipped="0" time="1.2076117">
+        <testcase classname="src/App.test.tsx" name="App &gt; renderiza o título principal" time="1.2033862">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/components/atoms/Dropdown/Dropdown.test.tsx" timestamp="2025-11-16T12:45:04.313Z" hostname="vostro-5510-jr" tests="2" failures="0" errors="0" skipped="0" time="1.9488811">
+        <testcase classname="src/components/atoms/Dropdown/Dropdown.test.tsx" name="Dropdown atom &gt; opens menu when toggle is clicked and calls onSelect when item clicked" time="1.4189905">
+        </testcase>
+        <testcase classname="src/components/atoms/Dropdown/Dropdown.test.tsx" name="Dropdown atom &gt; closes when clicking outside" time="0.5265087">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/components/atoms/Input/Input.test.tsx" timestamp="2025-11-16T12:45:04.319Z" hostname="vostro-5510-jr" tests="3" failures="0" errors="0" skipped="0" time="0.9976523">
+        <testcase classname="src/components/atoms/Input/Input.test.tsx" name="Input atom &gt; renders label and required star when required" time="0.2352376">
+        </testcase>
+        <testcase classname="src/components/atoms/Input/Input.test.tsx" name="Input atom &gt; renders error text and applies error styling" time="0.746585">
+        </testcase>
+        <testcase classname="src/components/atoms/Input/Input.test.tsx" name="Input atom &gt; forwards ref to the underlying input" time="0.0082587">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/components/molecules/Accordion/Accordion.test.tsx" timestamp="2025-11-16T12:45:04.326Z" hostname="vostro-5510-jr" tests="2" failures="0" errors="0" skipped="0" time="3.0764641">
+        <testcase classname="src/components/molecules/Accordion/Accordion.test.tsx" name="Accordion component &gt; toggles open/closed and shows farms content" time="1.6786343">
+        </testcase>
+        <testcase classname="src/components/molecules/Accordion/Accordion.test.tsx" name="Accordion component &gt; child harvest selection resets when accordion closes" time="1.3942746">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/components/molecules/DocumentInput/DocumentInput.test.tsx" timestamp="2025-11-16T12:45:04.337Z" hostname="vostro-5510-jr" tests="3" failures="0" errors="0" skipped="0" time="2.0062975">
+        <testcase classname="src/components/molecules/DocumentInput/DocumentInput.test.tsx" name="DocumentInput &gt; shows required error when submitted empty" time="0.8193844">
+        </testcase>
+        <testcase classname="src/components/molecules/DocumentInput/DocumentInput.test.tsx" name="DocumentInput &gt; formats CPF while typing and submits digits-only value" time="0.6875459">
+        </testcase>
+        <testcase classname="src/components/molecules/DocumentInput/DocumentInput.test.tsx" name="DocumentInput &gt; identifies cnpj type when more than 11 digits" time="0.4957566">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/components/organisms/Modal/Modal.test.tsx" timestamp="2025-11-16T12:45:04.342Z" hostname="vostro-5510-jr" tests="2" failures="0" errors="0" skipped="0" time="0.9553622">
+        <testcase classname="src/components/organisms/Modal/Modal.test.tsx" name="Modal &gt; renders content when open and closes on overlay click" time="0.5877593">
+        </testcase>
+        <testcase classname="src/components/organisms/Modal/Modal.test.tsx" name="Modal &gt; does not close when clicking inside dialog and closes with close button" time="0.3637281">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/components/molecules/Accordion/Harvests/Harvests.test.tsx" timestamp="2025-11-16T12:45:04.346Z" hostname="vostro-5510-jr" tests="3" failures="0" errors="0" skipped="0" time="1.8148144">
+        <testcase classname="src/components/molecules/Accordion/Harvests/Harvests.test.tsx" name="Harvests component &gt; shows placeholder when no safra selected" time="0.248295">
+        </testcase>
+        <testcase classname="src/components/molecules/Accordion/Harvests/Harvests.test.tsx" name="Harvests component &gt; opens dropdown and selects a safra showing details" time="1.0231855">
+        </testcase>
+        <testcase classname="src/components/molecules/Accordion/Harvests/Harvests.test.tsx" name="Harvests component &gt; resets selection when resetCounter changes" time="0.5395288">
         </testcase>
     </testsuite>
 </testsuites>

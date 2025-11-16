@@ -1,6 +1,6 @@
 import { render, screen } from '@/test-utils';
-import Producers from './producers';
-import { vi } from 'vitest';
+import Producers from './Producers';
+import { describe, expect, test, vi } from 'vitest';
 
 // Mock the ProducersSkeleton to render a test id
 vi.mock('./ProducersSkeleton/ProducersSkeleton', () => ({

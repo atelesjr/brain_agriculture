@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@/test-utils';
+import { describe, test, expect } from 'vitest';
 import Accordion from './Accordion';
 import type { Farmer } from '@/types/producer';
 

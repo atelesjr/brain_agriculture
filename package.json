@@ -8,7 +8,7 @@
 		"build": "tsc -b && vite build",
 		"lint": "eslint .",
 		"preview": "vite preview",
-		"test": "cross-env VITEST_POOL_FORKS=0 vitest",
+		"test": "cross-env VITEST_POOL_FORKS=0 vitest --watch --reporter=verbose",
 		"test:run": "cross-env VITEST_POOL_FORKS=0 vitest run",
 		"test:watch": "vitest --watch",
 		"test:coverage": "vitest run --coverage",
