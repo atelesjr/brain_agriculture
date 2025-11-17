@@ -9,6 +9,7 @@ import {
 	HarvestLabel,
 	HarvestRoot,
 	HarvestValue,
+	HarvestArea,
 } from './Harvests.styles';
 import Dropdown from '@/components/atoms/Dropdown';
 import { useState, useEffect } from 'react';
@@ -27,19 +28,23 @@ const Harvest = ({ farm, resetCounter }: HarvestProps) => {
 		}
 	}, [resetCounter]);
 
-    // group safras by year so dropdown shows unique years and combined cultures
-    const groupedMap = new Map<number, Safra>();
-    (farm.safras || []).forEach((s) => {
-        if (!groupedMap.has(s.year)) {
-            groupedMap.set(s.year, { year: s.year, name: s.name, cultures: [...(s.cultures || [])] });
-        } else {
-            const existing = groupedMap.get(s.year)!;
-            existing.cultures = existing.cultures.concat(s.cultures || []);
-        }
-    });
-    const groupedSafras = Array.from(groupedMap.values());
+	// group safras by year so dropdown shows unique years and combined cultures
+	const groupedMap = new Map<number, Safra>();
+	(farm.safras || []).forEach((s) => {
+		if (!groupedMap.has(s.year)) {
+			groupedMap.set(s.year, {
+				year: s.year,
+				name: s.name,
+				cultures: [...(s.cultures || [])],
+			});
+		} else {
+			const existing = groupedMap.get(s.year)!;
+			existing.cultures = existing.cultures.concat(s.cultures || []);
+		}
+	});
+	const groupedSafras = Array.from(groupedMap.values());
 
-    return (
+	return (
 		<HarvestRoot>
 			<Col>
 				<Dropdown
@@ -63,14 +68,15 @@ const Harvest = ({ farm, resetCounter }: HarvestProps) => {
 							<HarvestValue>{selectedHarvest.year}</HarvestValue>
 						</Col>
 						<Col>
-							<div>Culturas:</div>
-							{selectedHarvest.cultures.map((culture, i) => (
-								<Cultures key={i}>
-									<CultureValue>{culture.name}:</CultureValue>
-									<HarvestLabel>Área plantada:</HarvestLabel>
-									<CultureValue>{culture.areaPlanted} ha</CultureValue>
-								</Cultures>
-							))}
+							<HarvestLabel>Culturas:</HarvestLabel>
+							<div>
+								{selectedHarvest.cultures.map((culture, i) => (
+									<Cultures key={i}>
+										<HarvestValue>{culture.name} - </HarvestValue>
+										<HarvestArea>{culture.areaPlanted} ha</HarvestArea>
+									</Cultures>
+								))}
+							</div>
 						</Col>
 					</HarvestContent>
 				)}
