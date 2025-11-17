@@ -8,9 +8,10 @@ export const FarmItem = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 12px;
-	gap: 8px;
+	gap: 16px;
 	border-bottom: 1px solid ${({ theme }) => theme.colors.muted};
 	padding-bottom: 4px;
+	font-size: 14px;
 `;
 
 export const FarmListHeader = styled.div`
@@ -29,6 +30,9 @@ export const FarmField = styled.div`
 `;
 
 export const FarmFieldLabel = styled.div``;
-export const FarmFieldValue = styled.div`
+
+export const FarmFieldValue = styled.div<{ highlight?: boolean }>`
+	color: ${({ theme, highlight }) =>
+		highlight ? theme.colors.primary : theme.colors.textSecondary};
 	font-weight: 600;
 `;
