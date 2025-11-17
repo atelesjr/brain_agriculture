@@ -3,7 +3,6 @@ import type { Farm } from '@/types/producer';
 import {
 	Col,
 	Col2,
-	CultureValue,
 	HarvestContent,
 	Cultures,
 	HarvestLabel,
