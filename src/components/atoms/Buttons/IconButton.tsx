@@ -15,8 +15,10 @@ const Img = styled.img`
 export type IconAction = 'add' | 'edit' | 'delete';
 
 export interface IconButtonProps extends Omit<ButtonProps, 'children'> {
-	action: IconAction;
+	action?: IconAction;
 	label?: string;
+	/** optional icon override: either a string URL (imported svg) or a React node */
+	icon?: string | React.ReactNode;
 }
 
 const iconMap: Record<IconAction, string> = {
@@ -51,7 +53,13 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
 			if (maybeOnClick) maybeOnClick(e);
 		};
 
-		const icon = iconMap[action];
+		const icon =
+			// prefer explicit prop if provided
+			rest && (rest as any).icon
+				? (rest as any).icon
+				: action
+				? iconMap[action]
+				: undefined;
 
 		return (
 			<StyledButton
@@ -62,11 +70,12 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
 				{...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
 				onClick={handleClick}
 			>
-				<Img
-					src={icon}
-					alt={label ?? defaultLabels[action]}
-					aria-hidden="true"
-				/>
+				{typeof icon === 'string' ? (
+					<Img src={icon} alt={label ?? defaultLabels[action]} aria-hidden="true" />
+				) : (
+					// allow passing a React node (SVG component)
+					icon ?? null
+				)}
 				<span>
 					{done && action === 'delete'
 						? 'Excluído'
