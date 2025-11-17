@@ -19,7 +19,6 @@ export default defineConfig({
 		// global timeout for tests (ms) to reduce false negatives on slow filesystems
 		timeout: 20000,
 		// limit threads more explicitly for environments with fork issues
-		// @ts-expect-error: types may not include this option
 		maxThreads: 1,
 	},
 });
