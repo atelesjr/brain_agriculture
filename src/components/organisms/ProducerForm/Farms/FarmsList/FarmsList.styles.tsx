@@ -58,5 +58,5 @@ export const HarvestsFormRoot = styled.div`
 `;
 
 export const BottomSection = styled.div`
-	margin-top: 16px;
+	margin-top: 28px;
 `;

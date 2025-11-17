@@ -13,3 +13,15 @@ export const FarmHeader = styled.div<{ open?: boolean }>`
 	border-bottom: 1px solid ${({ theme }) => theme.colors.secondary};
 	margin-bottom: 16px;
 `;
+
+export const FarmContent = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+`;
+
+export const ButtonsSection = styled.div`
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+`;

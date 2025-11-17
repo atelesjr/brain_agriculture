@@ -1,6 +1,6 @@
 import type { UseFormRegister, FieldErrors } from 'react-hook-form';
 import type { ProducerFormValues } from '../ProducerForm';
-import { FarmHeader, FarmsFormRoot } from './Farms.styles';
+import { FarmContent, FarmHeader, FarmsFormRoot } from './Farms.styles';
 import { IconButton } from '@/components/atoms/Buttons';
 import { useState } from 'react';
 import FarmsList from './FarmsList/FarmsList';
@@ -57,7 +57,11 @@ const FarmsForm = ({ register, errors }: FarmsFormProps) => {
 					}}
 				/>
 			</FarmHeader>
-			{openFarmForm ? <FarmForm /> : <FarmsList farms={farms} />}
+			<FarmContent>
+				{openFarmForm ? <FarmForm /> : null}
+
+				<FarmsList farms={farms} />
+			</FarmContent>
 		</FarmsFormRoot>
 	);
 };

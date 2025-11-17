@@ -23,7 +23,11 @@ const HarvestsForm = () => {
 	};
 
 	const handleChange = (index: number, field: keyof Harvest, value: string) => {
-		setHarvests((prev) => prev.map((h, i) => (i === index ? { ...h, [field]: value } : h)));
+		setHarvests((prev) =>
+			prev.map((harvest, i) =>
+				i === index ? { ...harvest, [field]: value } : harvest
+			)
+		);
 	};
 
 	return (

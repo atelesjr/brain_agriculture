@@ -1,7 +1,8 @@
 import Input from '@/components/atoms/Input';
-import { FarmsFormRoot } from '../Farms.styles';
+import { FarmsFormRoot, ButtonsSection } from '../Farms.styles';
 import { FarmField, HarvestSection, Row } from '../FarmsList/FarmsList.styles';
 import HarvestsForm from './HarvestsForm';
+import { Button } from '@/components/atoms';
 
 const FarmForm = () => {
 	return (
@@ -36,6 +37,15 @@ const FarmForm = () => {
 			<HarvestSection>
 				<HarvestsForm />
 			</HarvestSection>
+
+			<ButtonsSection>
+				<Button variant="primary" size="sm">
+					Salvar propriedade
+				</Button>
+				<Button variant="secondary" size="sm">
+					Cancelar
+				</Button>
+			</ButtonsSection>
 		</FarmsFormRoot>
 	);
 };
