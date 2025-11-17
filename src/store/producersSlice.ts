@@ -27,6 +27,14 @@ export const createProducer = createAsyncThunk(
     }
 );
 
+export const deleteProducer = createAsyncThunk(
+    'producers/delete',
+    async (id: number) => {
+        await producersService.deleteProducer(id);
+        return id;
+    }
+);
+
 const producersSlice = createSlice({
     name: 'producers',
     initialState,
@@ -66,6 +74,21 @@ const producersSlice = createSlice({
             .addCase(createProducer.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Failed to create producer';
+            });
+
+        builder
+            .addCase(deleteProducer.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(deleteProducer.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                // remove producer by id
+                state.items = state.items.filter((p) => p.id !== action.payload);
+            })
+            .addCase(deleteProducer.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Failed to delete producer';
             });
     },
 });

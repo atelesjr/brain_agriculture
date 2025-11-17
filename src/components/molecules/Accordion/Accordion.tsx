@@ -10,10 +10,14 @@ import {
 } from './Accordion.styles';
 import ArrowIcon from '@/components/atoms/icons/ArrowIcon';
 import { IconButton } from '@/components/atoms/Buttons';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '@/store';
+import { deleteProducer as deleteProducerAction } from '@/store/producersSlice';
 import type { Farmer } from '@/types/producer';
 import Farms from './Farm/Farm';
 
 const Accordion: React.FC<{ item: Farmer }> = ({ item }) => {
+	const dispatch = useDispatch<AppDispatch>();
 	const [open, setOpen] = useState(false);
 	const [resetCounter, setResetCounter] = useState(0);
 
@@ -62,7 +66,7 @@ const Accordion: React.FC<{ item: Farmer }> = ({ item }) => {
 					size="sm"
 					onClick={(e) => {
 						e.stopPropagation();
-						console.log('Excluir', item.id);
+						void dispatch(deleteProducerAction(item.id));
 					}}
 				/>
 			</AccordionHeader>
