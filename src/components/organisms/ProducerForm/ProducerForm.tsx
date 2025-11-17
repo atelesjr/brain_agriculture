@@ -1,4 +1,10 @@
-import { FarmsSection, Field, ProducerForm, Row } from './ProducerForm.styles';
+import {
+	FarmsSection,
+	Field,
+	ProducerForm,
+	Row,
+	ButtonsSection,
+} from './ProducerForm.styles';
 import Input from '@/components/atoms/Input';
 import DocumentInput from '@/components/molecules/DocumentInput/DocumentInput';
 import { useForm } from 'react-hook-form';
@@ -7,6 +13,7 @@ import { useEffect } from 'react';
 import { producerSchema } from './ProducerFromScheme';
 import type z from 'zod';
 import Farms from './Farms/Farms';
+import { Button } from '@/components/atoms';
 
 export type ProducerFormValues = z.infer<typeof producerSchema>;
 
@@ -54,9 +61,21 @@ const ProducerFormComponent = () => {
 					</Field>
 				</Row>
 				<FarmsSection>
-					<Farms register={register} errors={errors} />
+					<Farms />
 				</FarmsSection>
-				<button type="submit">Salvar</button>
+				<ButtonsSection>
+					<Button role="submit" variant="primary" size="sm">
+						Salvar Produtor
+					</Button>
+					<Button
+						role="button"
+						variant="secondary"
+						size="sm"
+						onClick={() => {}}
+					>
+						Cancelar
+					</Button>
+				</ButtonsSection>
 			</form>
 		</ProducerForm>
 	);

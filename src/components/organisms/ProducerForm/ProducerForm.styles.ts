@@ -24,3 +24,9 @@ export const Field = styled.div<FieldSectionProps>`
 export const FarmsSection = styled.div`
 	margin-top: 16px;
 `;
+
+export const ButtonsSection = styled.div`
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+`;
