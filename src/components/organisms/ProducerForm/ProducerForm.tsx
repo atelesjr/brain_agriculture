@@ -1,4 +1,4 @@
-import { Field, ProducerForm, Row } from './ProducerForm.styles';
+import { FarmsSection, Field, ProducerForm, Row } from './ProducerForm.styles';
 import Input from '@/components/atoms/Input';
 import DocumentInput from '@/components/molecules/DocumentInput/DocumentInput';
 import { useForm } from 'react-hook-form';
@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { producerSchema } from './ProducerFromScheme';
 import type z from 'zod';
-import FarmsForm from './FarmsForm/FarmsForm';
+import FarmsForm from './FarmsForm/Farms';
 
 export type ProducerFormValues = z.infer<typeof producerSchema>;
 
@@ -53,16 +53,9 @@ const ProducerFormComponent = () => {
 						<DocumentInput control={control} name="document" />
 					</Field>
 				</Row>
-				<Row>
+				<FarmsSection>
 					<FarmsForm register={register} errors={errors} />
-				</Row>
-
-				<div className="label">Safras (ex: Safra 2021, Safra 2022)</div>
-				<div className="label">
-					Culturas plantadas (ex.: Soja na Safra 2021, Milho na Safra 2021, Café
-					na Safra 2022)
-				</div>
-
+				</FarmsSection>
 				<button type="submit">Salvar</button>
 			</form>
 		</ProducerForm>

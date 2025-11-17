@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import {
 	AccordionRoot,
 	AccordionHeader,
-	ArrowIcon,
 	HeaderText,
 	Highlight,
 	DocumentText,
 	AccordionContent,
 	HeaderLeft,
 } from './Accordion.styles';
+import ArrowIcon from '@/components/atoms/icons/ArrowIcon';
 import { IconButton } from '@/components/atoms/Buttons';
 import type { Farmer } from '@/types/producer';
 import Farms from './Farm/Farm';
@@ -17,47 +17,42 @@ const Accordion: React.FC<{ item: Farmer }> = ({ item }) => {
 	const [open, setOpen] = useState(false);
 	const [resetCounter, setResetCounter] = useState(0);
 
+	const handleOnClick = () => {
+		setOpen((s) => {
+			const next = !s;
+			if (!next) {
+				// accordion is closing -> bump reset counter to instruct children to reset
+				setResetCounter((c) => c + 1);
+			}
+			return next;
+		});
+	};
+
+	const handleOnKeyDown = (e: React.KeyboardEvent) => {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			setOpen((s) => {
+				const next = !s;
+				if (!next) {
+					setResetCounter((c) => c + 1);
+				}
+				return next;
+			});
+		}
+	};
+
 	return (
 		<AccordionRoot>
 			<AccordionHeader
 				role="button"
 				tabIndex={0}
-				onClick={() => {
-					setOpen((s) => {
-						const next = !s;
-						if (!next) {
-							// accordion is closing -> bump reset counter to instruct children to reset
-							setResetCounter((c) => c + 1);
-						}
-						return next;
-					});
-				}}
-				onKeyDown={(e) => {
-					if (e.key === 'Enter' || e.key === ' ') {
-						e.preventDefault();
-						setOpen((s) => {
-							const next = !s;
-							if (!next) setResetCounter((c) => c + 1);
-							return next;
-						});
-					}
-				}}
+				onClick={() => handleOnClick()}
+				onKeyDown={(e) => handleOnKeyDown(e)}
 				aria-expanded={open}
 				open={open}
 			>
 				<HeaderLeft>
-					<ArrowIcon
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24"
-						width="18"
-						height="18"
-						open={open}
-						aria-hidden="true"
-					>
-						{/* filled triangle pointing down by default; we rotate it to point right when closed */}
-						<polygon points="4,6 20,6 12,18" fill="currentColor" />
-					</ArrowIcon>
-
+					<ArrowIcon open={open} width="12" height="12" />
 					<HeaderText>
 						<Highlight>{`id: "${item.id}" - ${item.name}`}</Highlight>
 						<DocumentText>{`${item.documentType}: ${item.document}`}</DocumentText>

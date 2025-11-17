@@ -20,3 +20,7 @@ export const Row = styled.div`
 export const Field = styled.div<FieldSectionProps>`
 	width: ${(props) => props.width || '100%'};
 `;
+
+export const FarmsSection = styled.div`
+	margin-top: 16px;
+`;

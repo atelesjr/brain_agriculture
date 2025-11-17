@@ -21,14 +21,6 @@ export const AccordionHeader = styled.div<{ open?: boolean }>`
 			: 'none'};
 `;
 
-export const ArrowIcon = styled.svg<{ open?: boolean }>`
-	color: ${({ theme }) => theme?.colors?.text ?? '#0F172A'};
-	transition: transform 180ms ease;
-	transform-origin: center;
-	transform: rotate(${(p) => (p.open ? '0deg' : '-90deg')});
-	flex: 0 0 auto;
-`;
-
 export const HeaderText = styled.div`
 	display: flex;
 	align-items: center;
