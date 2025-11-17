@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { producerSchema } from './ProducerFromScheme';
 import type z from 'zod';
-import FarmsForm from './FarmsForm/Farms';
+import Farms from './Farms/Farms';
 
 export type ProducerFormValues = z.infer<typeof producerSchema>;
 
@@ -54,7 +54,7 @@ const ProducerFormComponent = () => {
 					</Field>
 				</Row>
 				<FarmsSection>
-					<FarmsForm register={register} errors={errors} />
+					<Farms register={register} errors={errors} />
 				</FarmsSection>
 				<button type="submit">Salvar</button>
 			</form>

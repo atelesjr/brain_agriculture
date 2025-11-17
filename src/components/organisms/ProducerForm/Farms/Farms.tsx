@@ -4,6 +4,7 @@ import { FarmHeader, FarmsFormRoot } from './Farms.styles';
 import { IconButton } from '@/components/atoms/Buttons';
 import { useState } from 'react';
 import FarmsList from './FarmsList/FarmsList';
+import FarmForm from './FarmForm/FarmForm';
 import type { Farm } from '@/types/producer';
 
 interface FarmsFormProps {
@@ -39,7 +40,8 @@ const sampleFarmsData: Farm[] = [
 ];
 
 const FarmsForm = ({ register, errors }: FarmsFormProps) => {
-	const [farms, setFarms] = useState<Farm[]>(sampleFarmsData);
+	const [farms] = useState<Farm[]>(sampleFarmsData);
+	const [openFarmForm, setOpenFarmForm] = useState<boolean>(true);
 
 	return (
 		<FarmsFormRoot>
@@ -51,11 +53,11 @@ const FarmsForm = ({ register, errors }: FarmsFormProps) => {
 					variant="primary"
 					size="sm"
 					onClick={() => {
-						console.log('Adicionar Propriedade clicked');
+						setOpenFarmForm(true);
 					}}
 				/>
 			</FarmHeader>
-			<FarmsList farms={farms} />
+			{openFarmForm ? <FarmForm /> : <FarmsList farms={farms} />}
 		</FarmsFormRoot>
 	);
 };

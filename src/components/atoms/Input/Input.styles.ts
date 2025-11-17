@@ -23,7 +23,7 @@ export const RequiredStar = styled.span`
 export const StyledInput = styled.input<{ $hasError?: boolean }>`
 	width: 100%;
 	box-sizing: border-box;
-	padding: 8px 12px;
+	padding: 4px 12px;
 	border-radius: ${({ theme }) => theme.radius.md};
 	border: 2px solid
 		${({ $hasError, theme }) =>
