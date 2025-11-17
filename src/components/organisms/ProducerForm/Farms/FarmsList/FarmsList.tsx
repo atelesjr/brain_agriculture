@@ -70,6 +70,7 @@ const FarmsList = ({ farms }: FarmListProps) => {
 							<FarmFieldValue>{`${farm.vegetatedArea}ha`}</FarmFieldValue>
 						</FarmField>
 					</FarmListHeader>
+
 					<HarvestSection hidden={!open} aria-hidden={!open}>
 						{<Harvest farm={farm} resetCounter={resetCounter} />}
 					</HarvestSection>

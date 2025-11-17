@@ -44,8 +44,9 @@ export const Row = styled.div`
 	margin-bottom: 8px;
 `;
 
-export const HarvestSection = styled.div`
+export const HarvestSection = styled.div<{ hidden?: boolean }>`
 	display: flex;
+	display: ${({ hidden }) => (hidden ? 'none' : 'flex')};
 `;
 
 export const HarvestsFormRoot = styled.div`

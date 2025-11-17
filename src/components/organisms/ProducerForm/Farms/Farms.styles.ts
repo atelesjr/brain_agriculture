@@ -25,3 +25,5 @@ export const ButtonsSection = styled.div`
 	justify-content: flex-end;
 	gap: 8px;
 `;
+
+export const FarmsListSection = styled.div``;
