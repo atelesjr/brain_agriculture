@@ -6,15 +6,20 @@ import { producerCreateSchema } from './ProducerFromScheme';
 import type { ProducerFormValues } from './ProducerForm';
 import type { Farm, Farmer } from '@/types/producer';
 import type { AppDispatch } from '@/store';
-import { createProducer } from '@/store/producersSlice';
+import { createProducer, updateProducer } from '@/store/producersSlice';
 import { closeModal } from '@/store/modalSlice';
 
-export function useProducerForm(initialFarms: Farm[] = []) {
+export function useProducerForm(initialProducer?: Farmer) {
 	const dispatch = useDispatch<AppDispatch>();
 
 	const form = useForm<ProducerFormValues>({
 		resolver: zodResolver(producerCreateSchema),
-		defaultValues: { name: '', document: '', farms: [] },
+		defaultValues: {
+			name: initialProducer?.name ?? '',
+			document: initialProducer?.document ?? '',
+			documentType: initialProducer?.documentType ?? '',
+			farms: initialProducer?.farms ?? [],
+		},
 		mode: 'onChange',
 		reValidateMode: 'onChange',
 	});
@@ -24,7 +29,7 @@ export function useProducerForm(initialFarms: Farm[] = []) {
 	const watchedName = watch('name');
 	const watchedDocument = watch('document');
 
-	const [farms, setFarms] = useState<Farm[]>(initialFarms);
+	const [farms, setFarms] = useState<Farm[]>(initialProducer?.farms ?? []);
 	const [farmFormOpen, setFarmFormOpen] = useState(false);
 	const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -59,13 +64,21 @@ export function useProducerForm(initialFarms: Farm[] = []) {
 					farms,
 				};
 
-				await dispatch(createProducer(payload)).unwrap();
+				if (initialProducer && typeof initialProducer.id === 'number') {
+					// update
+					await dispatch(
+						updateProducer({ id: initialProducer.id, payload })
+					).unwrap();
+				} else {
+					await dispatch(createProducer(payload)).unwrap();
+				}
+
 				dispatch(closeModal());
 			} catch (err) {
 				setSubmitError(String((err as Error)?.message || err));
 			}
 		},
-		[dispatch, farms]
+		[dispatch, farms, initialProducer]
 	);
 
 	return {

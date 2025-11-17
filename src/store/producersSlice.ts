@@ -35,6 +35,14 @@ export const deleteProducer = createAsyncThunk(
     }
 );
 
+export const updateProducer = createAsyncThunk(
+    'producers/update',
+    async ({ id, payload }: { id: number; payload: Partial<Omit<Farmer, 'id'>> }) => {
+        const updated = await producersService.updateProducer(id, payload as Partial<Farmer>);
+        return updated;
+    }
+);
+
 const producersSlice = createSlice({
     name: 'producers',
     initialState,
@@ -89,6 +97,21 @@ const producersSlice = createSlice({
             .addCase(deleteProducer.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Failed to delete producer';
+            });
+
+        builder
+            .addCase(updateProducer.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(updateProducer.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                // replace updated producer
+                state.items = state.items.map((p) => (p.id === action.payload.id ? action.payload : p));
+            })
+            .addCase(updateProducer.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Failed to update producer';
             });
     },
 });

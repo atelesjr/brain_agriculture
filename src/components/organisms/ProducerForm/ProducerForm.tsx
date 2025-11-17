@@ -20,7 +20,7 @@ import { Button } from '@/components/atoms';
 export type ProducerFormValues = z.infer<typeof producerCreateSchema>;
 import { useTheme } from 'styled-components';
 
-const ProducerFormComponent: React.FC = () => {
+const ProducerFormComponent: React.FC<{ initialProducer?: import('@/types/producer').Farmer }> = ({ initialProducer }) => {
 	const theme = useTheme();
 
 	// use the reusable hook to encapsulate form and domain logic
@@ -34,7 +34,7 @@ const ProducerFormComponent: React.FC = () => {
 		canAddProperty,
 		submitError,
 		onSubmit,
-	} = useProducerForm();
+	} = useProducerForm(initialProducer);
 
 	const dispatch = useDispatch<AppDispatch>();
 

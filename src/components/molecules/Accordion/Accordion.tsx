@@ -10,6 +10,8 @@ import {
 } from './Accordion.styles';
 import ArrowIcon from '@/components/atoms/icons/ArrowIcon';
 import { IconButton } from '@/components/atoms/Buttons';
+import { openModal } from '@/store/modalSlice';
+import ProducerForm from '@/components/organisms/ProducerForm/ProducerForm';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/store';
 import { deleteProducer as deleteProducerAction } from '@/store/producersSlice';
@@ -56,7 +58,9 @@ const Accordion: React.FC<{ item: Farmer }> = ({ item }) => {
 					size="sm"
 					onClick={(e) => {
 						e.stopPropagation();
-						console.log('Editar', item.id);
+						// open modal with ProducerForm in edit mode (pass initialProducer)
+						const EditForm = <ProducerForm initialProducer={item} />;
+						void dispatch(openModal(EditForm));
 					}}
 				/>
 				<IconButton
