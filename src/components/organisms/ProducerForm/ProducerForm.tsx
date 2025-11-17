@@ -7,74 +7,38 @@ import {
 } from './ProducerForm.styles';
 import Input from '@/components/atoms/Input';
 import DocumentInput from '@/components/molecules/DocumentInput/DocumentInput';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
 import { producerCreateSchema } from './ProducerFromScheme';
 import type z from 'zod';
 import Farms from './Farms/Farms';
-import type { Farm } from '@/types/producer';
+
+import { useProducerForm } from './useProducerForm';
+import { closeModal } from '@/store/modalSlice';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '@/store';
-import { createProducer } from '@/store/producersSlice';
-import { closeModal } from '@/store/modalSlice';
 import { Button } from '@/components/atoms';
 
 export type ProducerFormValues = z.infer<typeof producerCreateSchema>;
 import { useTheme } from 'styled-components';
 
-const ProducerFormComponent = () => {
+const ProducerFormComponent: React.FC = () => {
 	const theme = useTheme();
 
+	// use the reusable hook to encapsulate form and domain logic
 	const {
-		register,
-		handleSubmit,
-		watch,
-		formState: { errors },
-		control,
-	} = useForm<ProducerFormValues>({
-		resolver: zodResolver(producerCreateSchema),
-		defaultValues: { name: '', document: '', farms: [] },
-		mode: 'onChange',
-		reValidateMode: 'onChange',
-	});
+		form,
+		farms,
+		setFarms,
+		farmFormOpen,
+		handleOpenFarmForm,
+		handleCloseFarmForm,
+		canAddProperty,
+		submitError,
+		onSubmit,
+	} = useProducerForm();
 
 	const dispatch = useDispatch<AppDispatch>();
 
-	const [farms, setFarms] = useState<Farm[]>([]);
-	const [farmFormOpen, setFarmFormOpen] = useState<boolean>(false);
-
-	const watchedName = watch('name');
-	const watchedDocument = watch('document');
-
-	const canAddProperty = Boolean(
-		watchedName && String(watchedName).trim().length > 0 &&
-			watchedDocument && String(watchedDocument).trim().length > 0 &&
-			!errors.name && !errors.document
-	);
-
-	const onSubmit = async (data: ProducerFormValues) => {
-		console.log('ProducerForm submit values (form):', data);
-		console.log('ProducerForm local farms state:', farms);
-		setSubmitError(null);
-		try {
-			const payload: Omit<import('@/types/producer').Farmer, 'id'> = {
-				document: data.document,
-				// Farmer.documentType is required in the domain type; ensure we pass a string
-				documentType: data.documentType ?? '',
-				name: data.name,
-				farms,
-			};
-			// dispatch createProducer thunk
-			await dispatch(createProducer(payload)).unwrap();
-			dispatch(closeModal());
-		} catch (err) {
-			console.error('Failed to create producer', err);
-			setSubmitError(String((err as Error)?.message || err));
-		}
-	};
-
-	const [submitError, setSubmitError] = useState<string | null>(null);
+	const { register, handleSubmit, control, formState: { errors } } = form;
 
 	return (
 		<ProducerForm>
@@ -100,8 +64,8 @@ const ProducerFormComponent = () => {
 					<Farms
 						farms={farms}
 						setFarms={setFarms}
-						onOpenForm={() => setFarmFormOpen(true)}
-						onCloseForm={() => setFarmFormOpen(false)}
+						onOpenForm={handleOpenFarmForm}
+						onCloseForm={handleCloseFarmForm}
 						canAddProperty={canAddProperty}
 					/>
 				</FarmsSection>
