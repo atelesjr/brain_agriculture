@@ -28,26 +28,12 @@ const Accordion: React.FC<{ item: Farmer }> = ({ item }) => {
 		});
 	};
 
-	const handleOnKeyDown = (e: React.KeyboardEvent) => {
-		if (e.key === 'Enter' || e.key === ' ') {
-			e.preventDefault();
-			setOpen((s) => {
-				const next = !s;
-				if (!next) {
-					setResetCounter((c) => c + 1);
-				}
-				return next;
-			});
-		}
-	};
-
 	return (
 		<AccordionRoot>
 			<AccordionHeader
 				role="button"
 				tabIndex={0}
 				onClick={() => handleOnClick()}
-				onKeyDown={(e) => handleOnKeyDown(e)}
 				aria-expanded={open}
 				open={open}
 			>

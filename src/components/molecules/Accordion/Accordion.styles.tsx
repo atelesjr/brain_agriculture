@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import type { Theme } from '@/styles/theme';
 
 export const AccordionRoot = styled.div`
 	border: 1px solid ${({ theme }) => theme?.colors?.primary ?? '#0F172A'};
@@ -15,10 +14,8 @@ export const AccordionHeader = styled.div<{ open?: boolean }>`
 	cursor: pointer;
 	user-select: none;
 	background: transparent;
-	border-bottom: ${(p) =>
-		p.open
-			? `1px solid ${(p.theme as unknown as Theme).colors.primary ?? '#eee'}`
-			: 'none'};
+	border-bottom: ${({ open, theme }) =>
+		open ? `1px solid ${theme.colors.primary ?? '#eee'}` : 'none'};
 `;
 
 export const HeaderText = styled.div`
@@ -40,7 +37,7 @@ export const IconButton = styled.button`
 	gap: 8px;
 	background: transparent;
 	border: none;
-	color: ${(p) => (p.theme as unknown as Theme).colors.text ?? '#0F172A'};
+	color: ${({ theme }) => theme?.colors?.text ?? '#0F172A'};
 	padding: 6px 8px;
 	border-radius: 6px;
 	cursor: pointer;

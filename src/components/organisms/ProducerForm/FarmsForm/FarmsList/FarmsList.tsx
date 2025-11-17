@@ -9,25 +9,47 @@ import {
 	HarvestSection,
 } from './FarmsList.styles';
 import type { Farm } from '@/types/producer';
-import Harvests from '../../Harvests/Harvests';
+import Harvest from '@/components/molecules/Accordion/Harvests/Harvests';
+import { useState } from 'react';
 
 interface FarmListProps {
 	farms: Farm[];
 }
 
 const FarmsList = ({ farms }: FarmListProps) => {
-	const noFarm = <>Nenhuma propriedade cadastrada</>;
+	const [resetCounter, setResetCounter] = useState(0);
+	const [open, setOpen] = useState(false);
+
+	const handleOnClick = () => {
+		setOpen((s) => {
+			const next = !s;
+			if (!next) {
+				// accordion is closing -> bump reset counter to instruct children to reset
+				setResetCounter((c) => c + 1);
+			}
+			return next;
+		});
+	};
 
 	if (farms.length === 0) {
-		return <FarmListRoot>{noFarm}</FarmListRoot>;
+		return (
+			<FarmListRoot>
+				<h4>Nenhuma propriedade cadastrada</h4>
+			</FarmListRoot>
+		);
 	}
 
 	return (
 		<FarmListRoot>
 			{farms.map((farm) => (
 				<FarmItem key={farm.id}>
-					<FarmListHeader>
-						<ArrowIcon />
+					<FarmListHeader
+						role="button"
+						key={farm.id}
+						aria-expanded={open}
+						onClick={() => handleOnClick()}
+					>
+						<ArrowIcon open={open} />
 						<FarmField>
 							<FarmFieldValue>{farm.name}</FarmFieldValue>
 						</FarmField>
@@ -48,8 +70,8 @@ const FarmsList = ({ farms }: FarmListProps) => {
 							<FarmFieldValue>{`${farm.vegetatedArea}ha`}</FarmFieldValue>
 						</FarmField>
 					</FarmListHeader>
-					<HarvestSection>
-						<Harvests />
+					<HarvestSection hidden={!open} aria-hidden={!open}>
+						{<Harvest farm={farm} resetCounter={resetCounter} />}
 					</HarvestSection>
 				</FarmItem>
 			))}

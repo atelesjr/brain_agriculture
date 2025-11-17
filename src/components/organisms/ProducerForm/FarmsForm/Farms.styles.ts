@@ -6,7 +6,7 @@ export const FarmsFormRoot = styled.div`
 	width: 100%;
 `;
 
-export const FarmHeader = styled.div`
+export const FarmHeader = styled.div<{ open?: boolean }>`
 	display: flex;
 	justify-content: space-between;
 	padding: 0 0 8px;

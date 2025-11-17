@@ -9,7 +9,6 @@ export const FarmItem = styled.div`
 	flex-direction: column;
 	margin-bottom: 12px;
 	gap: 8px;
-
 	border-bottom: 1px solid ${({ theme }) => theme.colors.muted};
 	padding-bottom: 4px;
 `;
@@ -18,6 +17,8 @@ export const FarmListHeader = styled.div`
 	display: flex;
 	gap: 12px;
 	align-items: center;
+	cursor: pointer;
+	user-select: none;
 `;
 
 export const HarvestSection = styled.div``;
