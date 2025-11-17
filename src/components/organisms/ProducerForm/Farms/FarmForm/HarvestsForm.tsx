@@ -1,52 +1,47 @@
-import Input from '@/components/atoms/Input';
-import {
-	BottomSection,
-	FarmField,
-	HarvestsFormRoot,
-	Row,
-} from '../FarmsList/FarmsList.styles';
-import { IconButton } from '@/components/atoms/Buttons';
-import addIcon from '@/assets/add.svg';
-import garbageIcon from '@/assets/garbage.svg';
+import { HarvestsFormRoot } from '../FarmsList/FarmsList.styles';
 import { useState } from 'react';
+import HarvestItem from './HarvestItem';
+import type { Harvest } from './HarvestItem';
 
 const HarvestsForm = () => {
-	const [harvests, setHarvests] = useState([]);
+	const [harvests, setHarvests] = useState<Harvest[]>([
+		{ year: '', crop: '', area: '' },
+	]);
 
-	const addHarvest = () => {};
+	const addHarvest = () =>
+		setHarvests((prev) => [...prev, { year: '', crop: '', area: '' }]);
 
-	const removeHarvest = () => {};
+	const removeHarvest = (index: number) => {
+		setHarvests((prev) => {
+			// if there's only one harvest, clear its fields but keep one item
+			if (prev.length <= 1) {
+				return [{ year: '', crop: '', area: '' }];
+			}
+
+			return prev.filter((_, i) => i !== index);
+		});
+	};
+
+	const handleChange = (index: number, field: keyof Harvest, value: string) => {
+		setHarvests((prev) => prev.map((h, i) => (i === index ? { ...h, [field]: value } : h)));
+	};
 
 	return (
 		<HarvestsFormRoot>
 			<h5>Safras:</h5>
-			<Row>
-				<FarmField width="80px">
-					<Input placeholder="Ano" label="Ano:" />
-				</FarmField>
-				<FarmField width="150px">
-					<Input placeholder="Digite a cultura" label="Cultura:" />
-				</FarmField>
-				<FarmField width="100px">
-					<Input label="Área plantada:" />
-				</FarmField>
-				<BottomSection>
-					<IconButton
-						variant="primary"
-						size="sm"
-						icon={addIcon}
-						aria-label="Adicionar"
-						onClick={addHarvest}
+			<div>
+				{harvests.map((harvest, index) => (
+					<HarvestItem
+						key={index}
+						index={index}
+						harvest={harvest}
+						isLast={index === harvests.length - 1}
+						onChange={handleChange}
+						addHarvest={addHarvest}
+						removeHarvest={removeHarvest}
 					/>
-					<IconButton
-						variant="primary"
-						size="sm"
-						icon={garbageIcon}
-						aria-label="Excluir"
-						onClick={removeHarvest}
-					/>
-				</BottomSection>
-			</Row>
+				))}
+			</div>
 		</HarvestsFormRoot>
 	);
 };

@@ -50,6 +50,13 @@ const sizeStyles = {
 	`,
 };
 
+export const Img = styled.img`
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	vertical-align: middle;
+`;
+
 export const StyledButton = styled.button<StyledButtonProps>`
 	display: inline-flex;
 	align-items: center;
