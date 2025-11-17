@@ -40,8 +40,13 @@ const ProducerFormComponent = () => {
 
 	const onSubmit = async (data: ProducerFormValues) => {
 		try {
-			const payload = { ...(data as any), farms };
-			await producersService.createProducer(payload as any);
+			const payload: Omit<import('@/types/producer').Farmer, 'id'> = {
+				document: data.document,
+				documentType: data.documentType,
+				name: data.name,
+				farms,
+			};
+			await producersService.createProducer(payload);
 			dispatch(closeModal());
 		} catch (err) {
 			console.error('Failed to create producer', err);

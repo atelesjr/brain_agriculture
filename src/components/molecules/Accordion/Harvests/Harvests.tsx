@@ -26,12 +26,25 @@ const Harvest = ({ farm, resetCounter }: HarvestProps) => {
 			setSelectedHarvest(null);
 		}
 	}, [resetCounter]);
-	return (
+
+    // group safras by year so dropdown shows unique years and combined cultures
+    const groupedMap = new Map<number, Safra>();
+    (farm.safras || []).forEach((s) => {
+        if (!groupedMap.has(s.year)) {
+            groupedMap.set(s.year, { year: s.year, name: s.name, cultures: [...(s.cultures || [])] });
+        } else {
+            const existing = groupedMap.get(s.year)!;
+            existing.cultures = existing.cultures.concat(s.cultures || []);
+        }
+    });
+    const groupedSafras = Array.from(groupedMap.values());
+
+    return (
 		<HarvestRoot>
 			<Col>
 				<Dropdown
 					label="Safras"
-					items={(farm.safras || []).map((harvest) => ({
+					items={groupedSafras.map((harvest) => ({
 						id: harvest.year,
 						label: String(harvest.year),
 						onSelect: () => {

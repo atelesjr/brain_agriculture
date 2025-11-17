@@ -32,7 +32,7 @@ const iconMap: Record<IconAction, string> = {
  * - Keeps a local "done" state when action is `delete` so the UI reflects the change
  */
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-	({ action, label, variant = 'primary', size = 'sm', ...rest }, ref) => {
+	({ action, label, variant = 'primary', size = 'sm', icon, ...rest }, ref) => {
 		const [done, setDone] = useState(false);
 
 		const defaultLabels: Record<IconAction, string> = {
@@ -47,40 +47,34 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
 				setDone(true);
 			}
 
-			const maybeOnClick = (
-				rest as React.ButtonHTMLAttributes<HTMLButtonElement>
-			).onClick;
+			const restProps = rest as React.ButtonHTMLAttributes<HTMLButtonElement>;
+			const maybeOnClick = restProps.onClick;
 			if (maybeOnClick) maybeOnClick(e);
 		};
 
-		const icon =
+		const resolvedIcon =
 			// prefer explicit prop if provided
-			rest && (rest as any).icon
-				? (rest as any).icon
-				: action
-				? iconMap[action]
-				: undefined;
+			icon ? icon : action ? iconMap[action] : undefined;
+
+		const ariaLabel = label ?? (action ? defaultLabels[action] : undefined);
+		const displayLabel = done && action === 'delete' ? 'Excluído' : label ?? (action ? defaultLabels[action] : undefined);
 
 		return (
 			<StyledButton
 				ref={ref as unknown as React.Ref<HTMLButtonElement>}
 				$variant={variant}
 				$size={size}
-				aria-label={label ?? defaultLabels[action]}
+				aria-label={ariaLabel}
 				{...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
 				onClick={handleClick}
 			>
-				{typeof icon === 'string' ? (
-					<Img src={icon} alt={label ?? defaultLabels[action]} aria-hidden="true" />
+				{typeof resolvedIcon === 'string' ? (
+					<Img src={resolvedIcon} alt={ariaLabel} aria-hidden="true" />
 				) : (
 					// allow passing a React node (SVG component)
-					icon ?? null
+					resolvedIcon ?? null
 				)}
-				<span>
-					{done && action === 'delete'
-						? 'Excluído'
-						: label ?? defaultLabels[action]}
-				</span>
+				<span>{displayLabel}</span>
 			</StyledButton>
 		);
 	}

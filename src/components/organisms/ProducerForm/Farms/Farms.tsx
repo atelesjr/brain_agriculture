@@ -27,18 +27,8 @@ const Farms = ({ farms, setFarms, onOpenForm, onCloseForm }: FarmsProps) => {
 					variant="primary"
 					size="sm"
 					onClick={() => {
+						// do NOT append a new farm until the user clicks Save in FarmForm
 						const newIndex = farms.length;
-						const newFarm: Farm = {
-							id: `f-${Date.now()}`,
-							name: '',
-							city: '',
-							state: '',
-							areaTotal: 0,
-							cultivableLand: 0,
-							vegetatedArea: 0,
-							safras: [],
-						};
-						setFarms((prev) => [...prev, newFarm]);
 						setEditingIndex(newIndex);
 						setOpenFarmForm(true);
 						if (onOpenForm) onOpenForm();

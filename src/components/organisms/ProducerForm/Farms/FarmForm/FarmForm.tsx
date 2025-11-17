@@ -4,7 +4,8 @@ import { FarmField, HarvestSection, Row } from '../FarmsList/FarmsList.styles';
 import HarvestsForm from './HarvestsForm';
 import { Button } from '@/components/atoms';
 import { useState, useEffect } from 'react';
-import type { Farm } from '@/types/producer';
+import type { Farm, Safra } from '@/types/producer';
+import type { Harvest } from './HarvestItem';
 
 interface FarmFormProps {
 	closeForm: () => void;
@@ -34,7 +35,11 @@ const FarmForm = ({ closeForm, index, farms, setFarms }: FarmFormProps) => {
 		vegetatedArea: String(initial.vegetatedArea || ''),
 	});
 
-	const [harvests, setHarvests] = useState(initial.safras || []);
+	const initialHarvests: Harvest[] = (initial.safras || []).flatMap((s) =>
+		(s.cultures || []).map((c) => ({ year: String(s.year), crop: c.name, area: String(c.areaPlanted) }))
+	);
+
+	const [harvests, setHarvests] = useState<Harvest[]>(initialHarvests);
 
 	useEffect(() => {
 		setForm({
@@ -45,11 +50,30 @@ const FarmForm = ({ closeForm, index, farms, setFarms }: FarmFormProps) => {
 			cultivableLand: String(initial.cultivableLand || ''),
 			vegetatedArea: String(initial.vegetatedArea || ''),
 		});
-		setHarvests(initial.safras || []);
+		setHarvests((initial.safras || []).flatMap((s) => (s.cultures || []).map((c) => ({ year: String(s.year), crop: c.name, area: String(c.areaPlanted) }))));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [index]);
 
 	const handleSave = () => {
+		// convert local harvest rows (year:string, crop, area) into Safra[] grouped by year
+		const map = new Map<number, Safra>();
+		harvests.forEach((h) => {
+			const yearNum = Number(h.year);
+			if (Number.isNaN(yearNum)) return;
+			const cultureName = h.crop ? String(h.crop).trim() : '';
+			const areaPlanted = h.area ? Number(h.area) || 0 : 0;
+
+			if (!map.has(yearNum)) {
+				map.set(yearNum, { year: yearNum, name: `Safra ${yearNum}`, cultures: [] });
+			}
+			if (cultureName) {
+				const safra = map.get(yearNum)!;
+				safra.cultures.push({ name: cultureName, areaPlanted });
+			}
+		});
+
+		const safrasArray = Array.from(map.values());
+
 		const updated: Farm = {
 			id: initial.id,
 			name: form.name,
@@ -58,10 +82,16 @@ const FarmForm = ({ closeForm, index, farms, setFarms }: FarmFormProps) => {
 			areaTotal: Number(form.areaTotal) || 0,
 			cultivableLand: Number(form.cultivableLand) || 0,
 			vegetatedArea: Number(form.vegetatedArea) || 0,
-			safras: harvests as any,
+			safras: safrasArray,
 		};
 
-		setFarms((prev) => prev.map((f, i) => (i === index ? updated : f)));
+		setFarms((prev) => {
+			// if index is beyond current list, append (new farm); otherwise replace
+			if (index >= prev.length) {
+				return [...prev, updated];
+			}
+			return prev.map((f, i) => (i === index ? updated : f));
+		});
 		closeForm();
 	};
 
@@ -119,7 +149,7 @@ const FarmForm = ({ closeForm, index, farms, setFarms }: FarmFormProps) => {
 				</FarmField>
 			</Row>
 			<HarvestSection>
-				<HarvestsForm initial={harvests} onChange={(h) => setHarvests(h as any)} />
+				<HarvestsForm initial={harvests} onChange={(h) => setHarvests(h)} />
 			</HarvestSection>
 
 			<ButtonsSection>
