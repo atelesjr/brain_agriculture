@@ -6,36 +6,16 @@ import FarmForm from './FarmForm/FarmForm';
 import FarmsList from './FarmsList/FarmsList';
 import type { Farm } from '@/types/producer';
 
-const sampleFarmsData: Farm[] = [
-	{
-		id: 'f-1-1',
-		name: 'Fazenda Boa Vista',
-		city: 'Uberlândia',
-		state: 'MG',
-		areaTotal: 120.0,
-		cultivableLand: 80.0,
-		vegetatedArea: 30.0,
-		safras: [
-			{
-				year: 2021,
-				name: 'Safra 2021',
-				cultures: [
-					{ name: 'Soja', areaPlanted: 50.0 },
-					{ name: 'Milho', areaPlanted: 20.0 },
-				],
-			},
-			{
-				year: 2022,
-				name: 'Safra 2022',
-				cultures: [{ name: 'Algodão', areaPlanted: 30.0 }],
-			},
-		],
-	},
-];
+interface FarmsProps {
+	farms: Farm[];
+	setFarms: React.Dispatch<React.SetStateAction<Farm[]>>;
+	onOpenForm?: () => void;
+	onCloseForm?: () => void;
+}
 
-const Farms = () => {
+const Farms = ({ farms, setFarms, onOpenForm, onCloseForm }: FarmsProps) => {
 	const [openFarmForm, setOpenFarmForm] = useState<boolean>(false);
-	const [farms] = useState<Farm[]>([]);
+	const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
 	return (
 		<FarmsFormRoot>
@@ -47,14 +27,37 @@ const Farms = () => {
 					variant="primary"
 					size="sm"
 					onClick={() => {
+						const newIndex = farms.length;
+						const newFarm: Farm = {
+							id: `f-${Date.now()}`,
+							name: '',
+							city: '',
+							state: '',
+							areaTotal: 0,
+							cultivableLand: 0,
+							vegetatedArea: 0,
+							safras: [],
+						};
+						setFarms((prev) => [...prev, newFarm]);
+						setEditingIndex(newIndex);
 						setOpenFarmForm(true);
+						if (onOpenForm) onOpenForm();
 					}}
 				/>
 			</FarmHeader>
 
 			<FarmContent>
-				{openFarmForm ? (
-					<FarmForm closeForm={() => setOpenFarmForm(false)} />
+				{openFarmForm && editingIndex !== null ? (
+					<FarmForm
+						closeForm={() => {
+							setOpenFarmForm(false);
+							setEditingIndex(null);
+							if (onCloseForm) onCloseForm();
+						}}
+						index={editingIndex}
+						farms={farms}
+						setFarms={setFarms}
+					/>
 				) : (
 					<FarmsList farms={farms} />
 				)}

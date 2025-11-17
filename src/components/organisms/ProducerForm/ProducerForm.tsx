@@ -9,10 +9,15 @@ import Input from '@/components/atoms/Input';
 import DocumentInput from '@/components/molecules/DocumentInput/DocumentInput';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { producerSchema } from './ProducerFromScheme';
 import type z from 'zod';
 import Farms from './Farms/Farms';
+import type { Farm } from '@/types/producer';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '@/store';
+import producersService from '@/services/producers';
+import { closeModal } from '@/store/modalSlice';
 import { Button } from '@/components/atoms';
 
 export type ProducerFormValues = z.infer<typeof producerSchema>;
@@ -22,22 +27,25 @@ const ProducerFormComponent = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-		trigger,
 		control,
 	} = useForm<ProducerFormValues>({
 		resolver: zodResolver(producerSchema),
-		defaultValues: { name: '' },
+		defaultValues: { name: '', document: '', farms: [] },
 	});
 
-	// trigger validation on mount so the error UI is visible for review
-	useEffect(() => {
-		// run validation for 'nome' to populate errors on first render
-		//trigger('nome');
-	}, [trigger]);
+	const dispatch = useDispatch<AppDispatch>();
 
-	const onSubmit = (data: ProducerFormValues) => {
-		// TODO: replace with real submission logic
-		console.log('Producer submit:', data);
+	const [farms, setFarms] = useState<Farm[]>([]);
+	const [farmFormOpen, setFarmFormOpen] = useState<boolean>(false);
+
+	const onSubmit = async (data: ProducerFormValues) => {
+		try {
+			const payload = { ...(data as any), farms };
+			await producersService.createProducer(payload as any);
+			dispatch(closeModal());
+		} catch (err) {
+			console.error('Failed to create producer', err);
+		}
 	};
 
 	return (
@@ -61,21 +69,29 @@ const ProducerFormComponent = () => {
 					</Field>
 				</Row>
 				<FarmsSection>
-					<Farms />
+					<Farms
+						farms={farms}
+						setFarms={setFarms}
+						onOpenForm={() => setFarmFormOpen(true)}
+						onCloseForm={() => setFarmFormOpen(false)}
+					/>
 				</FarmsSection>
-				<ButtonsSection>
-					<Button role="submit" variant="primary" size="sm">
-						Salvar Produtor
-					</Button>
-					<Button
-						role="button"
-						variant="secondary"
-						size="sm"
-						onClick={() => {}}
-					>
-						Cancelar
-					</Button>
-				</ButtonsSection>
+
+				{!farmFormOpen && (
+					<ButtonsSection>
+						<Button role="submit" variant="primary" size="sm">
+							Salvar Produtor
+						</Button>
+						<Button
+							role="button"
+							variant="secondary"
+							size="sm"
+							onClick={() => dispatch(closeModal())}
+						>
+							Cancelar
+						</Button>
+					</ButtonsSection>
+				)}
 			</form>
 		</ProducerForm>
 	);
