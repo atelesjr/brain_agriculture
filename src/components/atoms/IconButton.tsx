@@ -49,13 +49,17 @@ const IconButton = forwardRef<IconButtonRef, IconButtonProps>(
 			? defaultLabels[action as keyof typeof defaultLabels]
 			: undefined;
 
+		const restProps = rest as React.ButtonHTMLAttributes<HTMLButtonElement>;
+		const typeProp = restProps.type ?? 'button';
+
 		return (
 			<StyledButton
 				ref={ref as unknown as React.Ref<HTMLButtonElement>}
 				$variant={variant}
 				$size={size}
+				type={typeProp}
 				aria-label={label ?? computedDefaultLabel}
-				{...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+				{...restProps}
 				onClick={handleClick}
 			>
 				{typeof icon === 'string' ? (

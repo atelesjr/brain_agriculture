@@ -19,6 +19,14 @@ export const fetchProducers = createAsyncThunk('producers/fetch', async () => {
     return data;
 });
 
+export const createProducer = createAsyncThunk(
+    'producers/create',
+    async (payload: Omit<Farmer, 'id'>) => {
+        const created = await producersService.createProducer(payload);
+        return created;
+    }
+);
+
 const producersSlice = createSlice({
     name: 'producers',
     initialState,
@@ -43,6 +51,21 @@ const producersSlice = createSlice({
             .addCase(fetchProducers.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Failed to load producers';
+            });
+
+        builder
+            .addCase(createProducer.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(createProducer.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                // append created producer
+                state.items.push(action.payload);
+            })
+            .addCase(createProducer.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Failed to create producer';
             });
     },
 });

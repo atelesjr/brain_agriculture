@@ -31,9 +31,9 @@ export const FarmFieldLabel = styled.div`
 	font-size: 14px;
 `;
 
-export const FarmFieldValue = styled.div<{ highlight?: boolean }>`
-	color: ${({ theme, highlight }) =>
-		highlight ? theme.colors.primary : theme.colors.textSecondary};
+export const FarmFieldValue = styled.div<{ $highlight?: boolean }>`
+	color: ${({ theme, $highlight }) =>
+		$highlight ? theme.colors.primary : theme.colors.textSecondary};
 	font-weight: 600;
 `;
 

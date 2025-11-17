@@ -85,12 +85,18 @@ const FarmForm = ({ closeForm, index, farms, setFarms }: FarmFormProps) => {
 			safras: safrasArray,
 		};
 
+		// compute next farms array for logging and state update
 		setFarms((prev) => {
 			// if index is beyond current list, append (new farm); otherwise replace
+			let next: Farm[];
 			if (index >= prev.length) {
-				return [...prev, updated];
+				next = [...prev, updated];
+			} else {
+				next = prev.map((f, i) => (i === index ? updated : f));
 			}
-			return prev.map((f, i) => (i === index ? updated : f));
+			console.log('FarmForm saved updated farm:', updated);
+			console.log('FarmForm next farms array:', next);
+			return next;
 		});
 		closeForm();
 	};
@@ -153,11 +159,11 @@ const FarmForm = ({ closeForm, index, farms, setFarms }: FarmFormProps) => {
 			</HarvestSection>
 
 			<ButtonsSection>
-				<Button role="button" variant="primary" size="sm" onClick={handleSave}>
+				<Button type="button" variant="primary" size="sm" onClick={handleSave}>
 					Salvar propriedade
 				</Button>
 				<Button
-					role="button"
+					type="button"
 					variant="secondary"
 					size="sm"
 					onClick={() => closeForm()}

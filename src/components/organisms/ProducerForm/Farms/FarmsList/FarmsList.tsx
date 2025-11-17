@@ -51,7 +51,7 @@ const FarmsList = ({ farms }: FarmListProps) => {
 					>
 						<ArrowIcon open={open} />
 						<FarmField>
-							<FarmFieldValue highlight>{farm.name}</FarmFieldValue>
+							<FarmFieldValue $highlight>{farm.name}</FarmFieldValue>
 						</FarmField>
 						<FarmField>
 							<FarmFieldLabel>Município:</FarmFieldLabel>

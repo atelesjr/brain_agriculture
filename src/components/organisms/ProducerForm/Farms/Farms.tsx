@@ -11,9 +11,16 @@ interface FarmsProps {
 	setFarms: React.Dispatch<React.SetStateAction<Farm[]>>;
 	onOpenForm?: () => void;
 	onCloseForm?: () => void;
+	canAddProperty?: boolean;
 }
 
-const Farms = ({ farms, setFarms, onOpenForm, onCloseForm }: FarmsProps) => {
+const Farms = ({
+	farms,
+	setFarms,
+	onOpenForm,
+	onCloseForm,
+	canAddProperty = false,
+}: FarmsProps) => {
 	const [openFarmForm, setOpenFarmForm] = useState<boolean>(false);
 	const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
@@ -26,7 +33,9 @@ const Farms = ({ farms, setFarms, onOpenForm, onCloseForm }: FarmsProps) => {
 					label="Adicionar Propriedade"
 					variant="primary"
 					size="sm"
+					disabled={!canAddProperty}
 					onClick={() => {
+						if (!canAddProperty) return;
 						// do NOT append a new farm until the user clicks Save in FarmForm
 						const newIndex = farms.length;
 						setEditingIndex(newIndex);
