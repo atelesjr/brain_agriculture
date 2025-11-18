@@ -9,6 +9,7 @@
 		"lint": "eslint .",
 		"preview": "vite preview",
 		"test": "vitest --watch --reporter=verbose",
+		"test:watch:stable": "vitest --watch --reporter=verbose",
 		"test:run": "vitest run",
 		"test:watch": "vitest --watch",
 		"test:coverage": "vitest run --coverage",
