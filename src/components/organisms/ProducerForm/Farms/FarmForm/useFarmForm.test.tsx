@@ -95,6 +95,36 @@ describe('useFarmForm', () => {
 		expect(calledArg.safras[0].cultures[0].areaPlanted).toBe(12);
 	});
 
+	it('detects area error when initial values have cultivable+vegetated > total', async () => {
+		const initial: Farm = {
+			id: 'f-err',
+			name: 'Err Farm',
+			city: 'City',
+			state: 'ST',
+			areaTotal: 10,
+			cultivableLand: 8,
+			vegetatedArea: 5,
+			safras: [],
+		};
+
+		const capture: React.MutableRefObject<ReturnType<
+			typeof useFarmForm
+		> | null> = { current: null };
+		render(<HookHost initial={initial} capture={capture} />);
+
+		await waitFor(() => expect(capture.current).not.toBeNull());
+		const hook = capture.current!;
+
+		// initial form keeps provided areaTotal and cult/veg values
+		expect(hook.form.areaTotal).toBe('10');
+		expect(hook.form.cultivableLand).toBe('8');
+		expect(hook.form.vegetatedArea).toBe('5');
+
+		// because 8 + 5 > 10, there must be an area error and the form is not valid
+		expect(hook.areaError).toBeTruthy();
+		expect(hook.isValid).toBe(false);
+	});
+
 	it('handleCancel calls onCancel when provided', async () => {
 		const onCancel = vi.fn();
 		const capture: React.MutableRefObject<ReturnType<
