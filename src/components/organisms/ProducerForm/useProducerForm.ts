@@ -8,11 +8,6 @@ import type { Farm, Farmer } from '@/types/producer';
 import type { AppDispatch } from '@/store';
 import { createProducer, updateProducer } from '@/store/producersSlice';
 import { closeModal } from '@/store/modalSlice';
-import {
-	onlyDigits,
-	isValidCPF,
-	isValidCNPJ,
-} from '@/components/molecules/DocumentInput/utils/validations';
 
 export function useProducerForm(initialProducer?: Farmer) {
 	const dispatch = useDispatch<AppDispatch>();
@@ -29,10 +24,8 @@ export function useProducerForm(initialProducer?: Farmer) {
 		reValidateMode: 'onChange',
 	});
 
-	const { watch, formState } = form;
-	const { errors, isValid } = formState;
-	const watchedName = watch('name');
-	const watchedDocument = watch('document');
+	const { formState } = form;
+	const { isValid } = formState;
 
 	const [farms, setFarms] = useState<Farm[]>(initialProducer?.farms ?? []);
 	const [farmFormOpen, setFarmFormOpen] = useState(false);
@@ -68,7 +61,11 @@ export function useProducerForm(initialProducer?: Farmer) {
 					farms,
 				};
 
-				if (initialProducer && typeof initialProducer.id !== 'undefined' && initialProducer.id !== null) {
+				if (
+					initialProducer &&
+					typeof initialProducer.id !== 'undefined' &&
+					initialProducer.id !== null
+				) {
 					// update existing producer (id may be string or number)
 					await dispatch(
 						updateProducer({ id: initialProducer.id, payload })
