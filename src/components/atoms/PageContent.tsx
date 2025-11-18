@@ -6,4 +6,7 @@ export const PageContent = styled.section`
 
 	width: 100%;
 	min-width: 32rem;
+	/* keep content away from the viewport edges */
+	padding: 1.5rem;
+	box-sizing: border-box;
 `;

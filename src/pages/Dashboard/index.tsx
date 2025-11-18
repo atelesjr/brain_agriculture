@@ -1,45 +1,38 @@
-import { Button, LeafIcon } from '@/components/atoms';
-import IconButton from '@/components/molecules/IconButton';
-const Dashboard = () => {
+import React from 'react';
+import { PageContent } from '@/components/atoms/PageContent';
+import { Grid, StatsColumn, ChartsGrid, StatCard, StatLabel, StatNumber } from './styles';
+import ChartsPanel from './ChartsPanel';
+import { COLORS } from './constants';
+import useDashboardData from './useDashboardData';
+
+const Dashboard: React.FC = () => {
+	const { totalFarms, totalHectares, byState, byCulture, landUse } =
+		useDashboardData();
+
+	// Charts are rendered by ChartsPanel component
+
 	return (
-		<div>
+		<PageContent>
 			<h1>Dashboard</h1>
-			<div
-				style={{
-					display: 'flex',
-					gap: '10px',
-					flexWrap: 'wrap',
-					marginTop: '20px',
-				}}
-			>
-				<Button variant="primary" size="md">
-					Primary
-				</Button>
-				<Button variant="secondary" size="md">
-					Secondary
-				</Button>
-				<Button variant="ghost" size="md">
-					Ghost
-				</Button>
 
-				<Button variant="primary" size="lg" fullWidth>
-					Full width
-				</Button>
+			<Grid>
+				<StatsColumn>
+					<StatCard>
+						<StatLabel>Total de propriedades cadastradas:</StatLabel>
+						<StatNumber>{totalFarms}</StatNumber>
+					</StatCard>
 
-				<IconButton
-					variant="primary"
-					size="sm"
-					icon={<LeafIcon />}
-					aria-label="Adicionar"
-				/>
-				<IconButton
-					variant="ghost"
-					size="md"
-					icon={<LeafIcon />}
-					label="Adicionar"
-				/>
-			</div>
-		</div>
+					<StatCard>
+						<StatLabel>Total de hectares registrados:</StatLabel>
+						<StatNumber>{totalHectares}</StatNumber>
+					</StatCard>
+				</StatsColumn>
+
+				<ChartsGrid>
+					<ChartsPanel byCulture={byCulture} landUse={landUse} byState={byState} colors={COLORS} />
+				</ChartsGrid>
+			</Grid>
+		</PageContent>
 	);
 };
 
