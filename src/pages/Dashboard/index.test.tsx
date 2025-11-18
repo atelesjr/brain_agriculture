@@ -63,7 +63,6 @@ describe('Dashboard page', () => {
 			},
 		];
 
-
 		// use the real app store and inject producers for testing
 		store.dispatch(setProducers(items));
 

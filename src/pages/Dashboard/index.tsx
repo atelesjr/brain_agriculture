@@ -1,7 +1,14 @@
 import React from 'react';
 import { PageContent } from '@/components/atoms/PageContent';
-import { Grid, StatsColumn, ChartsGrid, StatCard, StatLabel, StatNumber } from './styles';
-import ChartsPanel from './ChartsPanel';
+import {
+	Grid,
+	StatsColumn,
+	ChartsGrid,
+	StatCard,
+	StatLabel,
+	StatNumber,
+} from './styles';
+import ChartsPanel from './ChartsPanel/ChartsPanel';
 import { COLORS } from './constants';
 import useDashboardData from './useDashboardData';
 
@@ -29,7 +36,12 @@ const Dashboard: React.FC = () => {
 				</StatsColumn>
 
 				<ChartsGrid>
-					<ChartsPanel byCulture={byCulture} landUse={landUse} byState={byState} colors={COLORS} />
+					<ChartsPanel
+						byCulture={byCulture}
+						landUse={landUse}
+						byState={byState}
+						colors={COLORS}
+					/>
 				</ChartsGrid>
 			</Grid>
 		</PageContent>
