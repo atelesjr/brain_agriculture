@@ -116,6 +116,45 @@ If you want, I can:
 - Create a draft PR body and open a PR (requires `gh` or manual confirmation to open in browser)
 - Prepare deployment instructions (Vercel/Netlify/Docker)
 
+## Project structure
+
+Top-level tree (important files and folders):
+
+```
+.
+├─ .github/
+│  └─ workflows/ci.yml
+├─ public/
+├─ server/
+│  └─ db.json
+├─ src/
+│  ├─ assets/
+│  ├─ components/
+│  │  ├─ atoms/
+│  │  ├─ molecules/
+│  │  └─ organisms/
+│  ├─ hooks/
+│  ├─ pages/
+│  │  ├─ Dashboard/
+│  │  └─ Home/
+│  ├─ routes/
+│  ├─ services/
+│  ├─ store/
+│  ├─ styles/
+	│  └─ GlobalStyles.tsx
+│  └─ types/
+├─ dist/ (build output)
+├─ scripts/
+├─ test-results/
+├─ README_DELIVERY.md
+├─ README.md
+├─ package.json
+├─ tsconfig.json
+└─ vite.config.ts
+```
+
+If you want a more detailed tree (including tests and internal files), I can generate it and append here.
+
 ````
 
 ## Mock API / Producers
