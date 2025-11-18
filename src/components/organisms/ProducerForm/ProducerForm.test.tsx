@@ -39,7 +39,7 @@ describe('ProducerForm', () => {
 
 		// mock producers service to return created producer
 		const created = {
-			id: 999,
+			id: '999',
 			name: 'Fulano',
 			document: '52998224725',
 			documentType: 'CPF',

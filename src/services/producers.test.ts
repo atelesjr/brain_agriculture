@@ -4,7 +4,7 @@ import type { Farmer } from '@/types/producer';
 
 const sample: Farmer[] = [
   {
-    id: 1,
+    id: '1',
     document: '111.222.333-44',
     documentType: 'CPF',
     name: 'João da Silva',
@@ -37,13 +37,13 @@ describe('producers service', () => {
       json: async () => sample[0],
     }));
 
-    const res = await producersService.getProducer(1);
+    const res = await producersService.getProducer('1');
     expect(res).toEqual(sample[0]);
   });
 
   it('createProducer posts payload and returns created', async () => {
     const payload = { document: '000.000.000-00', documentType: 'CPF', name: 'Novo Produtor', farms: [] } as Omit<Farmer, 'id'>;
-    const created = { ...payload, id: 2 } as Farmer;
+    const created = { ...payload, id: '2' } as Farmer;
 
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
       ok: true,
@@ -62,13 +62,13 @@ describe('producers service', () => {
       json: async () => updated,
     }));
 
-    const res = await producersService.updateProducer(1, { name: 'Updated' });
+    const res = await producersService.updateProducer('1', { name: 'Updated' });
     expect(res).toEqual(updated);
   });
 
   it('deleteProducer deletes without error', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true }));
-    await expect(producersService.deleteProducer(1)).resolves.toBeUndefined();
+    await expect(producersService.deleteProducer('1')).resolves.toBeUndefined();
   });
 
   it('throws when response not ok', async () => {
