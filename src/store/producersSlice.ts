@@ -19,6 +19,30 @@ export const fetchProducers = createAsyncThunk('producers/fetch', async () => {
     return data;
 });
 
+export const createProducer = createAsyncThunk(
+    'producers/create',
+    async (payload: Omit<Farmer, 'id'>) => {
+        const created = await producersService.createProducer(payload);
+        return created;
+    }
+);
+
+export const deleteProducer = createAsyncThunk(
+    'producers/delete',
+    async (id: number) => {
+        await producersService.deleteProducer(id);
+        return id;
+    }
+);
+
+export const updateProducer = createAsyncThunk(
+    'producers/update',
+    async ({ id, payload }: { id: number; payload: Partial<Omit<Farmer, 'id'>> }) => {
+        const updated = await producersService.updateProducer(id, payload as Partial<Farmer>);
+        return updated;
+    }
+);
+
 const producersSlice = createSlice({
     name: 'producers',
     initialState,
@@ -43,6 +67,51 @@ const producersSlice = createSlice({
             .addCase(fetchProducers.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Failed to load producers';
+            });
+
+        builder
+            .addCase(createProducer.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(createProducer.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                // append created producer
+                state.items.push(action.payload);
+            })
+            .addCase(createProducer.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Failed to create producer';
+            });
+
+        builder
+            .addCase(deleteProducer.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(deleteProducer.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                // remove producer by id
+                state.items = state.items.filter((p) => p.id !== action.payload);
+            })
+            .addCase(deleteProducer.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Failed to delete producer';
+            });
+
+        builder
+            .addCase(updateProducer.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(updateProducer.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                // replace updated producer
+                state.items = state.items.map((p) => (p.id === action.payload.id ? action.payload : p));
+            })
+            .addCase(updateProducer.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Failed to update producer';
             });
     },
 });

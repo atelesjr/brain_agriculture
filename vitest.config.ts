@@ -18,5 +18,7 @@ export default defineConfig({
 		threads: false,
 		// global timeout for tests (ms) to reduce false negatives on slow filesystems
 		timeout: 20000,
+		// limit threads more explicitly for environments with fork issues
+		maxThreads: 1,
 	},
 });

@@ -45,3 +45,6 @@ If you want Vite to point to a different API during development, set `VITE_API_U
 ```
 
 ```
+
+> Development note: use Node 18 or 20 (LTS). If you experience test worker timeouts on Windows, switch your local Node using `nvm` to a supported version (e.g. `nvm install 20 && nvm use 20`).
+

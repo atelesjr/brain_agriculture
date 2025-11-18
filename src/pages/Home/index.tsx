@@ -5,7 +5,7 @@ import type { RootState, AppDispatch } from '@/store';
 import { fetchProducers } from '@/store/producersSlice';
 import Producers from '@/components/organisms/Producers/Producers';
 import { IconButton } from '@/components/atoms/Buttons';
-import { HomeAddProducer } from './Home.styles';
+import { HomeAddProducer, ProducerListContainer } from './Home.styles';
 import { openModal } from '@/store/modalSlice';
 import ProducerForm from '@/components/organisms/ProducerForm/ProducerForm';
 
@@ -38,7 +38,9 @@ const Home: React.FC = () => {
 				/>
 			</HomeAddProducer>
 
-			<Producers producersState={producersState} />
+			<ProducerListContainer>
+				<Producers producersState={producersState} />
+			</ProducerListContainer>
 		</PageContent>
 	);
 };

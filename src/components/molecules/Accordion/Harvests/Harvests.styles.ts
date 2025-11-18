@@ -20,6 +20,12 @@ export const HarvestContent = styled.div`
 	gap: 8px;
 `;
 
+export const CulturesList = styled.div`
+	display: flex;
+	gap: 8px;
+	margin-bottom: 6px;
+`;
+
 export const Cultures = styled.div`
 	display: flex;
 	flex-flow: row wrap;
@@ -38,6 +44,10 @@ export const HarvestValue = styled.div`
 export const CultureValue = styled.div`
 	font-weight: 600;
 	margin-right: 4px;
+`;
+
+export const HarvestArea = styled(CultureValue)`
+	font-weight: 400;
 `;
 
 // export const HarvestInfo = styled.div`

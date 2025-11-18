@@ -1,37 +1,51 @@
-import { Field, ProducerForm, Row } from './ProducerForm.styles';
+import {
+	FarmsSection,
+	Field,
+	ProducerForm,
+	Row,
+	ButtonsSection,
+} from './ProducerForm.styles';
 import Input from '@/components/atoms/Input';
 import DocumentInput from '@/components/molecules/DocumentInput/DocumentInput';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
-import { producerSchema } from './ProducerFromScheme';
+import { producerCreateSchema } from './ProducerFromScheme';
 import type z from 'zod';
-import FarmsForm from './FarmsForm/FarmsForm';
+import Farms from './Farms/Farms';
 
-export type ProducerFormValues = z.infer<typeof producerSchema>;
+import { useProducerForm } from './useProducerForm';
+import { closeModal } from '@/store/modalSlice';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '@/store';
+import { Button } from '@/components/atoms';
 
-const ProducerFormComponent = () => {
+export type ProducerFormValues = z.infer<typeof producerCreateSchema>;
+import { useTheme } from 'styled-components';
+
+const ProducerFormComponent: React.FC<{
+	initialProducer?: import('@/types/producer').Farmer;
+}> = ({ initialProducer }) => {
+	const theme = useTheme();
+
+	// use the reusable hook to encapsulate form and domain logic
+	const {
+		form,
+		farms,
+		setFarms,
+		farmFormOpen,
+		handleOpenFarmForm,
+		handleCloseFarmForm,
+		canAddProperty,
+		submitError,
+		onSubmit,
+	} = useProducerForm(initialProducer);
+
+	const dispatch = useDispatch<AppDispatch>();
+
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
-		trigger,
 		control,
-	} = useForm<ProducerFormValues>({
-		resolver: zodResolver(producerSchema),
-		defaultValues: { name: '' },
-	});
-
-	// trigger validation on mount so the error UI is visible for review
-	useEffect(() => {
-		// run validation for 'nome' to populate errors on first render
-		//trigger('nome');
-	}, [trigger]);
-
-	const onSubmit = (data: ProducerFormValues) => {
-		// TODO: replace with real submission logic
-		console.log('Producer submit:', data);
-	};
+		formState: { errors },
+	} = form;
 
 	return (
 		<ProducerForm>
@@ -45,7 +59,7 @@ const ProducerFormComponent = () => {
 							label="Nome do produtor"
 							placeholder="Digite o nome completo"
 							required
-							error={errors.name?.message as string}
+							error={errors.name?.message ?? ''}
 							{...register('name')}
 						/>
 					</Field>
@@ -53,17 +67,42 @@ const ProducerFormComponent = () => {
 						<DocumentInput control={control} name="document" />
 					</Field>
 				</Row>
-				<Row>
-					<FarmsForm register={register} errors={errors} />
-				</Row>
+				<FarmsSection>
+					<Farms
+						farms={farms}
+						setFarms={setFarms}
+						onOpenForm={handleOpenFarmForm}
+						onCloseForm={handleCloseFarmForm}
+						canAddProperty={canAddProperty}
+					/>
+				</FarmsSection>
 
-				<div className="label">Safras (ex: Safra 2021, Safra 2022)</div>
-				<div className="label">
-					Culturas plantadas (ex.: Soja na Safra 2021, Milho na Safra 2021, Café
-					na Safra 2022)
-				</div>
+				{!farmFormOpen && (
+					<ButtonsSection>
+						<Button
+							type="submit"
+							variant="primary"
+							size="sm"
+							disabled={!canAddProperty}
+						>
+							Salvar Produtor
+						</Button>
+						<Button
+							role="button"
+							variant="secondary"
+							size="sm"
+							onClick={() => dispatch(closeModal())}
+						>
+							Cancelar
+						</Button>
 
-				<button type="submit">Salvar</button>
+						{submitError && (
+							<div style={{ color: theme.colors.alert, marginTop: 8 }}>
+								{submitError}
+							</div>
+						)}
+					</ButtonsSection>
+				)}
 			</form>
 		</ProducerForm>
 	);

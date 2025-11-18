@@ -25,3 +25,9 @@ dist-ssr
 
 # Test artifacts
 test-results/
+coverage
+coverage/
+types/
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+tsconfig.app.tsbuildinfo

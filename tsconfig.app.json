@@ -8,6 +8,8 @@
 		"types": ["vite/client"],
 		"declaration": true,
 		"declarationDir": "types",
+		"rootDir": "src",
+		"outDir": "dist",
 		"skipLibCheck": true,
 
 		/* Path aliases */

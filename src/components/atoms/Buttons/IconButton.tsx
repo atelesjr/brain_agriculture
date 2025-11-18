@@ -15,8 +15,10 @@ const Img = styled.img`
 export type IconAction = 'add' | 'edit' | 'delete';
 
 export interface IconButtonProps extends Omit<ButtonProps, 'children'> {
-	action: IconAction;
+	action?: IconAction;
 	label?: string;
+	/** optional icon override: either a string URL (imported svg) or a React node */
+	icon?: string | React.ReactNode;
 }
 
 const iconMap: Record<IconAction, string> = {
@@ -30,7 +32,7 @@ const iconMap: Record<IconAction, string> = {
  * - Keeps a local "done" state when action is `delete` so the UI reflects the change
  */
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-	({ action, label, variant = 'primary', size = 'sm', ...rest }, ref) => {
+	({ action, label, variant = 'primary', size = 'sm', icon, ...rest }, ref) => {
 		const [done, setDone] = useState(false);
 
 		const defaultLabels: Record<IconAction, string> = {
@@ -45,33 +47,38 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
 				setDone(true);
 			}
 
-			const maybeOnClick = (
-				rest as React.ButtonHTMLAttributes<HTMLButtonElement>
-			).onClick;
+			const restProps = rest as React.ButtonHTMLAttributes<HTMLButtonElement>;
+			const maybeOnClick = restProps.onClick;
 			if (maybeOnClick) maybeOnClick(e);
 		};
 
-		const icon = iconMap[action];
+		const resolvedIcon =
+			// prefer explicit prop if provided
+			icon ? icon : action ? iconMap[action] : undefined;
+
+		const ariaLabel = label ?? (action ? defaultLabels[action] : undefined);
+		const displayLabel = done && action === 'delete' ? 'Excluído' : label ?? (action ? defaultLabels[action] : undefined);
+
+		const { type, ...otherRest } = rest as React.ButtonHTMLAttributes<HTMLButtonElement>;
+		const typeProp = type ?? 'button';
 
 		return (
 			<StyledButton
 				ref={ref as unknown as React.Ref<HTMLButtonElement>}
 				$variant={variant}
 				$size={size}
-				aria-label={label ?? defaultLabels[action]}
-				{...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+				type={typeProp}
+				aria-label={ariaLabel}
+				{...(otherRest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
 				onClick={handleClick}
 			>
-				<Img
-					src={icon}
-					alt={label ?? defaultLabels[action]}
-					aria-hidden="true"
-				/>
-				<span>
-					{done && action === 'delete'
-						? 'Excluído'
-						: label ?? defaultLabels[action]}
-				</span>
+				{typeof resolvedIcon === 'string' ? (
+					<Img src={resolvedIcon} alt={ariaLabel} aria-hidden="true" />
+				) : (
+					// allow passing a React node (SVG component)
+					resolvedIcon ?? null
+				)}
+				<span>{displayLabel}</span>
 			</StyledButton>
 		);
 	}

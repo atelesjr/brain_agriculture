@@ -5,3 +5,8 @@ export const HomeAddProducer = styled.div`
 	justify-content: flex-end;
 	margin-bottom: 8px;
 `;
+
+export const ProducerListContainer = styled.div`
+	box-sizing: border-box;
+	padding-bottom: 2.5rem;
+`;
