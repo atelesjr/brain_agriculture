@@ -1,8 +1,6 @@
-# React + TypeScript + Vite
+# Brain Agriculture — Delivery Guide
 
 [![CI](https://github.com/atelesjr/brain_agriculture/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/atelesjr/brain_agriculture/actions/workflows/ci.yml)
-
-# Brain Agriculture — Delivery Guide
 
 This file contains installation, test and delivery instructions intended for the final handoff.
 
