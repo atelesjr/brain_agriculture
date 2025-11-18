@@ -21,7 +21,7 @@ export interface Farm {
 }
 
 export interface Farmer {
-  id: number;
+  id: string;
   document: string;
   documentType: string;
   name: string;

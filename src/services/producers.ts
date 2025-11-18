@@ -8,13 +8,13 @@ type ImportMetaWithEnv = ImportMeta & {
 
 export type ProducersService = {
 	listProducers: () => Promise<Farmer[]>;
-	getProducer: (id: number) => Promise<Farmer>;
+	getProducer: (id: string) => Promise<Farmer>;
 	createProducer: (payload: Omit<Farmer, 'id'>) => Promise<Farmer>;
 	updateProducer: (
-		id: number,
+		id: string,
 		payload: Partial<Omit<Farmer, 'id'>>
 	) => Promise<Farmer>;
-	deleteProducer: (id: number) => Promise<void>;
+	deleteProducer: (id: string) => Promise<void>;
 };
 
 const DEFAULT_BASE = 'http://localhost:3001';
@@ -58,7 +58,7 @@ export async function listProducers(
 	return handleResponse<Farmer[]>(res);
 }
 
-export async function getProducer(id: number): Promise<Farmer> {
+export async function getProducer(id: string): Promise<Farmer> {
 	const url = buildUrl(`/${id}`);
 	const res = await fetch(url);
 	return handleResponse<Farmer>(res);
@@ -77,7 +77,7 @@ export async function createProducer(
 }
 
 export async function updateProducer(
-	id: number,
+	id: string,
 	payload: Partial<Farmer>
 ): Promise<Farmer> {
 	const url = buildUrl(`/${id}`);
@@ -89,7 +89,7 @@ export async function updateProducer(
 	return handleResponse<Farmer>(res);
 }
 
-export async function deleteProducer(id: number): Promise<void> {
+export async function deleteProducer(id: string): Promise<void> {
 	const url = buildUrl(`/${id}`);
 	const res = await fetch(url, { method: 'DELETE' });
 	if (!res.ok) throw new Error(`Failed to delete producer ${id}`);

@@ -678,6 +678,150 @@
           ]
         }
       ]
+    },
+    {
+      "document": "42042249033",
+      "documentType": "CPF",
+      "name": "Thiago",
+      "farms": [
+        {
+          "id": "f-1763471278404",
+          "name": "Sítio do Thiago",
+          "city": "Americana",
+          "state": "SP",
+          "areaTotal": 900,
+          "cultivableLand": 500,
+          "vegetatedArea": 400,
+          "safras": [
+            {
+              "year": 2002,
+              "name": "Safra 2002",
+              "cultures": [
+                {
+                  "name": "Algodão",
+                  "areaPlanted": 400
+                }
+              ]
+            },
+            {
+              "year": 2004,
+              "name": "Safra 2004",
+              "cultures": [
+                {
+                  "name": "Soja",
+                  "areaPlanted": 400
+                }
+              ]
+            },
+            {
+              "year": 2023,
+              "name": "Safra 2023",
+              "cultures": [
+                {
+                  "name": "Soja",
+                  "areaPlanted": 400
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "f-1763471988152",
+          "name": "Ticiano",
+          "city": "Jaú",
+          "state": "SP",
+          "areaTotal": 1000,
+          "cultivableLand": 1000,
+          "vegetatedArea": 0,
+          "safras": [
+            {
+              "year": 0,
+              "name": "Safra 0",
+              "cultures": []
+            }
+          ]
+        }
+      ],
+      "id": "4f54"
+    },
+    {
+      "document": "23293905056",
+      "documentType": "CPF",
+      "name": "José Bruno ",
+      "farms": [
+        {
+          "id": "f-1763472042181",
+          "name": "Fazenda Imaculada",
+          "city": "Imacuda",
+          "state": "PB",
+          "areaTotal": 2330,
+          "cultivableLand": 2000,
+          "vegetatedArea": 330,
+          "safras": [
+            {
+              "year": 2022,
+              "name": "Safra 2022",
+              "cultures": [
+                {
+                  "name": "Caja",
+                  "areaPlanted": 200
+                }
+              ]
+            },
+            {
+              "year": 2025,
+              "name": "Safra 2025",
+              "cultures": [
+                {
+                  "name": "Cacau",
+                  "areaPlanted": 200
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "f-1763472885306",
+          "name": "Terra Feliz",
+          "city": "Imaculada",
+          "state": "PB",
+          "areaTotal": 911,
+          "cultivableLand": 333,
+          "vegetatedArea": 578,
+          "safras": [
+            {
+              "year": 0,
+              "name": "Safra 0",
+              "cultures": []
+            }
+          ]
+        }
+      ],
+      "id": "37b6"
+    },
+    {
+      "document": "05413486049",
+      "documentType": "CPF",
+      "name": "Marcelo Nogueir",
+      "farms": [
+        {
+          "id": "f-1763473188490",
+          "name": "Esconderijo do Anjo Renegado",
+          "city": "Rio das Pedras",
+          "state": "RJ",
+          "areaTotal": 430,
+          "cultivableLand": 430,
+          "vegetatedArea": 0,
+          "safras": [
+            {
+              "year": 0,
+              "name": "Safra 0",
+              "cultures": []
+            }
+          ]
+        }
+      ],
+      "id": "158a"
     }
   ]
 }
