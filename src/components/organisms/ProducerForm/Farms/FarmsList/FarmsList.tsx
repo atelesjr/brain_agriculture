@@ -10,7 +10,8 @@ import {
 } from './FarmsList.styles';
 import type { Farm } from '@/types/producer';
 import Harvest from '@/components/molecules/Accordion/Harvests/Harvests';
-import { useState } from 'react';
+import React from 'react';
+import useFormList from './useFormList';
 import { IconButton } from '@/components/atoms/Buttons';
 
 interface FarmListProps {
@@ -21,21 +22,8 @@ interface FarmListProps {
 	onRemove?: (index: number) => void;
 }
 const FarmsList = ({ farms, isEditing = false, onEdit, onRemove }: FarmListProps) => {
-	// track open item by farm id
-	const [openId, setOpenId] = useState<string | null>(null);
-	// per-farm reset counters for children reset when closed
-	const [resetCounters, setResetCounters] = useState<Record<string, number>>({});
-
-	const handleOnClick = (farmId: string) => {
-		setOpenId((prev) => {
-			const next = prev === farmId ? null : farmId;
-			if (prev === farmId && next === null) {
-				// closing the same item -> bump its reset counter
-				setResetCounters((m) => ({ ...m, [farmId]: (m[farmId] ?? 0) + 1 }));
-			}
-			return next;
-		});
-	};
+	// encapsulate open/reset logic in custom hook
+	const { openId, resetCounters, toggle } = useFormList();
 
 	if (farms.length === 0) {
 		return (
@@ -55,7 +43,7 @@ const FarmsList = ({ farms, isEditing = false, onEdit, onRemove }: FarmListProps
 							role="button"
 							key={farm.id}
 							aria-expanded={isOpen}
-							onClick={() => handleOnClick(farm.id)}
+							onClick={() => toggle(farm.id)}
 						>
 							<ArrowIcon open={isOpen} />
 						<FarmField>
