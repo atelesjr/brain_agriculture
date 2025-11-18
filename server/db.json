@@ -622,129 +622,6 @@
       ]
     },
     {
-      "id": "8e30",
-      "document": "81166475000154",
-      "documentType": "CNPJ",
-      "name": "Agostinho Ferreira Teles Júnior",
-      "farms": [
-        {
-          "id": "f-1763458335752",
-          "name": "Qurino",
-          "city": "Campinas",
-          "state": "SP",
-          "areaTotal": 3000,
-          "cultivableLand": 2000,
-          "vegetatedArea": 1000,
-          "safras": [
-            {
-              "year": 0,
-              "name": "Safra 0",
-              "cultures": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "1398",
-      "document": "47933648029",
-      "documentType": "CPF",
-      "name": "Agostinh",
-      "farms": [
-        {
-          "id": "f-1763468790399",
-          "name": "Quirino",
-          "city": "Campinas",
-          "state": "SP",
-          "areaTotal": 800,
-          "cultivableLand": 500,
-          "vegetatedArea": 300,
-          "safras": [
-            {
-              "year": 2022,
-              "name": "Safra 2022",
-              "cultures": [
-                {
-                  "name": "Milho",
-                  "areaPlanted": 200
-                }
-              ]
-            },
-            {
-              "year": 0,
-              "name": "Safra 0",
-              "cultures": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "document": "42042249033",
-      "documentType": "CPF",
-      "name": "Thiago",
-      "farms": [
-        {
-          "id": "f-1763471278404",
-          "name": "Sítio do Thiago",
-          "city": "Americana",
-          "state": "SP",
-          "areaTotal": 900,
-          "cultivableLand": 500,
-          "vegetatedArea": 400,
-          "safras": [
-            {
-              "year": 2002,
-              "name": "Safra 2002",
-              "cultures": [
-                {
-                  "name": "Algodão",
-                  "areaPlanted": 400
-                }
-              ]
-            },
-            {
-              "year": 2004,
-              "name": "Safra 2004",
-              "cultures": [
-                {
-                  "name": "Soja",
-                  "areaPlanted": 400
-                }
-              ]
-            },
-            {
-              "year": 2023,
-              "name": "Safra 2023",
-              "cultures": [
-                {
-                  "name": "Soja",
-                  "areaPlanted": 400
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "f-1763471988152",
-          "name": "Ticiano",
-          "city": "Jaú",
-          "state": "SP",
-          "areaTotal": 1000,
-          "cultivableLand": 1000,
-          "vegetatedArea": 0,
-          "safras": [
-            {
-              "year": 0,
-              "name": "Safra 0",
-              "cultures": []
-            }
-          ]
-        }
-      ],
-      "id": "4f54"
-    },
-    {
       "document": "23293905056",
       "documentType": "CPF",
       "name": "José Bruno ",
@@ -779,22 +656,6 @@
               ]
             }
           ]
-        },
-        {
-          "id": "f-1763472885306",
-          "name": "Terra Feliz",
-          "city": "Imaculada",
-          "state": "PB",
-          "areaTotal": 911,
-          "cultivableLand": 333,
-          "vegetatedArea": 578,
-          "safras": [
-            {
-              "year": 0,
-              "name": "Safra 0",
-              "cultures": []
-            }
-          ]
         }
       ],
       "id": "37b6"
@@ -822,6 +683,40 @@
         }
       ],
       "id": "158a"
+    },
+    {
+      "id": "bdb7",
+      "document": "88397182063",
+      "documentType": "CPF",
+      "name": "Clark Kent",
+      "farms": [
+        {
+          "id": "f-1763489355751",
+          "name": "Sítio da Viagem Feliz",
+          "city": "Palmas",
+          "state": "TO",
+          "areaTotal": 800,
+          "cultivableLand": 350,
+          "vegetatedArea": 450,
+          "safras": [
+            {
+              "year": 2023,
+              "name": "Safra 2023",
+              "cultures": [
+                {
+                  "name": "Trigo",
+                  "areaPlanted": 350
+                }
+              ]
+            },
+            {
+              "year": 0,
+              "name": "Safra 0",
+              "cultures": []
+            }
+          ]
+        }
+      ]
     }
   ]
 }
