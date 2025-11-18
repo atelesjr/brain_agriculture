@@ -46,7 +46,9 @@ describe('ProducerForm', () => {
 			farms: [],
 		};
 		// suppress React 'act' warnings that surface from react-hook-form Controller updates
-		const originalConsoleError = console.error.bind(console) as (...args: unknown[]) => void;
+		const originalConsoleError = console.error.bind(console) as (
+			...args: unknown[]
+		) => void;
 		vi.spyOn(console, 'error').mockImplementation((...args: unknown[]) => {
 			const msg = args[0] as string | undefined;
 			if (typeof msg === 'string' && msg.includes('not wrapped in act')) return;

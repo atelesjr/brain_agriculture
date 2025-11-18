@@ -2,33 +2,6 @@
 
 [![CI](https://github.com/atelesjr/brain_agriculture/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/atelesjr/brain_agriculture/actions/workflows/ci.yml)
 
-````
-
-## Mock API / Producers
-
-This project includes a small mock REST API used for development, served by `json-server` from the `server/db.json` file.
-<!-- ci: trigger -->
-
-- Start the mock API server:
-
-```powershell
-npm run server
-````
-
-- Default API base URL: `http://localhost:3001`.
-- Producers resource path: `/producer` (see `server/db.json`).
-
-Client-side service helpers are available at `src/services/producers.ts` and use the types in `src/types/producer.ts`.
-
-Example usage:
-
-```ts
-import producersService from '@/services/producers';
-
-// list producers
-const all = await producersService.listProducers();
-
- 
 # Brain Agriculture — Delivery Guide
 
 This file contains installation, test and delivery instructions intended for the final handoff.
@@ -145,3 +118,29 @@ If you want, I can:
 - Create a draft PR body and open a PR (requires `gh` or manual confirmation to open in browser)
 - Prepare deployment instructions (Vercel/Netlify/Docker)
 
+````
+
+## Mock API / Producers
+
+This project includes a small mock REST API used for development, served by `json-server` from the `server/db.json` file.
+<!-- ci: trigger -->
+
+- Start the mock API server:
+
+```powershell
+npm run server
+````
+
+- Default API base URL: `http://localhost:3001`.
+- Producers resource path: `/producer` (see `server/db.json`).
+
+Client-side service helpers are available at `src/services/producers.ts` and use the types in `src/types/producer.ts`.
+
+Example usage:
+
+```ts
+import producersService from '@/services/producers';
+
+// list producers
+const all = await producersService.listProducers();
+```
