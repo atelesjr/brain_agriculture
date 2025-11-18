@@ -8,6 +8,7 @@ import type { Farm, Farmer } from '@/types/producer';
 import type { AppDispatch } from '@/store';
 import { createProducer, updateProducer } from '@/store/producersSlice';
 import { closeModal } from '@/store/modalSlice';
+import { onlyDigits, isValidCPF, isValidCNPJ } from '@/components/molecules/DocumentInput/utils/validations';
 
 export function useProducerForm(initialProducer?: Farmer) {
 	const dispatch = useDispatch<AppDispatch>();
@@ -25,7 +26,7 @@ export function useProducerForm(initialProducer?: Farmer) {
 	});
 
 	const { watch, formState } = form;
-	const { errors } = formState;
+	const { errors, isValid } = formState;
 	const watchedName = watch('name');
 	const watchedDocument = watch('document');
 
@@ -33,14 +34,11 @@ export function useProducerForm(initialProducer?: Farmer) {
 	const [farmFormOpen, setFarmFormOpen] = useState(false);
 	const [submitError, setSubmitError] = useState<string | null>(null);
 
-	const canAddProperty = Boolean(
-		watchedName &&
-			String(watchedName).trim().length > 0 &&
-			watchedDocument &&
-			String(watchedDocument).trim().length > 0 &&
-			!errors.name &&
-			!errors.document
-	);
+	// rely on react-hook-form's validation state (mode: 'onChange')
+	// to decide whether the user can add properties or submit the form.
+	// this ensures zod/resolver validation (including document rules)
+	// is the single source of truth for form validity.
+	const canAddProperty = Boolean(isValid);
 
 	const inferDocumentType = (doc?: string): string => {
 		if (!doc) return '';

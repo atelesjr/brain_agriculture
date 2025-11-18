@@ -28,10 +28,14 @@ const DocumentInput = <
 		required: 'Documento é obrigatório',
 		validate: (val: unknown) => {
 			const digits = String(val ?? '').replace(/\D/g, '');
-			if (digits.length <= 11) {
+			// only accept exact lengths: CPF = 11, CNPJ = 14
+			if (digits.length === 11) {
 				return isValidCPF(digits) || 'CPF inválido';
 			}
-			return isValidCNPJ(digits) || 'CNPJ inválido';
+			if (digits.length === 14) {
+				return isValidCNPJ(digits) || 'CNPJ inválido';
+			}
+			return 'Documento deve ser CPF (11 dígitos) ou CNPJ (14 dígitos)';
 		},
 	};
 
@@ -39,7 +43,8 @@ const DocumentInput = <
 		e: React.ChangeEvent<HTMLInputElement>,
 		fieldOnChange: (value: string) => void
 	) => {
-		const newDigits = onlyDigits(e.target.value);
+		// accept only digits and limit to 14 characters (max for CNPJ)
+		const newDigits = onlyDigits(e.target.value).slice(0, 14);
 		fieldOnChange(newDigits);
 	};
 
