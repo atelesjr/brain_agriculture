@@ -68,12 +68,13 @@ export function useProducerForm(initialProducer?: Farmer) {
 					farms,
 				};
 
-				if (initialProducer && typeof initialProducer.id === 'number') {
-					// update
+				if (initialProducer && typeof initialProducer.id !== 'undefined' && initialProducer.id !== null) {
+					// update existing producer (id may be string or number)
 					await dispatch(
 						updateProducer({ id: initialProducer.id, payload })
 					).unwrap();
 				} else {
+					// create new producer
 					await dispatch(createProducer(payload)).unwrap();
 				}
 
