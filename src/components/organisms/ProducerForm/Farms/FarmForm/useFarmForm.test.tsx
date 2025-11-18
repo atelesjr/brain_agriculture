@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { render, waitFor } from '@/test-utils';
 import { act } from '@testing-library/react';
 import { vi } from 'vitest';
@@ -18,8 +17,7 @@ function HookHost({
 }) {
 	const hook = useFarmForm({ initial, index: 0, onSave, onCancel });
 	// assign synchronously during render so tests can read updated value immediately
-	// eslint-disable-next-line react-hooks/rules-of-hooks
-	(capture as React.MutableRefObject<any>).current = hook;
+	capture.current = hook;
 	return null;
 }
 
@@ -77,7 +75,6 @@ describe('useFarmForm', () => {
 		render(<HookHost capture={capture} onSave={onSave} />);
 
 		await waitFor(() => expect(capture.current).not.toBeNull());
-		const hook = capture.current!;
 
 		act(() => capture.current!.setField('name', 'Saved Farm'));
 		act(() =>

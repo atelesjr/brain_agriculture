@@ -3,7 +3,7 @@ import { render, waitFor } from '@/test-utils';
 import { act } from '@testing-library/react';
 import useHarvestsForm from './useHarvestsForm';
 
-type Harvest = { year: string; crop: string; area: string };
+import type { Harvest } from './HarvestItem';
 
 function HookHost({
 	initial,
@@ -30,7 +30,7 @@ describe('useHarvestsForm', () => {
 		render(<HookHost initial={initial} capture={capture} />);
 
 		await waitFor(() => expect(capture.current).not.toBeNull());
-		expect(capture.current.harvests).toEqual(initial);
+		expect(capture.current!.harvests).toEqual(initial);
 	});
 
 	it('addHarvest appends a blank harvest', async () => {
@@ -43,11 +43,11 @@ describe('useHarvestsForm', () => {
 		await waitFor(() => expect(capture.current).not.toBeNull());
 
 		act(() => {
-			capture.current.addHarvest();
+			capture.current!.addHarvest();
 		});
 
-		expect(capture.current.harvests).toHaveLength(2);
-		expect(capture.current.harvests[1]).toEqual({
+		expect(capture.current!.harvests).toHaveLength(2);
+		expect(capture.current!.harvests[1]).toEqual({
 			year: '',
 			crop: '',
 			area: '',
@@ -64,11 +64,11 @@ describe('useHarvestsForm', () => {
 		await waitFor(() => expect(capture.current).not.toBeNull());
 
 		act(() => {
-			capture.current.removeHarvest(0);
+			capture.current!.removeHarvest(0);
 		});
 
-		expect(capture.current.harvests).toHaveLength(1);
-		expect(capture.current.harvests[0]).toEqual({
+		expect(capture.current!.harvests).toHaveLength(1);
+		expect(capture.current!.harvests[0]).toEqual({
 			year: '',
 			crop: '',
 			area: '',
@@ -88,13 +88,13 @@ describe('useHarvestsForm', () => {
 		await waitFor(() => expect(capture.current).not.toBeNull());
 
 		act(() => {
-			capture.current.handleChange(0, 'crop', 'Wheat');
+			capture.current!.handleChange(0, 'crop', 'Wheat');
 		});
 
-		expect(capture.current.harvests[0].crop).toBe('Wheat');
+		expect(capture.current!.harvests[0].crop).toBe('Wheat');
 		// onChange is called because effect runs after state changes
 		await waitFor(() => expect(onChange).toHaveBeenCalled());
-		expect(onChange).toHaveBeenCalledWith(capture.current.harvests);
+		expect(onChange).toHaveBeenCalledWith(capture.current!.harvests);
 	});
 });
 
