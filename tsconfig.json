@@ -3,7 +3,7 @@
 	"compilerOptions": {
 		"types": ["vite/client", "vitest/globals"],
 		"esModuleInterop": true,
-		"allowImportingTsExtensions": true
+		
 	},
 	"include": ["src"],
 	"exclude": ["types"]

@@ -58,9 +58,9 @@ describe('DocumentInput', () => {
     await user.click(screen.getByRole('button', { name: /enviar/i }));
 
     expect(onSubmit).toHaveBeenCalledTimes(1);
-    // handleSubmit may call the handler with (data, event) so assert on the first call's first arg
-    const firstCallFirstArg = (onSubmit as unknown as { mock: unknown[][] }).mock[0][0] as Record<string, string>;
-    expect(firstCallFirstArg).toEqual(expect.objectContaining({ documento: '52998224725' }));
+    // handleSubmit may call the handler with (data, event) so inspect the first call's first arg
+    const firstArg = (onSubmit as any).mock.calls[0][0] as Record<string, string>;
+    expect(firstArg).toEqual(expect.objectContaining({ documento: '52998224725' }));
   });
 
   it('identifies cnpj type when more than 11 digits', async () => {
