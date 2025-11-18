@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, within } from '@/test-utils';
+import { render, screen } from '@/test-utils';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 import FarmsList from './FarmsList';
