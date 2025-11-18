@@ -35,6 +35,8 @@ const HarvestItem = ({
 					placeholder="Ano"
 					label="Ano:"
 					value={harvest.year || ''}
+					inputMode="numeric"
+					maxLength={4}
 					onChange={(e) => onChange(index, 'year', e.target.value)}
 				/>
 			</FarmField>
@@ -50,6 +52,7 @@ const HarvestItem = ({
 				<Input
 					label="Área plantada:"
 					value={harvest.area || ''}
+					inputMode="numeric"
 					onChange={(e) => onChange(index, 'area', e.target.value)}
 				/>
 			</FarmField>

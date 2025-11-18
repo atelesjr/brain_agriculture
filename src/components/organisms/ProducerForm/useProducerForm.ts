@@ -8,7 +8,11 @@ import type { Farm, Farmer } from '@/types/producer';
 import type { AppDispatch } from '@/store';
 import { createProducer, updateProducer } from '@/store/producersSlice';
 import { closeModal } from '@/store/modalSlice';
-import { onlyDigits, isValidCPF, isValidCNPJ } from '@/components/molecules/DocumentInput/utils/validations';
+import {
+	onlyDigits,
+	isValidCPF,
+	isValidCNPJ,
+} from '@/components/molecules/DocumentInput/utils/validations';
 
 export function useProducerForm(initialProducer?: Farmer) {
 	const dispatch = useDispatch<AppDispatch>();
@@ -57,7 +61,9 @@ export function useProducerForm(initialProducer?: Farmer) {
 			try {
 				const payload: Omit<Farmer, 'id'> = {
 					document: data.document,
-					documentType: data.documentType ?? inferDocumentType(data.document),
+					// treat empty string as not provided — prefer explicit documentType,
+					// otherwise infer from the document digits
+					documentType: data.documentType || inferDocumentType(data.document),
 					name: data.name,
 					farms,
 				};

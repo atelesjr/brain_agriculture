@@ -50,7 +50,7 @@ describe('useHarvestsForm', () => {
 		expect(capture.current!.harvests[1]).toEqual({
 			year: '',
 			crop: '',
-			area: '',
+			area: '0',
 		});
 	});
 
@@ -71,12 +71,12 @@ describe('useHarvestsForm', () => {
 		expect(capture.current!.harvests[0]).toEqual({
 			year: '',
 			crop: '',
-			area: '',
+			area: '0',
 		});
 	});
 
 	it('handleChange updates a field and calls onChange', async () => {
-		const initial: Harvest[] = [{ year: '', crop: '', area: '' }];
+		const initial: Harvest[] = [{ year: '', crop: '', area: '0' }];
 		const capture: React.MutableRefObject<ReturnType<
 			typeof useHarvestsForm
 		> | null> = { current: null };

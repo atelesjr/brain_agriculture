@@ -1,5 +1,10 @@
 import { z } from 'zod';
 import type { Farmer } from '../../../types/producer';
+import {
+	onlyDigits,
+	isValidCPF,
+	isValidCNPJ,
+} from '@/components/molecules/DocumentInput/utils/validations';
 
 export const producerSchema = z.object({
 	id: z.number(),
@@ -45,7 +50,12 @@ export type _ = _Assert<_SchemaMatchesFarmer>;
 
 // Schema for create/update form (no `id` required, documentType optional)
 export const producerCreateSchema = z.object({
-	document: z.string(),
+	document: z.string().refine((val) => {
+		const digits = onlyDigits(String(val ?? ''));
+		if (digits.length === 11) return isValidCPF(digits);
+		if (digits.length === 14) return isValidCNPJ(digits);
+		return false;
+	}, 'Documento deve ser CPF (11 dígitos) ou CNPJ (14 dígitos) válido'),
 	documentType: z.string().optional(),
 	name: z.string().min(1, 'Nome é obrigatório'),
 	farms: producerSchema.shape.farms.optional(),

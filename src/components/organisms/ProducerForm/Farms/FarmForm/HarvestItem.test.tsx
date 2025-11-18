@@ -31,7 +31,7 @@ describe('HarvestItem', () => {
 	});
 
 	it('calls onChange when inputs change', async () => {
-		const initialHarvest = { year: '', crop: '', area: '' };
+		const initialHarvest = { year: '', crop: '', area: '0' };
 		const onChangeMock = vi.fn();
 		const addHarvest = vi.fn();
 		const removeHarvest = vi.fn();
@@ -80,7 +80,8 @@ describe('HarvestItem', () => {
 		).toBe(true);
 
 		await user.type(inputs[2], '25');
-		expect(screen.getByDisplayValue('25')).toBeInTheDocument();
+		// initial area defaults to '0' for new harvests, so typing '25' yields '025'
+		expect(screen.getByDisplayValue('025')).toBeInTheDocument();
 		expect(
 			onChangeMock.mock.calls.some(
 				(c: unknown[]) => (c[1] as string) === 'area'
@@ -89,7 +90,7 @@ describe('HarvestItem', () => {
 	});
 
 	it('shows add button when isLast and calls addHarvest', async () => {
-		const harvest = { year: '', crop: '', area: '' };
+		const harvest = { year: '', crop: '', area: '0' };
 		const onChange = vi.fn();
 		const addHarvest = vi.fn();
 		const removeHarvest = vi.fn();
@@ -112,7 +113,7 @@ describe('HarvestItem', () => {
 	});
 
 	it('calls removeHarvest with index when delete clicked', async () => {
-		const harvest = { year: '', crop: '', area: '' };
+		const harvest = { year: '', crop: '', area: '0' };
 		const onChange = vi.fn();
 		const addHarvest = vi.fn();
 		const removeHarvest = vi.fn();

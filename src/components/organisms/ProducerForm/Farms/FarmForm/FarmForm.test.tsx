@@ -6,7 +6,7 @@ import { vi } from 'vitest';
 import type { Farm } from '@/types/producer';
 
 describe('FarmForm', () => {
-	it.skip('saves a new farm and calls closeForm', async () => {
+	it('saves a new farm and calls closeForm', async () => {
 		const closeForm = vi.fn();
 		const setFarms = vi.fn();
 		const initial: Farm = {
@@ -29,6 +29,10 @@ describe('FarmForm', () => {
 				setFarms={setFarms}
 			/>
 		);
+
+		// since several fields default to '0' (areas and harvest area), assert at least one input shows '0'
+		const zeros = screen.getAllByDisplayValue('0');
+		expect(zeros.length).toBeGreaterThanOrEqual(1);
 
 		const save = screen.getByRole('button', { name: /salvar propriedade/i });
 		// ensure button is enabled before clicking

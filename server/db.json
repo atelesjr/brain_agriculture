@@ -622,30 +622,9 @@
       ]
     },
     {
-      "id": "2644",
-      "document": "52998224725",
-      "documentType": "",
-      "name": "Fulano",
-      "farms": []
-    },
-    {
-      "id": "658f",
-      "document": "52998224725",
-      "documentType": "",
-      "name": "Fulano",
-      "farms": []
-    },
-    {
-      "id": "f5c5",
-      "document": "52998224725",
-      "documentType": "",
-      "name": "Fulano",
-      "farms": []
-    },
-    {
-      "id": "bb77",
-      "document": "11111111111",
-      "documentType": "",
+      "id": "8e30",
+      "document": "81166475000154",
+      "documentType": "CNPJ",
       "name": "Agostinho Ferreira Teles Júnior",
       "farms": [
         {
@@ -657,6 +636,40 @@
           "cultivableLand": 2000,
           "vegetatedArea": 1000,
           "safras": [
+            {
+              "year": 0,
+              "name": "Safra 0",
+              "cultures": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1398",
+      "document": "47933648029",
+      "documentType": "CPF",
+      "name": "Agostinh",
+      "farms": [
+        {
+          "id": "f-1763468790399",
+          "name": "Quirino",
+          "city": "Campinas",
+          "state": "SP",
+          "areaTotal": 800,
+          "cultivableLand": 500,
+          "vegetatedArea": 300,
+          "safras": [
+            {
+              "year": 2022,
+              "name": "Safra 2022",
+              "cultures": [
+                {
+                  "name": "Milho",
+                  "areaPlanted": 200
+                }
+              ]
+            },
             {
               "year": 0,
               "name": "Safra 0",

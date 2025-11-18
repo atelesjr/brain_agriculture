@@ -32,6 +32,7 @@ const FarmForm = ({ closeForm, index, farms, setFarms }: FarmFormProps) => {
 		handleSave,
 		handleCancel,
 		isValid,
+		areaError,
 	} = useFarmForm({
 		initial,
 		index,
@@ -69,14 +70,6 @@ const FarmForm = ({ closeForm, index, farms, setFarms }: FarmFormProps) => {
 				</FarmField>
 				<FarmField width="100px">
 					<Input
-						placeholder="Digite a área total"
-						label="Área total:"
-						value={form.areaTotal}
-						onChange={(e) => setField('areaTotal', e.target.value)}
-					/>
-				</FarmField>
-				<FarmField width="100px">
-					<Input
 						placeholder="Digite a área cultivável"
 						label="Área cultivável:"
 						value={form.cultivableLand}
@@ -89,6 +82,15 @@ const FarmForm = ({ closeForm, index, farms, setFarms }: FarmFormProps) => {
 						label="Área vegetada:"
 						value={form.vegetatedArea}
 						onChange={(e) => setField('vegetatedArea', e.target.value)}
+					/>
+				</FarmField>
+				<FarmField width="100px">
+					<Input
+						placeholder="Calculada automaticamente"
+						label="Área total:"
+						value={form.areaTotal}
+						readOnly
+						error={areaError}
 					/>
 				</FarmField>
 			</Row>

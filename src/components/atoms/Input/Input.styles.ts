@@ -20,7 +20,7 @@ export const RequiredStar = styled.span`
 	color: ${({ theme }) => theme.colors.alert};
 `;
 
-export const StyledInput = styled.input<{ $hasError?: boolean }>`
+export const StyledInput = styled.input<{ $hasError?: boolean; readOnly?: boolean }>`
 	width: 100%;
 	box-sizing: border-box;
 	padding: 4px 12px;
@@ -35,8 +35,11 @@ export const StyledInput = styled.input<{ $hasError?: boolean }>`
 	box-shadow: ${({ $hasError, theme }) =>
 		$hasError ? `0 0 0 3px ${theme.colors.alert}22` : 'none'};
 
-	&:focus,
-	&:hover {
+	/* When readOnly, disable hover/focus visual changes and show light gray background */
+	background: ${({ readOnly, theme }) =>
+		readOnly ? theme.colors.background_main : 'transparent'};
+	&:not(:read-only):focus,
+	&:not(:read-only):hover {
 		outline: none;
 		border-color: ${({ $hasError, theme }) =>
 			$hasError ? theme.colors.alert : theme.colors.primary};
@@ -44,6 +47,16 @@ export const StyledInput = styled.input<{ $hasError?: boolean }>`
 			$hasError
 				? `0 0 0 4px ${theme.colors.alert}22`
 				: `0 0 0 4px ${theme.colors.primary}14`};
+	}
+
+	/* ensure read-only inputs never show focus/hover outlines from the UA */
+	&:read-only,
+	&:read-only:focus,
+	&:read-only:hover {
+		outline: none;
+		box-shadow: none;
+		border-color: ${({ $hasError, theme }) =>
+			$hasError ? theme.colors.alert : theme.colors.muted};
 	}
 `;
 

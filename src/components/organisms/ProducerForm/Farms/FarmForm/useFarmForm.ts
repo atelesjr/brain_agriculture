@@ -30,20 +30,26 @@ export default function useFarmForm(options: UseFarmFormOptions = {}) {
 	const [form, setForm] = useState(() => ({
 		name: initialValues.name,
 		city: initialValues.city,
-		state: initialValues.state,
-		areaTotal: String(initialValues.areaTotal || ''),
-		cultivableLand: String(initialValues.cultivableLand || ''),
-		vegetatedArea: String(initialValues.vegetatedArea || ''),
+		state: String(initialValues.state ?? '').toUpperCase().slice(0, 2),
+		areaTotal: String(initialValues.areaTotal ?? 0),
+		cultivableLand: String(initialValues.cultivableLand ?? 0),
+		vegetatedArea: String(initialValues.vegetatedArea ?? 0),
 	}));
 
-	const toInitialHarvests = (safras: Safra[] = []): Harvest[] =>
-		safras.flatMap((s) =>
+	const toInitialHarvests = (safras: Safra[] = []): Harvest[] => {
+		if (!safras || safras.length === 0) {
+	 		// for a new farm, expose a single empty harvest with area '0'
+	 		return [{ year: '', crop: '', area: '0' }];
+	 	}
+
+		return safras.flatMap((s) =>
 			(s.cultures || []).map((c) => ({
 				year: String(s.year),
 				crop: c.name,
 				area: String(c.areaPlanted),
 			}))
 		);
+	};
 
 	const [harvests, setHarvests] = useState<Harvest[]>(() =>
 		toInitialHarvests(initialValues.safras)
@@ -55,16 +61,39 @@ export default function useFarmForm(options: UseFarmFormOptions = {}) {
 		setForm({
 			name: initialValues.name,
 			city: initialValues.city,
-			state: initialValues.state,
-			areaTotal: String(initialValues.areaTotal || ''),
-			cultivableLand: String(initialValues.cultivableLand || ''),
-			vegetatedArea: String(initialValues.vegetatedArea || ''),
+			state: String(initialValues.state ?? '').toUpperCase().slice(0, 2),
+			areaTotal: String(initialValues.areaTotal ?? 0),
+			cultivableLand: String(initialValues.cultivableLand ?? 0),
+			vegetatedArea: String(initialValues.vegetatedArea ?? 0),
 		});
 		setHarvests(toInitialHarvests(initialValues.safras));
 		// depend on id to reset when initial changes
 	}, [initial?.id]);
 
 	const setField = useCallback((field: keyof typeof form, value: string) => {
+		// state field: allow only letters, uppercase, max 2 chars
+		if (field === 'state') {
+			const letters = String(value ?? '')
+				.replace(/[^A-Za-z]/g, '')
+				.toUpperCase()
+				.slice(0, 2);
+			setForm((prev) => ({ ...prev, state: letters }));
+			return;
+		}
+
+		// for numeric fields, accept only digits
+		if (field === 'areaTotal' || field === 'cultivableLand' || field === 'vegetatedArea') {
+			const digits = String(value ?? '').replace(/\D/g, '');
+			setForm((prev) => {
+				const next = { ...prev, [field]: digits };
+				// recalculate areaTotal as sum of cultivable + vegetated when those change
+				const cult = Number(next.cultivableLand || 0);
+				const veg = Number(next.vegetatedArea || 0);
+				next.areaTotal = String(cult + veg);
+				return next;
+			});
+			return;
+		}
 		setForm((prev) => ({ ...prev, [field]: value }));
 	}, []);
 
@@ -110,7 +139,20 @@ export default function useFarmForm(options: UseFarmFormOptions = {}) {
 		if (typeof onCancel === 'function') onCancel();
 	}, [onCancel]);
 
-	const isValid = Boolean(form.name && form.name.trim().length > 0);
+	// compute numeric validity for area fields: sum(cultivable + vegetated) must not exceed total
+	const areaTotalN = Number(form.areaTotal) || 0;
+	const cultN = Number(form.cultivableLand) || 0;
+	const vegN = Number(form.vegetatedArea) || 0;
+	const areasValid = cultN + vegN <= areaTotalN;
+
+	// error message when the sum of cultivable + vegetated exceeds total
+	const areaError = !areasValid
+		? 'A soma de Área cultivável e Área vegetada não pode exceder a Área total'
+		: '';
+
+	const isValid = Boolean(
+		form.name && form.name.trim().length > 0 && areasValid
+	);
 
 	return {
 		form,
@@ -120,5 +162,6 @@ export default function useFarmForm(options: UseFarmFormOptions = {}) {
 		handleSave,
 		handleCancel,
 		isValid,
+		areaError,
 	} as const;
 }

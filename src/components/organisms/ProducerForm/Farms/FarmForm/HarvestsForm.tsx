@@ -8,7 +8,7 @@ interface HarvestsFormProps {
 	onChange?: (harvests: Harvest[]) => void;
 }
 
-const HarvestsForm = ({ initial = [{ year: '', crop: '', area: '' }], onChange }: HarvestsFormProps) => {
+const HarvestsForm = ({ initial = [{ year: '', crop: '', area: '0' }], onChange }: HarvestsFormProps) => {
 	const { harvests, addHarvest, removeHarvest, handleChange } = useHarvestsForm(initial, onChange);
 
 	return (
