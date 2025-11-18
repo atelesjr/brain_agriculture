@@ -10,7 +10,6 @@ import {
 } from './FarmsList.styles';
 import type { Farm } from '@/types/producer';
 import Harvest from '@/components/molecules/Accordion/Harvests/Harvests';
-import React from 'react';
 import useFormList from './useFormList';
 import { IconButton } from '@/components/atoms/Buttons';
 
