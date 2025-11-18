@@ -9,7 +9,7 @@ vi.mock('./ProducersSkeleton/ProducersSkeleton', () => ({
 
 // Mock Accordion to render a simple identifiable element
 vi.mock('@/components/molecules/Accordion/Accordion', () => ({
-	default: ({ item }: any) => (
+	default: ({ item }: { item: { id: number; name: string } }) => (
 		<div data-testid={`accordion-${item.id}`}>{item.name}</div>
 	),
 }));

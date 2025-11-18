@@ -11,21 +11,27 @@ import {
 import type { Farm } from '@/types/producer';
 import Harvest from '@/components/molecules/Accordion/Harvests/Harvests';
 import { useState } from 'react';
+import { IconButton } from '@/components/atoms/Buttons';
 
 interface FarmListProps {
 	farms: Farm[];
+	// whether the parent form is in edit mode (editing an existing producer)
+	isEditing?: boolean;
+	onEdit?: (index: number) => void;
+	onRemove?: (index: number) => void;
 }
+const FarmsList = ({ farms, isEditing = false, onEdit, onRemove }: FarmListProps) => {
+	// track open item by farm id
+	const [openId, setOpenId] = useState<string | null>(null);
+	// per-farm reset counters for children reset when closed
+	const [resetCounters, setResetCounters] = useState<Record<string, number>>({});
 
-const FarmsList = ({ farms }: FarmListProps) => {
-	const [resetCounter, setResetCounter] = useState(0);
-	const [open, setOpen] = useState(false);
-
-	const handleOnClick = () => {
-		setOpen((s) => {
-			const next = !s;
-			if (!next) {
-				// accordion is closing -> bump reset counter to instruct children to reset
-				setResetCounter((c) => c + 1);
+	const handleOnClick = (farmId: string) => {
+		setOpenId((prev) => {
+			const next = prev === farmId ? null : farmId;
+			if (prev === farmId && next === null) {
+				// closing the same item -> bump its reset counter
+				setResetCounters((m) => ({ ...m, [farmId]: (m[farmId] ?? 0) + 1 }));
 			}
 			return next;
 		});
@@ -41,15 +47,17 @@ const FarmsList = ({ farms }: FarmListProps) => {
 
 	return (
 		<FarmListRoot>
-			{farms.map((farm) => (
-				<FarmItem key={farm.id}>
-					<FarmListHeader
-						role="button"
-						key={farm.id}
-						aria-expanded={open}
-						onClick={() => handleOnClick()}
-					>
-						<ArrowIcon open={open} />
+			{farms.map((farm) => {
+				const isOpen = openId === farm.id;
+				return (
+					<FarmItem key={farm.id}>
+						<FarmListHeader
+							role="button"
+							key={farm.id}
+							aria-expanded={isOpen}
+							onClick={() => handleOnClick(farm.id)}
+						>
+							<ArrowIcon open={isOpen} />
 						<FarmField>
 							<FarmFieldValue $highlight>{farm.name}</FarmFieldValue>
 						</FarmField>
@@ -69,13 +77,44 @@ const FarmsList = ({ farms }: FarmListProps) => {
 							<FarmFieldLabel>Área vegetada:</FarmFieldLabel>
 							<FarmFieldValue>{`${farm.vegetatedArea}ha`}</FarmFieldValue>
 						</FarmField>
+
+						{/* action buttons aligned to the extreme right when in edit mode */}
+						<div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
+							{isEditing && (
+								<>
+									<IconButton
+										action="edit"
+										label=""
+										variant="ghost"
+										size="sm"
+										onClick={(e) => {
+											e.stopPropagation();
+											if (onEdit) onEdit(farms.indexOf(farm));
+										}}
+									/>
+									<IconButton
+										action="delete"
+										label=""
+										variant="ghost"
+										size="sm"
+										onClick={(e) => {
+											e.stopPropagation();
+											if (onRemove) onRemove(farms.indexOf(farm));
+										}}
+									/>
+								</>
+							)}
+						</div>
+
 					</FarmListHeader>
 
-					<HarvestSection hidden={!open} aria-hidden={!open}>
-						{<Harvest farm={farm} resetCounter={resetCounter} />}
+					<HarvestSection hidden={!isOpen} aria-hidden={!isOpen}>
+						{<Harvest farm={farm} resetCounter={resetCounters[farm.id] ?? 0} />}
 					</HarvestSection>
-				</FarmItem>
-			))}
+
+					</FarmItem>
+				);
+			})}
 		</FarmListRoot>
 	);
 };

@@ -11,12 +11,12 @@ import { theme } from '@/styles/theme';
 function renderWithStore(
 	initialState = { modal: { isOpen: true, content: <div>Hi</div> } }
 ) {
-	const store = configureStore(
-		({
-			reducer: { modal: modalReducer },
-			preloadedState: initialState,
-		} as any)
-	);
+	const store = configureStore({
+		reducer: { modal: modalReducer },
+		preloadedState: initialState as unknown as {
+			modal: { isOpen: boolean; content: React.ReactNode };
+		},
+	});
 	return render(
 		<Provider store={store}>
 			<ThemeProvider theme={theme}>

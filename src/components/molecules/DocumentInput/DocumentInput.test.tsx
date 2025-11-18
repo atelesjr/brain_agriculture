@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from '@/styles/theme';
 import DocumentInput from './DocumentInput';
 
-function TestForm({ onSubmit }: { onSubmit: (data: any) => void }) {
+function TestForm({ onSubmit }: { onSubmit: (data: Record<string, string>) => void }) {
   const { control, handleSubmit } = useForm({ defaultValues: { documento: '' } });
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -19,7 +19,7 @@ function TestForm({ onSubmit }: { onSubmit: (data: any) => void }) {
 describe('DocumentInput', () => {
   it('shows required error when submitted empty', async () => {
     const user = userEvent.setup();
-    const onSubmit = vi.fn();
+    const onSubmit = vi.fn<(data: Record<string, string>) => void>();
 
     render(
       <ThemeProvider theme={theme}>
@@ -35,7 +35,7 @@ describe('DocumentInput', () => {
 
   it('formats CPF while typing and submits digits-only value', async () => {
     const user = userEvent.setup();
-    const onSubmit = vi.fn();
+    const onSubmit = vi.fn<(data: Record<string, string>) => void>();
 
     render(
       <ThemeProvider theme={theme}>
@@ -59,13 +59,13 @@ describe('DocumentInput', () => {
 
     expect(onSubmit).toHaveBeenCalledTimes(1);
     // handleSubmit may call the handler with (data, event) so assert on the first call's first arg
-    const firstCallFirstArg = (onSubmit as any).mock.calls[0][0];
+    const firstCallFirstArg = (onSubmit as unknown as { mock: unknown[][] }).mock[0][0] as Record<string, string>;
     expect(firstCallFirstArg).toEqual(expect.objectContaining({ documento: '52998224725' }));
   });
 
   it('identifies cnpj type when more than 11 digits', async () => {
     const user = userEvent.setup();
-    const onSubmit = vi.fn();
+    const onSubmit = vi.fn<(data: Record<string, string>) => void>();
 
     render(
       <ThemeProvider theme={theme}>

@@ -58,7 +58,18 @@ const Farms = ({
 						setFarms={setFarms}
 					/>
 				) : (
-					<FarmsList farms={farms} />
+					<FarmsList
+						farms={farms}
+						isEditing={Boolean(onOpenForm)}
+						onEdit={(index: number) => {
+							setEditingIndex(index);
+							setOpenFarmForm(true);
+							if (onOpenForm) onOpenForm();
+						}}
+						onRemove={(index: number) => {
+							setFarms((prev) => prev.filter((_, i) => i !== index));
+						}}
+					/>
 				)}
 			</FarmContent>
 		</FarmsFormRoot>

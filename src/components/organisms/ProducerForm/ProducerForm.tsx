@@ -20,7 +20,9 @@ import { Button } from '@/components/atoms';
 export type ProducerFormValues = z.infer<typeof producerCreateSchema>;
 import { useTheme } from 'styled-components';
 
-const ProducerFormComponent: React.FC<{ initialProducer?: import('@/types/producer').Farmer }> = ({ initialProducer }) => {
+const ProducerFormComponent: React.FC<{
+	initialProducer?: import('@/types/producer').Farmer;
+}> = ({ initialProducer }) => {
 	const theme = useTheme();
 
 	// use the reusable hook to encapsulate form and domain logic
@@ -38,7 +40,12 @@ const ProducerFormComponent: React.FC<{ initialProducer?: import('@/types/produc
 
 	const dispatch = useDispatch<AppDispatch>();
 
-	const { register, handleSubmit, control, formState: { errors } } = form;
+	const {
+		register,
+		handleSubmit,
+		control,
+		formState: { errors },
+	} = form;
 
 	return (
 		<ProducerForm>
@@ -48,13 +55,13 @@ const ProducerFormComponent: React.FC<{ initialProducer?: import('@/types/produc
 				{/* Nome do produtor using Input atom (registered via react-hook-form) */}
 				<Row>
 					<Field width={'500px'}>
-							<Input
-								label="Nome do produtor"
-								placeholder="Digite o nome completo"
-								required
-								error={errors.name?.message ?? ''}
-								{...register('name')}
-							/>
+						<Input
+							label="Nome do produtor"
+							placeholder="Digite o nome completo"
+							required
+							error={errors.name?.message ?? ''}
+							{...register('name')}
+						/>
 					</Field>
 					<Field width={'200px'}>
 						<DocumentInput control={control} name="document" />
@@ -72,7 +79,12 @@ const ProducerFormComponent: React.FC<{ initialProducer?: import('@/types/produc
 
 				{!farmFormOpen && (
 					<ButtonsSection>
-						<Button type="submit" variant="primary" size="sm" disabled={!canAddProperty}>
+						<Button
+							type="submit"
+							variant="primary"
+							size="sm"
+							disabled={!canAddProperty}
+						>
 							Salvar Produtor
 						</Button>
 						<Button
@@ -85,7 +97,9 @@ const ProducerFormComponent: React.FC<{ initialProducer?: import('@/types/produc
 						</Button>
 
 						{submitError && (
-							<div style={{ color: theme.colors.alert, marginTop: 8 }}>{submitError}</div>
+							<div style={{ color: theme.colors.alert, marginTop: 8 }}>
+								{submitError}
+							</div>
 						)}
 					</ButtonsSection>
 				)}
