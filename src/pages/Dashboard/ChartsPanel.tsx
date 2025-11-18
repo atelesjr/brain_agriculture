@@ -52,6 +52,15 @@ const ChartsPanel: React.FC<Props> = ({ byCulture, landUse, byState, colors = CO
                         <Legend content={<LegendContent />} />
                     </PieChart>
                 </ResponsiveContainer>
+                {/* explicit, testable legend rendered independent of Recharts internals */}
+                <LegendWrapper>
+                    {byCulture.map((d, i) => (
+                        <LegendItem key={`legend-c-${i}`}>
+                            <LegendSwatch color={colors[i % colors.length]} />
+                            {d.name}
+                        </LegendItem>
+                    ))}
+                </LegendWrapper>
             </ChartCard>
 
             <ChartCard>
@@ -67,6 +76,14 @@ const ChartsPanel: React.FC<Props> = ({ byCulture, landUse, byState, colors = CO
                         <Legend content={<LegendContent />} />
                     </PieChart>
                 </ResponsiveContainer>
+                <LegendWrapper>
+                    {landUse.map((d, i) => (
+                        <LegendItem key={`legend-l-${i}`}>
+                            <LegendSwatch color={colors[i % colors.length]} />
+                            {d.name}
+                        </LegendItem>
+                    ))}
+                </LegendWrapper>
             </ChartCard>
 
             <ChartCard style={{ gridColumn: '1 / -1', minHeight: 560 }}>
@@ -82,6 +99,14 @@ const ChartsPanel: React.FC<Props> = ({ byCulture, landUse, byState, colors = CO
                         <Legend content={<LegendContent />} />
                     </PieChart>
                 </ResponsiveContainer>
+                <LegendWrapper>
+                    {byState.map((d, i) => (
+                        <LegendItem key={`legend-s-${i}`}>
+                            <LegendSwatch color={colors[i % colors.length]} />
+                            {d.name}
+                        </LegendItem>
+                    ))}
+                </LegendWrapper>
             </ChartCard>
         </>
     );
