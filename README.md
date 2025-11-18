@@ -29,62 +29,119 @@ import producersService from '@/services/producers';
 const all = await producersService.listProducers();
 
  
-## Project structure and rationale
+# Brain Agriculture — Delivery Guide
 
-This section documents how the project is organized and the reasoning behind the structure so reviewers can quickly find the code they need.
+This file contains installation, test and delivery instructions intended for the final handoff.
 
-Top-level folders
+## Quick summary
 
-- `src/` — application source code (React + TypeScript). Key subfolders:
-	- `components/` — UI components organized by atomic/molecular/organism pattern:
-		- `atoms/` — small, reusable building blocks (buttons, inputs, layout primitives).
-		- `molecules/` — composed components built from atoms (Accordion, DocumentInput, IconButton wrappers).
-		- `organisms/` — larger units that compose pages (Header, Modal, ProducerForm, Producers list).
-	- `pages/` — page-level components that map to routes (Home, Dashboard, NotFound). Pages assemble organisms and provide page-specific layout and hooks.
-	- `routes/` — application route definitions used by the router.
-	- `store/` — Redux Toolkit slices and store configuration:
-		- `producersSlice.ts` — producers CRUD + thunks (`fetchProducers`, `createProducer`, `updateProducer`, `deleteProducer`).
-		- `modalSlice.ts` — simple open/close modal state that holds `ReactNode` content for convenience.
-	- `services/` — thin wrappers for network calls (e.g. `producers.ts`) that interact with the mock `json-server` API.
-	- `schemas/` — (if present) validation schemas for forms.
-	- `styles/` — global styles, theme and media-queries used across the app.
-	- `types/` — application domain TypeScript types (e.g. `producer.ts` describing `Farmer`, `Farm`, `Safra`, `Culture`).
+- Project: React + TypeScript + Vite
+- State: Redux Toolkit
+- Charts: Recharts
+- Styling: styled-components
+- Forms & validation: react-hook-form + zod
+- Tests: Vitest + Testing Library (happy-dom)
+- Mock API: json-server (dev)
 
-Design decisions and patterns
+## Prerequisites
 
-- Atomic design: components are grouped by `atoms`, `molecules`, and `organisms` to make reuse and testing easier.
-- Redux Toolkit: slices colocate reducer logic and async thunks. `producersSlice` encapsulates all business logic interacting with `producers`.
-- Hooks for logic: heavier logic such as the Dashboard aggregation is extracted into hooks (e.g. `useDashboardData`) to make components pure and easier to test.
-- Tests: Vitest + Testing Library with `happy-dom` provide a fast DOM environment. Tests use a project-specific serial runner (`scripts/run-tests-serial.cjs`) for deterministic order during CI and local QA.
-- Charts: Recharts is used for visualizations. Because Recharts may behave differently in test DOMs, chart components render accessible HTML legends (in `ChartsPanel`) so tests can assert on visible, stable elements rather than SVG internals.
+- Node.js >= 18
+- npm
 
-Where to find things quickly
+## Install
 
-- Dashboard aggregation logic: `src/pages/Dashboard/useDashboardData.ts`
-- Charts component (reusable): `src/pages/Dashboard/ChartsPanel.tsx`
-- Producer CRUD service: `src/services/producers.ts`
-- Forms and validation: `src/components/organisms/ProducerForm/*`
-- Store: `src/store/index.ts`, `src/store/producersSlice.ts`
-- Tests: colocated alongside implementation files under `src/` and runnable with `npm run test:local`.
-
-If you want more details in any specific area (e.g. tests, chart implementation, form validation), tell me which area and I will expand this README with code links and examples.
-// get one
-const one = await producersService.getProducer(1);
-
-// create
-const created = await producersService.createProducer({
-	document: '000.000.000-00',
-	documentType: 'CPF',
-	name: 'Novo Produtor',
-	farms: [],
-});
+```powershell
+npm install
 ```
 
-If you want Vite to point to a different API during development, set `VITE_API_URL` in an `.env` file at the project root.
+## Development
 
+Start mock API (separate terminal):
+
+```powershell
+npm run server
 ```
 
+Start dev server:
+
+```powershell
+npm run dev
 ```
 
-> Development note: use Node 18 or 20 (LTS). If you experience test worker timeouts on Windows, switch your local Node using `nvm` to a supported version (e.g. `nvm install 20 && nvm use 20`).
+Open: http://localhost:5173
+
+## Tests
+
+Run the full deterministic suite (project serial runner):
+
+```powershell
+npm run test:local
+```
+
+Run vitest once (parallel):
+
+```powershell
+npm run test:run
+```
+
+Run a single test file:
+
+```powershell
+npx vitest run src/pages/Home/index.test.tsx --reporter=verbose
+```
+
+## Build
+
+To verify TypeScript + Vite build:
+
+```powershell
+npm run build
+```
+
+## Notes about Dashboard and tests
+
+- `useDashboardData` contains aggregation logic for totals and chart data.
+- `ChartsPanel` renders three pie charts and also exposes accessible HTML legends so tests do not rely on Recharts internals.
+- Tests were stabilized by adding explicit legends and fixing fixtures to match `src/types/producer.ts` types.
+
+## Forms and validation
+
+- The application uses `react-hook-form` for form state management and integration with UI inputs.
+- `zod` is used to declare validation schemas that are integrated with `react-hook-form` via `@hookform/resolvers`.
+
+This combination provides performant form state, decoupled validation schemas and strong TypeScript inference for form values.
+
+## Create a PR
+
+1. Push branch:
+
+```powershell
+git push -u origin feat/Dashboard
+```
+
+2. Open compare page in browser:
+
+https://github.com/atelesjr/brain_agriculture/compare/feat/Dashboard?expand=1
+
+3. Suggested PR title: `feat(dashboard): add ChartsPanel, useDashboardData and tests`
+
+If you have `gh` available:
+
+```powershell
+gh pr create --base main --head feat/Dashboard --title "feat(dashboard): add ChartsPanel, useDashboardData and tests" --body "See commits for details."
+```
+
+## Delivery checklist
+
+- [ ] Run `npm run test:local` and confirm all tests pass
+- [ ] Run `npm run build` successfully
+- [ ] Open PR and request review
+
+---
+
+If you want, I can:
+
+- Run `npm run build` and upload artifacts
+- Create a draft PR body and open a PR (requires `gh` or manual confirmation to open in browser)
+- Prepare deployment instructions (Vercel/Netlify/Docker)
 
