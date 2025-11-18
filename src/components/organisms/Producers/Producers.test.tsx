@@ -9,7 +9,7 @@ vi.mock('./ProducersSkeleton/ProducersSkeleton', () => ({
 
 // Mock Accordion to render a simple identifiable element
 vi.mock('@/components/molecules/Accordion/Accordion', () => ({
-	default: ({ item }: { item: { id: number; name: string } }) => (
+	default: ({ item }: { item: { id: string; name: string } }) => (
 		<div data-testid={`accordion-${item.id}`}>{item.name}</div>
 	),
 }));
@@ -49,8 +49,8 @@ describe('Producers component', () => {
 
 	test('renders an accordion for each producer', () => {
 		const items = [
-			{ id: 1, name: 'P1', document: '1', documentType: 'CPF', farms: [] },
-			{ id: 2, name: 'P2', document: '2', documentType: 'CPF', farms: [] },
+			{ id: '1', name: 'P1', document: '1', documentType: 'CPF', farms: [] },
+			{ id: '2', name: 'P2', document: '2', documentType: 'CPF', farms: [] },
 		];
 
 		render(
