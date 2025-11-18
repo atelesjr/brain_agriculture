@@ -4,7 +4,7 @@ import Accordion from './Accordion';
 import type { Farmer } from '@/types/producer';
 
 const makeFarmer = (): Farmer => ({
-	id: 1,
+	id: '1',
 	document: '123456789',
 	documentType: 'CPF',
 	name: 'João da Silva',
