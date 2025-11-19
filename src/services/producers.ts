@@ -76,7 +76,8 @@ export async function listProducers(
 	const url = buildUrl('', params);
 	try {
 		const res = await fetch(url);
-		return handleResponse<Farmer[]>(res);
+		const data = await handleResponse<Farmer[]>(res);
+		return data;
 	} catch (err) {
 		// Network errors can happen in production when no API is configured
 		// (e.g., static deploy on Vercel). Log and return an empty list so
