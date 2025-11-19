@@ -1,4 +1,5 @@
 import type { Farmer } from '@/types/producer';
+import staticProducers from '@/data/producersStatic';
 
 type ImportMetaWithEnv = ImportMeta & {
 	readonly env?: {
@@ -86,7 +87,29 @@ export async function listProducers(
 		// real API.
 		// eslint-disable-next-line no-console
 		console.error('Failed to fetch producers from', url, err);
-		return [] as Farmer[];
+		// Try to load a static JSON file from the public folder (e.g.:
+		// `/producers.json`) before falling back to the tiny built-in
+		// `staticProducers`. This helps local dev when `json-server`
+		// isn't running and also supports static deploys where
+		// `public/producers.json` is served by the CDN.
+		if (typeof window !== 'undefined') {
+			try {
+				const fallbackUrl = `${window.location.origin}/producers.json`;
+				// eslint-disable-next-line no-console
+				console.info('Attempting to load fallback producers from', fallbackUrl);
+				const r = await fetch(fallbackUrl);
+				if (r.ok) {
+					const j = (await r.json()) as Farmer[];
+					return j;
+				}
+			} catch (e) {
+				// ignore and continue to built-in fallback
+			}
+		}
+
+		// Final fallback to the small built-in static dataset so the
+		// UI can still render without crashing.
+		return staticProducers as Farmer[];
 	}
 }
 

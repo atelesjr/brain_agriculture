@@ -685,7 +685,6 @@
       "id": "158a"
     },
     {
-      "id": "bdb7",
       "document": "88397182063",
       "documentType": "CPF",
       "name": "Clark Kent",
@@ -715,8 +714,25 @@
               "cultures": []
             }
           ]
+        },
+        {
+          "id": "f-1763564278702",
+          "name": "Fazenda Krypton",
+          "city": "Torres",
+          "state": "RS",
+          "areaTotal": 664,
+          "cultivableLand": 324,
+          "vegetatedArea": 340,
+          "safras": [
+            {
+              "year": 0,
+              "name": "Safra 0",
+              "cultures": []
+            }
+          ]
         }
-      ]
+      ],
+      "id": "bdb7"
     }
   ]
 }
