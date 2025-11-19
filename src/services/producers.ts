@@ -29,11 +29,18 @@ const apiFromProcess =
 	typeof process !== 'undefined'
 		? (process.env.REACT_APP_API_URL as string | undefined)
 		: undefined;
-const API_BASE = apiFromImportMeta || apiFromProcess || DEFAULT_BASE;
+const rawBase = (apiFromImportMeta || apiFromProcess || DEFAULT_BASE || '').toString();
+// Ensure no trailing slash so we don't produce '...//resource' when concatenating
+const API_BASE = rawBase.replace(/\/+$/, '');
 const RESOURCE = 'producers';
 
 function buildUrl(path = '', params?: Record<string, string | number>) {
-	const url = new URL(`${API_BASE}/${RESOURCE}${path}`);
+	// Ensure no double slashes when combining base, resource and path.
+	// - strip leading slashes from `path`
+	// - ensure base ends with a single slash for URL constructor
+	const cleanPath = path ? path.replace(/^\/+/, '') : '';
+	const baseWithSlash = API_BASE.replace(/\/+$/, '') + '/';
+	const url = new URL(`${RESOURCE}/${cleanPath}`, baseWithSlash);
 	if (params) {
 		Object.entries(params).forEach(([k, v]) =>
 			url.searchParams.append(k, String(v))
