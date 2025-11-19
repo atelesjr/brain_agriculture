@@ -22,18 +22,38 @@ const DEFAULT_BASE = 'http://localhost:3001';
 const apiFromImportMeta =
 	typeof import.meta !== 'undefined'
 		? ((import.meta as ImportMetaWithEnv).env?.VITE_API_URL as
-				| string
-				| undefined)
+			| string
+			| undefined)
 		: undefined;
 const apiFromProcess =
 	typeof process !== 'undefined'
 		? (process.env.REACT_APP_API_URL as string | undefined)
 		: undefined;
-const API_BASE = apiFromImportMeta || apiFromProcess || DEFAULT_BASE;
+// Determine API base priority:
+// 1. `VITE_API_URL` (import.meta.env)
+// 2. `REACT_APP_API_URL` (process.env)
+// 3. In local dev (Vite `DEV`), use `DEFAULT_BASE` so the app talks to
+//    a local json-server running on localhost:3001.
+// 4. In production (no env set and not DEV), leave undefined so we can use
+//    `window.location.origin` in the browser and avoid hardcoded localhost.
+const isViteDev =
+	typeof import.meta !== 'undefined' && !!(import.meta as any).env?.DEV;
+const API_BASE = apiFromImportMeta || apiFromProcess || (isViteDev ? DEFAULT_BASE : undefined);
 const RESOURCE = 'producers';
 
 function buildUrl(path = '', params?: Record<string, string | number>) {
-	const url = new URL(`${API_BASE}/${RESOURCE}${path}`);
+	const resourcePath = `${RESOURCE}${path}`.replace(/\/\//g, '/').replace(/^(?!\/)/, '/');
+	// Determine base:
+	// - if API_BASE is explicitly set (VITE_API_URL), use it
+	// - else if running in browser, use window.location.origin
+	// - else fall back to DEFAULT_BASE (node/test)
+	const base = API_BASE
+		? API_BASE.replace(/\/$/, '')
+		: typeof window !== 'undefined' && window.location
+		? window.location.origin
+		: DEFAULT_BASE;
+
+	const url = new URL(`${base}${resourcePath}`);
 	if (params) {
 		Object.entries(params).forEach(([k, v]) =>
 			url.searchParams.append(k, String(v))
@@ -54,8 +74,19 @@ export async function listProducers(
 	params?: Record<string, string | number>
 ): Promise<Farmer[]> {
 	const url = buildUrl('', params);
-	const res = await fetch(url);
-	return handleResponse<Farmer[]>(res);
+	try {
+		const res = await fetch(url);
+		return handleResponse<Farmer[]>(res);
+	} catch (err) {
+		// Network errors can happen in production when no API is configured
+		// (e.g., static deploy on Vercel). Log and return an empty list so
+		// the Home page can render gracefully instead of crashing.
+		// Encourage setting `VITE_API_URL` in production to point to a
+		// real API.
+		// eslint-disable-next-line no-console
+		console.error('Failed to fetch producers from', url, err);
+		return [] as Farmer[];
+	}
 }
 
 export async function getProducer(id: string): Promise<Farmer> {
