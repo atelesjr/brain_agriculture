@@ -168,16 +168,17 @@ If you want a more detailed tree (including tests and internal files), I can gen
 ## Mock API / Producers
 
 This project includes a small mock REST API used for development, served by `json-server` from the `server/db.json` file.
+
 <!-- ci: trigger -->
 
-- Start the mock API server:
+- Start the mock API server (separate terminal):
 
 ```powershell
 npm run server
-````
+```
 
 - Default API base URL: `http://localhost:3001`.
-- Producers resource path: `/producer` (see `server/db.json`).
+- Producers resource path: `/producers` (see `server/db.json`).
 
 Client-side service helpers are available at `src/services/producers.ts` and use the types in `src/types/producer.ts`.
 
@@ -189,3 +190,26 @@ import producersService from '@/services/producers';
 // list producers
 const all = await producersService.listProducers();
 ```
+
+## Production / Deploy notes
+
+- The frontend reads the API base from `import.meta.env.VITE_API_URL` at build time. When deploying to Vercel (or similar), set the environment variable `VITE_API_URL` to the production API URL.
+	- Example (Render fake API): `https://brain-agriculture-api-4qkm.onrender.com`
+	- The client code now strips trailing slashes, but it's good practice to set the env value without a trailing slash.
+
+- Important: Vite inlines `import.meta.env` values during the build, so the runtime host must be the one configured in the environment used for the production build (Vercel build settings).
+
+- If you deploy the mock API (json-server) to a service like Render, ensure the start command points to `server/db.json` (we include `render.yaml` and `Dockerfile` in the repo for convenience).
+
+- To verify production after deploy:
+	1. Open the deployed site.
+ 2. In the browser devtools Network tab, confirm requests go to the API URL defined in `VITE_API_URL` and that the resource path `/producers` returns JSON (HTTP 200).
+
+## Useful commands
+
+- Start both dev server + mock API in one terminal:
+
+```powershell
+npm run dev:all
+```
+
