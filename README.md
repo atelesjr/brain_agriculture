@@ -41,6 +41,14 @@ npm run dev
 
 Open: http://localhost:5173
 
+Alternatively, start both the dev server and the mock API together (single terminal):
+
+```powershell
+npm run dev:all
+```
+
+This runs `vite` and `json-server` concurrently so you can develop without opening multiple terminals.
+
 ## Tests
 
 Run the full deterministic suite (project serial runner):
