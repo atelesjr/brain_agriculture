@@ -35,7 +35,12 @@ const API_BASE = rawBase.replace(/\/+$/, '');
 const RESOURCE = 'producers';
 
 function buildUrl(path = '', params?: Record<string, string | number>) {
-	const url = new URL(`${API_BASE}/${RESOURCE}${path}`);
+	// Ensure no double slashes when combining base, resource and path.
+	// - strip leading slashes from `path`
+	// - ensure base ends with a single slash for URL constructor
+	const cleanPath = path ? path.replace(/^\/+/, '') : '';
+	const baseWithSlash = API_BASE.replace(/\/+$/, '') + '/';
+	const url = new URL(`${RESOURCE}/${cleanPath}`, baseWithSlash);
 	if (params) {
 		Object.entries(params).forEach(([k, v]) =>
 			url.searchParams.append(k, String(v))
