@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: brain-agriculture-api
+    repo: https://github.com/atelesjr/brain_agriculture
+    branch: feat/api-fake-render
+    env: node
+    buildCommand: "npm ci"
+    startCommand: "json-server --watch server/db.json --host 0.0.0.0 --port $PORT"
+    plan: free
