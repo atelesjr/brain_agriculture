@@ -31,7 +31,7 @@ const apiFromProcess =
 		: undefined;
 const rawBase = (apiFromImportMeta || apiFromProcess || DEFAULT_BASE || '').toString();
 // Ensure no trailing slash so we don't produce '...//resource' when concatenating
-const API_BASE = rawBase.replace(/\/+$, '');
+const API_BASE = rawBase.replace(/\/+$/, '');
 const RESOURCE = 'producers';
 
 function buildUrl(path = '', params?: Record<string, string | number>) {
