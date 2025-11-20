@@ -58,7 +58,7 @@ export const DocumentText = styled.span`
 `;
 
 export const AccordionContent = styled.div`
-	padding: 0 16px 12px 46px; /* leave space for arrow */
+	padding: 0 16px 12px 40px; /* leave space for arrow */
 `;
 
 export default AccordionRoot;

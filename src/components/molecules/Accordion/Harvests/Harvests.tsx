@@ -1,7 +1,6 @@
 import type { Safra } from '@/types/producer';
 import type { Farm } from '@/types/producer';
 import {
-	Col,
 	Col2,
 	HarvestContent,
 	Cultures,
@@ -9,6 +8,8 @@ import {
 	HarvestRoot,
 	HarvestValue,
 	HarvestArea,
+	HarvestHeader,
+	HarvestList,
 } from './Harvests.styles';
 import Dropdown from '@/components/atoms/Dropdown';
 import { useState, useEffect } from 'react';
@@ -45,9 +46,9 @@ const Harvest = ({ farm, resetCounter }: HarvestProps) => {
 
 	return (
 		<HarvestRoot>
-			<Col>
+			<HarvestHeader>
 				<Dropdown
-					label="Safras"
+					label="Safras:"
 					items={groupedSafras.map((harvest) => ({
 						id: harvest.year,
 						label: String(harvest.year),
@@ -56,17 +57,17 @@ const Harvest = ({ farm, resetCounter }: HarvestProps) => {
 						},
 					}))}
 				/>
-			</Col>
+			</HarvestHeader>
 			<Col2>
 				{!selectedHarvest ? (
 					<HarvestContent>Selecione uma safra</HarvestContent>
 				) : (
 					<HarvestContent>
-						<Col>
-							<HarvestLabel>Safra:</HarvestLabel>
+						<HarvestHeader>
+							<HarvestLabel>Ano:</HarvestLabel>
 							<HarvestValue>{selectedHarvest.year}</HarvestValue>
-						</Col>
-						<Col>
+						</HarvestHeader>
+						<HarvestList>
 							<HarvestLabel>Culturas:</HarvestLabel>
 							<div>
 								{selectedHarvest.cultures.map((culture, i) => (
@@ -76,7 +77,7 @@ const Harvest = ({ farm, resetCounter }: HarvestProps) => {
 									</Cultures>
 								))}
 							</div>
-						</Col>
+						</HarvestList>
 					</HarvestContent>
 				)}
 			</Col2>

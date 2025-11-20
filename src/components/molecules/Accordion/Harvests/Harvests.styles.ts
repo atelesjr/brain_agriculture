@@ -5,7 +5,7 @@ export const HarvestRoot = styled.div`
 	gap: 8px;
 `;
 
-export const Col = styled.div`
+export const HarvestHeader = styled.div`
 	width: fit-content;
 `;
 
@@ -18,6 +18,10 @@ export const HarvestContent = styled.div`
 	width: fit-content;
 	font-size: 13px;
 	gap: 8px;
+`;
+
+export const HarvestList = styled(HarvestContent)`
+	font-size: 12px;
 `;
 
 export const CulturesList = styled.div`

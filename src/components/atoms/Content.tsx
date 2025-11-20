@@ -6,4 +6,7 @@ export const Content = styled.main`
 	width: 100%;
 	min-width: 32rem;
 	padding: 1rem 4rem;
+	${({ theme }) => theme?.media?.maxTablet} {
+		padding: 1rem 0rem;
+	}
 `;
