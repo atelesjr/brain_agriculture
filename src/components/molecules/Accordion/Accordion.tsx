@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import {
 	AccordionRoot,
 	AccordionHeader,
-	HeaderText,
+	Producer,
 	Highlight,
 	DocumentText,
 	AccordionContent,
 	HeaderLeft,
+	ProducerName,
+	ProducerId,
 } from './Accordion.styles';
 import ArrowIcon from '@/components/atoms/icons/ArrowIcon';
 import { IconButton } from '@/components/atoms/Buttons';
@@ -45,10 +47,13 @@ const Accordion: React.FC<{ item: Farmer }> = ({ item }) => {
 			>
 				<HeaderLeft>
 					<ArrowIcon open={open} width="12" height="12" />
-					<HeaderText>
-						<Highlight>{`id: "${item.id}" - ${item.name}`}</Highlight>
-						<DocumentText>{`${item.documentType}: ${item.document}`}</DocumentText>
-					</HeaderText>
+					<ProducerId>id: {item.id} </ProducerId>
+					<Producer>
+						<Highlight> {item.name}</Highlight>
+						<DocumentText>
+							{`${item.documentType}: ${item.document}`}
+						</DocumentText>
+					</Producer>
 				</HeaderLeft>
 
 				<IconButton
