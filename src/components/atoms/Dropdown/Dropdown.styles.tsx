@@ -10,12 +10,13 @@ export const Toggle = styled.button<{ open?: boolean }>`
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
-	padding: 6px 10px;
+	padding: 4px 8px;
 	border-radius: 6px;
 	border: 1px solid ${({ theme }) => theme.colors.secondary};
 	background: ${({ theme }) => theme.colors.ghost};
 	color: ${({ theme }) => theme.colors.text};
 	font-weight: 600;
+	font-size: 14px;
 	cursor: pointer;
 	transition: background-color 150ms ease;
 
@@ -41,12 +42,12 @@ export const MenuItem = styled.button`
 	display: block;
 	width: 100%;
 	text-align: left;
-	padding: 8px 12px;
+	padding: 6px 8px;
 	background: transparent;
 	border: none;
 	color: ${({ theme }) => theme.colors.text};
 	cursor: pointer;
-	font-size: 0.95rem;
+	font-size: 12px;
 
 	&:hover {
 		background: ${({ theme }) => theme.colors.secondaryHover};
