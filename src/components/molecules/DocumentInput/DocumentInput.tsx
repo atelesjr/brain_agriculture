@@ -2,12 +2,7 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 import type { Control, FieldValues, FieldPath } from 'react-hook-form';
 import Input from '@/components/atoms/Input';
-import {
-	formatDocument,
-	isValidCNPJ,
-	isValidCPF,
-	onlyDigits,
-} from './utils/validations';
+import { useDocumentInput } from './useDocumentInput';
 
 type DocumentInputProps<
 	TFieldValues extends FieldValues = { documento?: string },
@@ -24,42 +19,18 @@ const DocumentInput = <
 	control,
 	name,
 }: DocumentInputProps<TFieldValues, TName>) => {
-	const rules = {
-		required: 'Documento é obrigatório',
-		validate: (val: unknown) => {
-			const digits = String(val ?? '').replace(/\D/g, '');
-			// only accept exact lengths: CPF = 11, CNPJ = 14
-			if (digits.length === 11) {
-				return isValidCPF(digits) || 'CPF inválido';
-			}
-			if (digits.length === 14) {
-				return isValidCNPJ(digits) || 'CNPJ inválido';
-			}
-			return 'Documento deve ser CPF (11 dígitos) ou CNPJ (14 dígitos)';
-		},
-	};
-
-	const handleChange = (
-		e: React.ChangeEvent<HTMLInputElement>,
-		fieldOnChange: (value: string) => void
-	) => {
-		// accept only digits and limit to 14 characters (max for CNPJ)
-		const newDigits = onlyDigits(e.target.value).slice(0, 14);
-		fieldOnChange(newDigits);
-	};
+	// Hook encapsulates mask/validation/change logic
+	const hook = useDocumentInput();
 
 	return (
 		<Controller<TFieldValues, TName>
 			control={control}
 			name={name}
-			rules={rules}
+			rules={hook.rules}
 			render={({ field, fieldState }) => {
-				const raw = String(field.value ?? '');
-				const digits = onlyDigits(raw);
-				const display = formatDocument(digits);
-
-				// identify type: 'cpf' or 'cnpj'
-				const type = digits.length > 11 ? 'cnpj' : 'cpf';
+				// Use hook helper functions
+				const display = hook.format(field.value);
+				const type = hook.detectType(field.value);
 
 				return (
 					<Input
@@ -68,7 +39,7 @@ const DocumentInput = <
 						placeholder="CPF ou CNPJ"
 						value={display}
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-							handleChange(e, field.onChange)
+							hook.handleChange(e.target.value, field.onChange)
 						}
 						onBlur={field.onBlur}
 						error={fieldState.error?.message}

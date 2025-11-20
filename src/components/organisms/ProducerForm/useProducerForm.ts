@@ -7,6 +7,7 @@ import type { ProducerFormValues } from './ProducerForm';
 import type { Farm, Farmer } from '@/types/producer';
 import type { AppDispatch } from '@/store';
 import { createProducer, updateProducer } from '@/store/producersSlice';
+import { formatDocument, onlyDigits } from '@/components/molecules/DocumentInput/utils/validations';
 import { closeModal } from '@/store/modalSlice';
 
 export function useProducerForm(initialProducer?: Farmer) {
@@ -52,11 +53,15 @@ export function useProducerForm(initialProducer?: Farmer) {
 		async (data: ProducerFormValues) => {
 			setSubmitError(null);
 			try {
-				const payload: Omit<Farmer, 'id'> = {
-					document: data.document,
-					// treat empty string as not provided — prefer explicit documentType,
-					// otherwise infer from the document digits
-					documentType: data.documentType || inferDocumentType(data.document),
+				// ensure the stored document value uses the standard mask (e.g. 000.000.000-00)
+				const formattedDocument = data.document ? formatDocument(onlyDigits(String(data.document))) : '';
+					const inferredType = inferDocumentType(formattedDocument);
+					const payload: Omit<Farmer, 'id'> = {
+						document: formattedDocument,
+						// Prefer an inferred document type based on the (new) document digits.
+						// If inference fails (unknown length), fall back to any explicit value
+						// provided in the form (e.g. when user manually selected a type).
+						documentType: inferredType || data.documentType || '',
 					name: data.name,
 					farms,
 				};
