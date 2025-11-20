@@ -7,6 +7,8 @@ export const HeaderRoot = styled.header`
 	padding: 1rem 4rem;
 	background: ${({ theme }) => theme.colors?.background_main ?? '#fff'};
 	border-bottom: 1px solid ${({ theme }) => theme.colors?.muted ?? '#eee'};
+	max-width: 1440px;
+	margin: 0 auto;
 
 	/* keep header fixed at top */
 	position: fixed;

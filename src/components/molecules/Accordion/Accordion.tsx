@@ -7,7 +7,6 @@ import {
 	DocumentText,
 	AccordionContent,
 	HeaderLeft,
-	ProducerName,
 	ProducerId,
 } from './Accordion.styles';
 import ArrowIcon from '@/components/atoms/icons/ArrowIcon';

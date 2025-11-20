@@ -13,7 +13,7 @@ export const Overlay = styled.div`
 
 export const Dialog = styled.div`
 	width: 80%;
-	max-width: calc(100% - 2rem);
+	max-width: 1152px;
 	background: var(--surface, #fff);
 	border-radius: 8px;
 	padding: 20px;
