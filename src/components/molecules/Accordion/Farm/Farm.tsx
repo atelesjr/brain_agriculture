@@ -11,6 +11,7 @@ import {
 	FarmCity,
 	FarmHeader,
 	FarmContent,
+	FarmNotRegistered,
 } from './Farm.styles';
 import Harvest from '../Harvests/Harvests';
 
@@ -21,7 +22,9 @@ interface FarmsProps {
 
 const Farms = ({ farms, resetCounter }: FarmsProps) => {
 	if (farms.length === 0) {
-		return <FarmRoot>Nenhuma propriedade cadastrada.</FarmRoot>;
+		return (
+			<FarmNotRegistered>Nenhuma propriedade cadastrada.</FarmNotRegistered>
+		);
 	}
 
 	return (
@@ -30,9 +33,9 @@ const Farms = ({ farms, resetCounter }: FarmsProps) => {
 				<FarmProperty key={farm.id}>
 					<FarmInfo>
 						<FarmHeader>
-							<FarmName>{farm?.name || 'N/A'}</FarmName> -{' '}
+							<FarmName>{farm?.name || 'N/A'}</FarmName>
 							<FarmCity>
-								{`${farm?.city || 'N/A'} - ${farm?.state || 'N/A'}`}
+								- {`${farm?.city || 'N/A'} - ${farm?.state || 'N/A'}`}
 							</FarmCity>
 						</FarmHeader>
 

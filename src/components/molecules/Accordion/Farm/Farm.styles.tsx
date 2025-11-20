@@ -5,6 +5,10 @@ export const FarmRoot = styled.div`
 	flex-direction: column;
 `;
 
+export const FarmNotRegistered = styled(FarmRoot)`
+	color: ${({ theme }) => theme?.colors?.secondary ?? '#0F172A'};
+`;
+
 export const FarmProperty = styled.div`
 	display: flex;
 	align-items: flex-start;
@@ -12,6 +16,11 @@ export const FarmProperty = styled.div`
 	border-bottom: 1px solid
 		${({ theme }) => theme?.colors?.secondary ?? '#0F172A'};
 	padding: 12px 0px;
+
+	${({ theme }) => theme?.media?.maxTablet} {
+		flex-flow: column;
+		gap: 8px;
+	}
 `;
 
 export const FarmInfo = styled.div`
@@ -37,13 +46,18 @@ export const FarmName = styled.div`
 `;
 
 export const FarmCity = styled.div`
-	font-weight: 400;
+	font-weight: 500;
+	font-size: 14px;
 `;
 
 export const FarmDetails = styled.div`
 	display: flex;
 	gap: 12px;
 	font-size: 14px;
+
+	${({ theme }) => theme?.media?.maxTablet} {
+		font-size: 12px;
+	}
 `;
 
 export const FarmLabel = styled.div`

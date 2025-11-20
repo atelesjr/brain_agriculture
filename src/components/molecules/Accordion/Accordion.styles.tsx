@@ -18,16 +18,26 @@ export const AccordionHeader = styled.div<{ open?: boolean }>`
 		open ? `1px solid ${theme.colors.primary ?? '#eee'}` : 'none'};
 `;
 
-export const HeaderText = styled.div`
+export const Producer = styled.div`
 	display: flex;
 	align-items: center;
-	gap: 20px;
+	gap: 12px;
+
+	${({ theme }) => theme?.media?.maxMobile} {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+`;
+
+export const ProducerName = styled.div`
+	display: flex;
+	justify-content: center;
 `;
 
 export const HeaderLeft = styled.div`
 	display: flex;
 	align-items: center;
-	gap: 12px;
+	gap: 8px;
 	flex: 1 1 auto;
 `;
 
@@ -53,12 +63,17 @@ export const Highlight = styled.span`
 `;
 
 export const DocumentText = styled.span`
-	font-size: 0.9rem;
+	font-size: 12px;
 	color: ${({ theme }) => theme?.colors?.textSecondary ?? '#0F172A'};
 `;
 
+export const ProducerId = styled.div`
+	width: 50px;
+	font-size: 12px;
+`;
+
 export const AccordionContent = styled.div`
-	padding: 0 16px 12px 46px; /* leave space for arrow */
+	padding: 0 16px 12px 40px; /* leave space for arrow */
 `;
 
 export default AccordionRoot;
