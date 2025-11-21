@@ -26,6 +26,7 @@ export const Producer = styled.div`
 	${({ theme }) => theme?.media?.maxMobile} {
 		flex-direction: column;
 		align-items: flex-start;
+		gap: 4px;
 	}
 `;
 

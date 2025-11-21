@@ -5,6 +5,6 @@ export const PageContent = styled.section`
 	flex-flow: column;
 
 	width: 100%;
-	min-width: 36rem;
+	min-width: calc(100% - 40px);
 	box-sizing: border-box;
 `;
