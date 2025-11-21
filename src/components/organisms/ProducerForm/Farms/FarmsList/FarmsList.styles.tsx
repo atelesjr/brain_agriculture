@@ -86,6 +86,10 @@ export const Row = styled.div`
 export const HarvestSection = styled.div<{ hidden?: boolean }>`
 	display: flex;
 	display: ${({ hidden }) => (hidden ? 'none' : 'flex')};
+
+	${({ theme }) => theme?.media?.maxTablet} {
+		padding-left: 20px;
+	}
 `;
 
 export const HarvestsFormRoot = styled.div`
