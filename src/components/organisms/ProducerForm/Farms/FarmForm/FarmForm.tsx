@@ -1,6 +1,12 @@
 import Input from '@/components/atoms/Input';
-import { FarmsFormRoot, ButtonsSection } from '../Farms.styles';
-import { FarmField, HarvestSection, Row } from '../FarmsList/FarmsList.styles';
+import {
+	FarmsFormRoot,
+	ButtonsSection,
+	FarmFormLocation,
+	FarmFormAreaContent,
+	FarmFormHeader,
+} from '../Farms.styles';
+import { FarmField, HarvestSection } from '../FarmsList/FarmsList.styles';
 import HarvestsForm from './HarvestsForm';
 import { Button } from '@/components/atoms';
 import useFarmForm from './useFarmForm';
@@ -43,7 +49,7 @@ const FarmForm = ({ closeForm, index, farms, setFarms }: FarmFormProps) => {
 	return (
 		<FarmsFormRoot>
 			<h4>Adicionar Nova Propriedade</h4>
-			<Row>
+			<FarmFormHeader>
 				<FarmField width="250px">
 					<Input
 						placeholder="Digite o nome da propriedade"
@@ -52,48 +58,55 @@ const FarmForm = ({ closeForm, index, farms, setFarms }: FarmFormProps) => {
 						onChange={(e) => setField('name', e.target.value)}
 					/>
 				</FarmField>
-				<FarmField width="200px">
-					<Input
-						placeholder="Digite o nome do município"
-						label="Município:"
-						value={form.city}
-						onChange={(e) => setField('city', e.target.value)}
-					/>
-				</FarmField>
-				<FarmField width="80px">
-					<Input
-						placeholder="Estado"
-						label="Estado:"
-						value={form.state}
-						onChange={(e) => setField('state', e.target.value)}
-					/>
-				</FarmField>
-				<FarmField width="100px">
-					<Input
-						placeholder="Digite a área cultivável"
-						label="Área cultivável:"
-						value={form.cultivableLand}
-						onChange={(e) => setField('cultivableLand', e.target.value)}
-					/>
-				</FarmField>
-				<FarmField width="100px">
-					<Input
-						placeholder="Digite a área vegetada"
-						label="Área vegetada:"
-						value={form.vegetatedArea}
-						onChange={(e) => setField('vegetatedArea', e.target.value)}
-					/>
-				</FarmField>
-				<FarmField width="100px">
-					<Input
-						placeholder="Calculada automaticamente"
-						label="Área total:"
-						value={form.areaTotal}
-						readOnly
-						error={areaError}
-					/>
-				</FarmField>
-			</Row>
+
+				<FarmFormLocation>
+					<FarmField width="200px">
+						<Input
+							placeholder="Digite o nome do município"
+							label="Município:"
+							value={form.city}
+							onChange={(e) => setField('city', e.target.value)}
+						/>
+					</FarmField>
+					<FarmField width="80px">
+						<Input
+							placeholder="Estado"
+							label="Estado:"
+							value={form.state}
+							onChange={(e) => setField('state', e.target.value)}
+						/>
+					</FarmField>
+				</FarmFormLocation>
+
+				<FarmFormAreaContent>
+					<FarmField width="100px">
+						<Input
+							placeholder="Digite a área cultivável"
+							label="Área cultivável:"
+							value={form.cultivableLand}
+							onChange={(e) => setField('cultivableLand', e.target.value)}
+						/>
+					</FarmField>
+					<FarmField width="100px">
+						<Input
+							placeholder="Digite a área vegetada"
+							label="Área vegetada:"
+							value={form.vegetatedArea}
+							onChange={(e) => setField('vegetatedArea', e.target.value)}
+						/>
+					</FarmField>
+					<FarmField width="100px">
+						<Input
+							placeholder="Calculada automaticamente"
+							label="Área total:"
+							value={form.areaTotal}
+							readOnly
+							error={areaError}
+						/>
+					</FarmField>
+				</FarmFormAreaContent>
+			</FarmFormHeader>
+
 			<HarvestSection>
 				<HarvestsForm initial={harvests} onChange={(h) => setHarvests(h)} />
 			</HarvestSection>

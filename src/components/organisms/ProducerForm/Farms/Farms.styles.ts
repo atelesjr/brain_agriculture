@@ -20,6 +20,29 @@ export const FarmContent = styled.div`
 	gap: 16px;
 `;
 
+export const FarmFormHeader = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	margin-bottom: 8px;
+
+	${({ theme }) => theme.media.maxTablet} {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+	}
+`;
+
+export const FarmFormLocation = styled.div`
+	display: flex;
+	gap: 16px;
+`;
+
+export const FarmFormAreaContent = styled.div`
+	display: flex;
+	gap: 16px;
+`;
+
 export const ButtonsSection = styled.div`
 	display: flex;
 	justify-content: flex-end;
