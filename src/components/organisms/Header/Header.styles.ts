@@ -17,6 +17,10 @@ export const HeaderRoot = styled.header`
 	right: 0;
 	height: 64px;
 	z-index: 1000;
+
+	${({ theme }) => theme?.media?.maxTablet} {
+		padding-inline: 20px;
+	}
 `;
 export const HeaderContent = styled.div`
 	display: flex;
