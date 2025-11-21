@@ -15,7 +15,7 @@ export const media = {
 	desktop: `@media (min-width: ${breakpoints.desktop})`,
 	wide: `@media (min-width: ${breakpoints.wide})`,
 	// Max-width queries
-	maxSmMobile: `@media (max-width: ${breakpoints.mobile})`,
+	maxMdMobile: `@media (max-width: ${breakpoints.mobile})`,
 	maxMobile: `@media (max-width: ${breakpoints.tablet})`,
 	maxTablet: `@media (max-width: ${breakpoints.desktop})`,
 	maxDesktop: `@media (max-width: ${breakpoints.wide})`,

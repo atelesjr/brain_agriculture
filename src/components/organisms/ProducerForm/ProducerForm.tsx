@@ -2,8 +2,9 @@ import {
 	FarmsSection,
 	Field,
 	ProducerForm,
-	Row,
 	ButtonsSection,
+	ProducerInfo,
+	FieldFarmName,
 } from './ProducerForm.styles';
 import Input from '@/components/atoms/Input';
 import DocumentInput from '@/components/molecules/DocumentInput/DocumentInput';
@@ -53,8 +54,8 @@ const ProducerFormComponent: React.FC<{
 
 			<form onSubmit={handleSubmit(onSubmit)}>
 				{/* Nome do produtor using Input atom (registered via react-hook-form) */}
-				<Row>
-					<Field width={'500px'}>
+				<ProducerInfo>
+					<FieldFarmName width={'500px'}>
 						<Input
 							label="Nome do produtor"
 							placeholder="Digite o nome completo"
@@ -62,11 +63,11 @@ const ProducerFormComponent: React.FC<{
 							error={errors.name?.message ?? ''}
 							{...register('name')}
 						/>
-					</Field>
+					</FieldFarmName>
 					<Field width={'200px'}>
 						<DocumentInput control={control} name="document" />
 					</Field>
-				</Row>
+				</ProducerInfo>
 				<FarmsSection>
 					<Farms
 						farms={farms}

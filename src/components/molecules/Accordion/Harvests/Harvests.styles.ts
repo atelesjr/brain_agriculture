@@ -3,6 +3,10 @@ import styled from 'styled-components';
 export const HarvestRoot = styled.div`
 	display: flex;
 	gap: 8px;
+
+	${({ theme }) => theme?.media?.maxMobile} {
+		padding-left: 18px;
+	}
 `;
 
 export const HarvestHeader = styled.div`

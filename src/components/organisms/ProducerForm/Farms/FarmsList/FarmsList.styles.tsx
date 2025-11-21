@@ -16,7 +16,7 @@ export const FarmItem = styled.div`
 export const FarmListHeader = styled.div`
 	display: flex;
 	gap: 12px;
-	align-items: center;
+	align-items: flex-start;
 	cursor: pointer;
 	user-select: none;
 `;
@@ -29,12 +29,51 @@ export const FarmField = styled.div<{ width?: string }>`
 
 export const FarmFieldLabel = styled.div`
 	font-size: 14px;
+
+	${({ theme }) => theme?.media?.maxMobile} {
+		font-size: 12px;
+	}
 `;
 
 export const FarmFieldValue = styled.div<{ $highlight?: boolean }>`
 	color: ${({ theme, $highlight }) =>
 		$highlight ? theme.colors.primary : theme.colors.textSecondary};
 	font-weight: 600;
+
+	${({ theme }) => theme?.media?.maxMobile} {
+		font-size: 12px;
+	}
+`;
+
+export const FarmInfo = styled.div`
+	display: flex;
+
+	${({ theme }) => theme?.media?.maxMobile} {
+		flex-direction: column;
+		gap: 8px;
+	}
+`;
+
+export const FarmInfoContent = styled.div`
+	display: flex;
+	gap: 8px;
+	align-items: center;
+
+	${({ theme }) => theme?.media?.maxMobile} {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+`;
+
+export const FarmAreaContent = styled.div<{ isOpen?: boolean }>`
+	display: flex;
+	flex-flow: wrap;
+	gap: 8px;
+
+	${({ theme }) => theme?.media?.maxMobile} {
+		${({ isOpen }) => (isOpen ? 'display: flex;' : 'display: none;')}
+		flex-direction: column;
+	}
 `;
 
 export const Row = styled.div`
