@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HeaderRoot, Nav, Brand } from './Header.styles';
+import { HeaderRoot, Nav, Brand, HeaderContent } from './Header.styles';
 
 export type NavItem = { to: string; label: string };
 
@@ -16,14 +16,16 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
 	return (
 		<HeaderRoot role="banner" aria-label="Cabeçalho do site">
-			<Brand>{title}</Brand>
-			<Nav role="navigation" aria-label="Navegação principal">
-				{nav.map((n) => (
-					<Link key={n.to} to={n.to}>
-						{n.label}
-					</Link>
-				))}
-			</Nav>
+			<HeaderContent>
+				<Brand>{title}</Brand>
+				<Nav role="navigation" aria-label="Navegação principal">
+					{nav.map((n) => (
+						<Link key={n.to} to={n.to}>
+							{n.label}
+						</Link>
+					))}
+				</Nav>
+			</HeaderContent>
 		</HeaderRoot>
 	);
 };
