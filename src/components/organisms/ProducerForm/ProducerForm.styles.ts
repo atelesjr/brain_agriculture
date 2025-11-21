@@ -17,8 +17,22 @@ export const Row = styled.div`
 	margin-bottom: 8px;
 `;
 
+export const ProducerInfo = styled(Row)`
+	${({ theme }) => theme?.media?.maxMobile} {
+		flex-direction: column;
+		gap: 8px;
+		margin-bottom: 16px;
+	}
+`;
+
 export const Field = styled.div<FieldSectionProps>`
 	width: ${(props) => props.width || '100%'};
+`;
+
+export const FieldFarmName = styled(Field)`
+	${({ theme }) => theme?.media?.maxMobile} {
+		width: 100%;
+	}
 `;
 
 export const FarmsSection = styled.div`

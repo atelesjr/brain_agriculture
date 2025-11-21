@@ -9,6 +9,10 @@ export const Overlay = styled.div`
 	align-items: center;
 	justify-content: center;
 	z-index: 9999;
+
+	${({ theme }) => theme?.media?.maxTablet} {
+		align-items: normal;
+	}
 `;
 
 export const Dialog = styled.div`
@@ -17,14 +21,30 @@ export const Dialog = styled.div`
 	background: var(--surface, #fff);
 	border-radius: 8px;
 	padding: 20px;
+	box-sizing: border-box;
+
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 	position: relative;
+
+	${({ theme }) => theme?.media?.maxTablet} {
+		width: 90%;
+		max-width: 90%;
+	}
+
+	${({ theme }) => theme?.media?.maxMobile} {
+		width: 95%;
+		max-width: 95%;
+	}
 `;
 
 export const CloseBtn = styled.button`
-	position: absolute;
-	right: 12px;
+	/* keep visible while dialog content scrolls */
+	position: sticky;
 	top: 12px;
+	align-self: flex-end;
 	border: none;
 	background: transparent;
 	font-size: 20px;
@@ -33,6 +53,7 @@ export const CloseBtn = styled.button`
 	color: #333;
 	padding: 4px;
 	border-radius: 4px;
+	z-index: 2;
 
 	&:hover {
 		background: rgba(0, 0, 0, 0.06);

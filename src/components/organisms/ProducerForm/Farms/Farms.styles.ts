@@ -4,6 +4,7 @@ export const FarmsFormRoot = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	padding-bottom: 24px;
 `;
 
 export const FarmHeader = styled.div<{ open?: boolean }>`
@@ -17,6 +18,29 @@ export const FarmHeader = styled.div<{ open?: boolean }>`
 export const FarmContent = styled.div`
 	display: flex;
 	flex-direction: column;
+	gap: 16px;
+`;
+
+export const FarmFormHeader = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	margin-bottom: 8px;
+
+	${({ theme }) => theme.media.maxTablet} {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+	}
+`;
+
+export const FarmFormLocation = styled.div`
+	display: flex;
+	gap: 16px;
+`;
+
+export const FarmFormAreaContent = styled.div`
+	display: flex;
 	gap: 16px;
 `;
 

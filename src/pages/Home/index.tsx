@@ -3,7 +3,7 @@ import { PageContent } from '@/components/atoms';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState, AppDispatch } from '@/store';
 import { fetchProducers } from '@/store/producersSlice';
-import Producers from '@/components/organisms/Producers/Producers';
+import ProducersList from '@/components/organisms/ProducersList/ProducersList';
 import { IconButton } from '@/components/atoms/Buttons';
 import { HomeAddProducer, ProducerListContainer } from './Home.styles';
 import { openModal } from '@/store/modalSlice';
@@ -39,7 +39,7 @@ const Home: React.FC = () => {
 			</HomeAddProducer>
 
 			<ProducerListContainer>
-				<Producers producersState={producersState} />
+				<ProducersList producersState={producersState} />
 			</ProducerListContainer>
 		</PageContent>
 	);

@@ -1,11 +1,15 @@
 import React from 'react';
-import { Bar, SkeletonItem, SkeletonRoot } from './ProducersSkeleton.styles';
+import {
+	Bar,
+	SkeletonItem,
+	SkeletonRoot,
+} from './ProducersListSkeleton.styles';
 
-interface ProducersSkeletonProps {
+interface ProducersListSkeletonProps {
 	count?: number;
 }
 
-const ProducersSkeleton: React.FC<ProducersSkeletonProps> = ({
+const ProducersListSkeleton: React.FC<ProducersListSkeletonProps> = ({
 	count = 11,
 }) => {
 	return (
@@ -25,4 +29,4 @@ const ProducersSkeleton: React.FC<ProducersSkeletonProps> = ({
 	);
 };
 
-export default ProducersSkeleton;
+export default ProducersListSkeleton;

@@ -1,9 +1,9 @@
 import { render, screen } from '@/test-utils';
-import Producers from './Producers';
+import ProducersList from './ProducersList';
 import { describe, expect, test, vi } from 'vitest';
 
 // Mock the ProducersSkeleton to render a test id
-vi.mock('./ProducersSkeleton/ProducersSkeleton', () => ({
+vi.mock('./ProducersSkeleton/ProducersListSkeleton', () => ({
 	default: () => <div data-testid="producers-skeleton" />,
 }));
 
@@ -14,10 +14,10 @@ vi.mock('@/components/molecules/Accordion/Accordion', () => ({
 	),
 }));
 
-describe('Producers component', () => {
+describe('ProducersList component', () => {
 	test('renders skeleton when loading', () => {
 		render(
-			<Producers
+			<ProducersList
 				producersState={{ items: [], status: 'loading', error: null }}
 			/>
 		);
@@ -27,7 +27,7 @@ describe('Producers component', () => {
 
 	test('renders error message when failed', () => {
 		render(
-			<Producers
+			<ProducersList
 				producersState={{ items: [], status: 'failed', error: 'boom' }}
 			/>
 		);
@@ -39,7 +39,7 @@ describe('Producers component', () => {
 
 	test('renders empty message when no producers', () => {
 		render(
-			<Producers
+			<ProducersList
 				producersState={{ items: [], status: 'succeeded', error: null }}
 			/>
 		);
@@ -54,7 +54,9 @@ describe('Producers component', () => {
 		];
 
 		render(
-			<Producers producersState={{ items, status: 'succeeded', error: null }} />
+			<ProducersList
+				producersState={{ items, status: 'succeeded', error: null }}
+			/>
 		);
 
 		// both mocked accordions should appear

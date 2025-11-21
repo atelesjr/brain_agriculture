@@ -1,8 +1,11 @@
 import ArrowIcon from '@/components/atoms/icons/ArrowIcon';
 import {
+	FarmAreaContent,
+	FarmInfoContent,
 	FarmField,
 	FarmFieldLabel,
 	FarmFieldValue,
+	FarmInfo,
 	FarmItem,
 	FarmListHeader,
 	FarmListRoot,
@@ -20,7 +23,12 @@ interface FarmListProps {
 	onEdit?: (index: number) => void;
 	onRemove?: (index: number) => void;
 }
-const FarmsList = ({ farms, isEditing = false, onEdit, onRemove }: FarmListProps) => {
+const FarmsList = ({
+	farms,
+	isEditing = false,
+	onEdit,
+	onRemove,
+}: FarmListProps) => {
 	// encapsulate open/reset logic in custom hook
 	const { openId, resetCounters, toggle } = useFormList();
 
@@ -45,60 +53,70 @@ const FarmsList = ({ farms, isEditing = false, onEdit, onRemove }: FarmListProps
 							onClick={() => toggle(farm.id)}
 						>
 							<ArrowIcon open={isOpen} />
-						<FarmField>
-							<FarmFieldValue $highlight>{farm.name}</FarmFieldValue>
-						</FarmField>
-						<FarmField>
-							<FarmFieldLabel>Município:</FarmFieldLabel>
-							<FarmFieldValue>{`${farm.city}-${farm.state}`}</FarmFieldValue>
-						</FarmField>
-						<FarmField>
-							<FarmFieldLabel>Área total:</FarmFieldLabel>
-							<FarmFieldValue>{`${farm.areaTotal}ha`}</FarmFieldValue>
-						</FarmField>
-						<FarmField>
-							<FarmFieldLabel>Área cultivável:</FarmFieldLabel>
-							<FarmFieldValue>{`${farm.cultivableLand}ha`}</FarmFieldValue>
-						</FarmField>
-						<FarmField>
-							<FarmFieldLabel>Área vegetada:</FarmFieldLabel>
-							<FarmFieldValue>{`${farm.vegetatedArea}ha`}</FarmFieldValue>
-						</FarmField>
+							<FarmInfo>
+								<FarmInfoContent>
+									<FarmField>
+										<FarmFieldValue $highlight>{farm.name}</FarmFieldValue>
+									</FarmField>
+									<FarmField>
+										<FarmFieldLabel>Município:</FarmFieldLabel>
+										<FarmFieldValue>{`${farm.city}-${farm.state}`}</FarmFieldValue>
+									</FarmField>
+								</FarmInfoContent>
 
-						{/* action buttons aligned to the extreme right when in edit mode */}
-						<div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
-							{isEditing && (
-								<>
-									<IconButton
-										action="edit"
-										label=""
-										variant="ghost"
-										size="sm"
-										onClick={(e) => {
-											e.stopPropagation();
-											if (onEdit) onEdit(farms.indexOf(farm));
-										}}
-									/>
-									<IconButton
-										action="delete"
-										label=""
-										variant="ghost"
-										size="sm"
-										onClick={(e) => {
-											e.stopPropagation();
-											if (onRemove) onRemove(farms.indexOf(farm));
-										}}
-									/>
-								</>
-							)}
-						</div>
+								<FarmAreaContent isOpen={isOpen}>
+									<FarmField>
+										<FarmFieldLabel>Área total:</FarmFieldLabel>
+										<FarmFieldValue>{`${farm.areaTotal}ha`}</FarmFieldValue>
+									</FarmField>
+									<FarmField>
+										<FarmFieldLabel>Área cultivável:</FarmFieldLabel>
+										<FarmFieldValue>{`${farm.cultivableLand}ha`}</FarmFieldValue>
+									</FarmField>
+									<FarmField>
+										<FarmFieldLabel>Área vegetada:</FarmFieldLabel>
+										<FarmFieldValue>{`${farm.vegetatedArea}ha`}</FarmFieldValue>
+									</FarmField>
+								</FarmAreaContent>
+							</FarmInfo>
 
-					</FarmListHeader>
+							{/* action buttons aligned to the extreme right when in edit mode */}
+							<div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
+								{isEditing && (
+									<>
+										<IconButton
+											action="edit"
+											label=""
+											variant="ghost"
+											size="sm"
+											onClick={(e) => {
+												e.stopPropagation();
+												if (onEdit) onEdit(farms.indexOf(farm));
+											}}
+										/>
+										<IconButton
+											action="delete"
+											label=""
+											variant="ghost"
+											size="sm"
+											onClick={(e) => {
+												e.stopPropagation();
+												if (onRemove) onRemove(farms.indexOf(farm));
+											}}
+										/>
+									</>
+								)}
+							</div>
+						</FarmListHeader>
 
-					<HarvestSection hidden={!isOpen} aria-hidden={!isOpen}>
-						{<Harvest farm={farm} resetCounter={resetCounters[farm.id] ?? 0} />}
-					</HarvestSection>
-
+						<HarvestSection hidden={!isOpen} aria-hidden={!isOpen}>
+							{
+								<Harvest
+									farm={farm}
+									resetCounter={resetCounters[farm.id] ?? 0}
+								/>
+							}
+						</HarvestSection>
 					</FarmItem>
 				);
 			})}
