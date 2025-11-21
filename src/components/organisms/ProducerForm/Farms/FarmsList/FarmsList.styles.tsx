@@ -92,6 +92,13 @@ export const HarvestSection = styled.div<{ hidden?: boolean }>`
 	}
 `;
 
+export const HarvestFormSection = styled(HarvestSection)`
+	${({ theme }) => theme?.media?.maxTablet} {
+		padding-left: 0px;
+	}
+	margin-bottom: 16px;
+`;
+
 export const HarvestsFormRoot = styled.div`
 	display: flex;
 	margin-right: 16px;
@@ -99,6 +106,14 @@ export const HarvestsFormRoot = styled.div`
 	& > h5 {
 		margin-right: 24px;
 	}
+
+	${({ theme }) => theme?.media?.maxTablet} {
+		flex-flow: column;
+	}
+`;
+
+export const HarvestFormItem = styled(Row)`
+	gap: 8px;
 `;
 
 export const BottomSection = styled.div`
