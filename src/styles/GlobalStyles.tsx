@@ -32,6 +32,12 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.primary};
   }
 
+  h1 {
+    ${({ theme }) => theme?.media?.maxMobile} {
+    font-size: 1.5em;
+    }
+  }
+
   h1, h2, h3 {
     margin-bottom: 16px;
   }
