@@ -22,8 +22,6 @@ export const Dialog = styled.div`
 	border-radius: 8px;
 	padding: 20px;
 	box-sizing: border-box;
-	/* limit height to viewport with some breathing room and allow internal scroll */
-	max-height: calc(100vh - 80px);
 
 	overflow: auto;
 	display: flex;

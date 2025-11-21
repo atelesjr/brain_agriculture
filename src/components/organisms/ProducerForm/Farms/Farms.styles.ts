@@ -4,6 +4,7 @@ export const FarmsFormRoot = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	padding-bottom: 24px;
 `;
 
 export const FarmHeader = styled.div<{ open?: boolean }>`
