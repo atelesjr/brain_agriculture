@@ -42,6 +42,11 @@ export const HeaderLeft = styled.div`
 	flex: 1 1 auto;
 `;
 
+export const HeaderButtonsArea = styled.div`
+	display: flex;
+	gap: 4px;
+`;
+
 export const IconButton = styled.button`
 	display: inline-flex;
 	align-items: center;

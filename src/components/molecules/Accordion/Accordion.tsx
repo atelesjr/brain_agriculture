@@ -8,6 +8,7 @@ import {
 	AccordionContent,
 	HeaderLeft,
 	ProducerId,
+	HeaderButtonsArea,
 } from './Accordion.styles';
 import ArrowIcon from '@/components/atoms/icons/ArrowIcon';
 import { IconButton } from '@/components/atoms/Buttons';
@@ -54,29 +55,30 @@ const Accordion: React.FC<{ item: Farmer }> = ({ item }) => {
 						</DocumentText>
 					</Producer>
 				</HeaderLeft>
-
-				<IconButton
-					action="edit"
-					label="Editar"
-					variant="primary"
-					size="sm"
-					onClick={(e) => {
-						e.stopPropagation();
-						// open modal with ProducerForm in edit mode (pass initialProducer)
-						const EditForm = <ProducerForm initialProducer={item} />;
-						void dispatch(openModal(EditForm));
-					}}
-				/>
-				<IconButton
-					action="delete"
-					label="Excluir"
-					variant="primary"
-					size="sm"
-					onClick={(e) => {
-						e.stopPropagation();
-						void dispatch(deleteProducerAction(item.id));
-					}}
-				/>
+				<HeaderButtonsArea>
+					<IconButton
+						action="edit"
+						label="Editar"
+						variant="primary"
+						size="sm"
+						onClick={(e) => {
+							e.stopPropagation();
+							// open modal with ProducerForm in edit mode (pass initialProducer)
+							const EditForm = <ProducerForm initialProducer={item} />;
+							void dispatch(openModal(EditForm));
+						}}
+					/>
+					<IconButton
+						action="delete"
+						label="Excluir"
+						variant="primary"
+						size="sm"
+						onClick={(e) => {
+							e.stopPropagation();
+							void dispatch(deleteProducerAction(item.id));
+						}}
+					/>
+				</HeaderButtonsArea>
 			</AccordionHeader>
 
 			<AccordionContent hidden={!open} aria-hidden={!open}>
