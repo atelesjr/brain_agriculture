@@ -4,10 +4,10 @@ export const HeaderRoot = styled.header`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 1rem 4rem;
+	width: 100%;
+	padding: 10px 40px;
 	background: ${({ theme }) => theme.colors?.background_main ?? '#fff'};
 	border-bottom: 1px solid ${({ theme }) => theme.colors?.muted ?? '#eee'};
-	max-width: 1440px;
 	margin: 0 auto;
 
 	/* keep header fixed at top */
@@ -17,6 +17,14 @@ export const HeaderRoot = styled.header`
 	right: 0;
 	height: 64px;
 	z-index: 1000;
+`;
+export const HeaderContent = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	max-width: 1552px;
+	margin: 0 auto;
 `;
 
 export const Brand = styled.h1`
