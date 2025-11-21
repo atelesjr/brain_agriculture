@@ -1,6 +1,9 @@
 import Input from '@/components/atoms/Input';
-import { Row } from '../../ProducerForm.styles';
-import { BottomSection, FarmField } from '../FarmsList/FarmsList.styles';
+import {
+	BottomSection,
+	FarmField,
+	HarvestFormItem,
+} from '../FarmsList/FarmsList.styles';
 import { IconButton } from '@/components/atoms/Buttons';
 import addIcon from '@/assets/add.svg';
 import garbageIcon from '@/assets/garbage.svg';
@@ -29,7 +32,7 @@ const HarvestItem = ({
 	removeHarvest,
 }: HarvestItemProps) => {
 	return (
-		<Row>
+		<HarvestFormItem>
 			<FarmField width="80px">
 				<Input
 					placeholder="Ano"
@@ -74,7 +77,7 @@ const HarvestItem = ({
 					onClick={() => removeHarvest(index)}
 				/>
 			</BottomSection>
-		</Row>
+		</HarvestFormItem>
 	);
 };
 

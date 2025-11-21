@@ -6,7 +6,7 @@ import {
 	FarmFormAreaContent,
 	FarmFormHeader,
 } from '../Farms.styles';
-import { FarmField, HarvestSection } from '../FarmsList/FarmsList.styles';
+import { FarmField, HarvestFormSection } from '../FarmsList/FarmsList.styles';
 import HarvestsForm from './HarvestsForm';
 import { Button } from '@/components/atoms';
 import useFarmForm from './useFarmForm';
@@ -107,9 +107,9 @@ const FarmForm = ({ closeForm, index, farms, setFarms }: FarmFormProps) => {
 				</FarmFormAreaContent>
 			</FarmFormHeader>
 
-			<HarvestSection>
+			<HarvestFormSection>
 				<HarvestsForm initial={harvests} onChange={(h) => setHarvests(h)} />
-			</HarvestSection>
+			</HarvestFormSection>
 
 			<ButtonsSection>
 				<Button
