@@ -21,6 +21,13 @@ export const Dialog = styled.div`
 	background: var(--surface, #fff);
 	border-radius: 8px;
 	padding: 20px;
+	box-sizing: border-box;
+	/* limit height to viewport with some breathing room and allow internal scroll */
+	max-height: calc(100vh - 80px);
+
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 	position: relative;
 
@@ -36,9 +43,10 @@ export const Dialog = styled.div`
 `;
 
 export const CloseBtn = styled.button`
-	position: absolute;
-	right: 12px;
+	/* keep visible while dialog content scrolls */
+	position: sticky;
 	top: 12px;
+	align-self: flex-end;
 	border: none;
 	background: transparent;
 	font-size: 20px;
@@ -47,6 +55,7 @@ export const CloseBtn = styled.button`
 	color: #333;
 	padding: 4px;
 	border-radius: 4px;
+	z-index: 2;
 
 	&:hover {
 		background: rgba(0, 0, 0, 0.06);
