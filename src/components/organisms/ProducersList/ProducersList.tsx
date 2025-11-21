@@ -1,8 +1,9 @@
 import Accordion from '@/components/molecules/Accordion/Accordion';
 import type { Farmer } from '@/types/producer';
-import ProducersSkeleton from './ProducersSkeleton/ProducersSkeleton';
+import ProducersListSkeleton from './ProducersListSkeleton/ProducersListSkeleton';
+import { ProducersListMessages } from './ProducersList.styles';
 
-interface ProducersProps {
+interface ProducersListProps {
 	producersState: {
 		items: Farmer[];
 		status: 'idle' | 'loading' | 'succeeded' | 'failed';
@@ -10,23 +11,27 @@ interface ProducersProps {
 	};
 }
 
-const Producers = ({ producersState }: ProducersProps) => {
+const ProducersList = ({ producersState }: ProducersListProps) => {
 	return (
 		<>
 			{producersState.status === 'loading' ? (
-				<ProducersSkeleton count={11} />
+				<ProducersListSkeleton count={11} />
 			) : producersState.status === 'failed' ? (
-				<p>Falha ao carregar produtores: {producersState.error}</p>
+				<ProducersListMessages>
+					Falha ao carregar produtores: {producersState.error}
+				</ProducersListMessages>
 			) : producersState.items && producersState.items.length > 0 ? (
 				// Render all producers
 				producersState.items.map((producer: Farmer) => (
 					<Accordion key={producer.id} item={producer} />
 				))
 			) : (
-				<p>Nenhum produtor cadastrado.</p>
+				<ProducersListMessages>
+					Nenhum produtor cadastrado.
+				</ProducersListMessages>
 			)}
 		</>
 	);
 };
 
-export default Producers;
+export default ProducersList;
