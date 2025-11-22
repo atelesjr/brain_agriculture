@@ -65,7 +65,6 @@ export const LegendWrapper = styled.div`
 	width: 100%;
 	justify-content: center;
 	align-items: center;
-	margin-top: 22px;
 `;
 
 export const LegendItem = styled.div`
