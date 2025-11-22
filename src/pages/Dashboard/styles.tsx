@@ -6,12 +6,23 @@ export const Grid = styled.div`
 	gap: 1rem;
 	width: 100%;
 	margin-top: 1rem;
+
+	${({ theme }) => theme?.media?.maxTablet} {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto 1fr;
+	}
 `;
+
+export const TextAreaSection = styled.div``;
 
 export const StatsColumn = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
+
+	${({ theme }) => theme?.media?.maxTablet} {
+		flex-direction: row;
+	}
 `;
 
 export const ChartsGrid = styled.div`
