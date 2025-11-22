@@ -15,6 +15,7 @@ import {
 	LegendSwatch,
 } from '../styles';
 import { COLORS } from '../constants';
+import useResponsiveSizes from '@/hooks/useResponsiveSizes';
 
 type Datum = { name: string; value: number };
 
@@ -32,6 +33,16 @@ const ChartsPanel: React.FC<Props> = ({
 	byState,
 	colors = COLORS,
 }) => {
+	// responsive sizes from hook
+	const {
+		smallHeight,
+		mediumHeight,
+		smallOuter,
+		smallInner,
+		largeOuter,
+		largeInner,
+	} = useResponsiveSizes();
+
 	interface LegendEntry {
 		value: string;
 		color?: string;
@@ -57,14 +68,14 @@ const ChartsPanel: React.FC<Props> = ({
 		<>
 			<ChartCard>
 				<StatLabel>Por Cultura Plantada (ha):</StatLabel>
-				<ResponsiveContainer width="100%" height={380}>
+				<ResponsiveContainer width="100%" height={smallHeight}>
 					<PieChart margin={{ top: 24, right: 24, bottom: 24, left: 24 }}>
 						<Pie
 							data={byCulture}
 							dataKey="value"
 							nameKey="name"
-							outerRadius={150}
-							innerRadius={70}
+							outerRadius={smallOuter}
+							innerRadius={smallInner}
 							label
 						>
 							{byCulture.map((_, i) => (
@@ -88,14 +99,14 @@ const ChartsPanel: React.FC<Props> = ({
 
 			<ChartCard>
 				<StatLabel>Uso do Solo:</StatLabel>
-				<ResponsiveContainer width="100%" height={380}>
+				<ResponsiveContainer width="100%" height={smallHeight}>
 					<PieChart margin={{ top: 24, right: 24, bottom: 24, left: 24 }}>
 						<Pie
 							data={landUse}
 							dataKey="value"
 							nameKey="name"
-							outerRadius={150}
-							innerRadius={70}
+							outerRadius={smallOuter}
+							innerRadius={smallInner}
 							label
 						>
 							{landUse.map((_, i) => (
@@ -118,14 +129,14 @@ const ChartsPanel: React.FC<Props> = ({
 
 			<ChartCard style={{ gridColumn: '1 / -1', minHeight: 560 }}>
 				<StatLabel>Por Estado (nº de propriedades):</StatLabel>
-				<ResponsiveContainer width="100%" height={520}>
+				<ResponsiveContainer width="100%" height={mediumHeight}>
 					<PieChart margin={{ top: 36, right: 36, bottom: 36, left: 36 }}>
 						<Pie
 							data={byState}
 							dataKey="value"
 							nameKey="name"
-							outerRadius={200}
-							innerRadius={100}
+							outerRadius={largeOuter}
+							innerRadius={largeInner}
 							label
 						>
 							{byState.map((_, i) => (

@@ -29,7 +29,12 @@ const apiFromProcess =
 	typeof process !== 'undefined'
 		? (process.env.REACT_APP_API_URL as string | undefined)
 		: undefined;
-const rawBase = (apiFromImportMeta || apiFromProcess || DEFAULT_BASE || '').toString();
+const rawBase = (
+	apiFromImportMeta ||
+	apiFromProcess ||
+	DEFAULT_BASE ||
+	''
+).toString();
 // Ensure no trailing slash so we don't produce '...//resource' when concatenating
 const API_BASE = rawBase.replace(/\/+$/, '');
 const RESOURCE = 'producers';

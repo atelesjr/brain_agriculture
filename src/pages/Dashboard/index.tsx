@@ -20,7 +20,7 @@ const Dashboard: React.FC = () => {
 
 	return (
 		<PageContent>
-			<h1>Dashboard</h1>
+			<h1>Painel</h1>
 
 			<Grid>
 				<StatsColumn>
