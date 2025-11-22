@@ -1,30 +1,24 @@
-FROM node:20-alpine
+FROM node:24.11.1-alpine
 
 WORKDIR /app
 
-# Install only production dependencies
+# Copy package files and install only production dependencies
+# json-server is a dependency in package.json so it will be installed
 COPY package.json package-lock.json* ./
 RUN npm ci --omit=dev
-
-# Copy repo files
-COPY . .
-
-EXPOSE 10000
-
-# Start json-server using Render's $PORT or fallback to 10000
-CMD ["sh", "-c", "npx json-server --watch server/db.json --host 0.0.0.0 --port ${PORT:-10000}"]
-FROM node:18-alpine
-
-WORKDIR /app
-
-# Copy package files and install production dependencies
-COPY package.json package-lock.json* ./
-RUN npm ci --production || npm install --production
 
 # Copy only the server data needed for json-server
 COPY server ./server
 
 EXPOSE 3000
 
-# Start json-server on the provided PORT (if set by the host) or 3000
-CMD ["sh","-c","npx json-server --host 0.0.0.0 --port ${PORT:-3000} --watch server/db.json"]
+# Start json-server using the npm script and honor PORT if provided by the host
+# Avoid using `npx` at runtime to reduce supply-chain surface
+## Create a non-root user and ensure ownership of the app directory
+RUN addgroup -S app && adduser -S app -G app
+RUN chown -R app:app /app
+
+# Switch to non-root user for runtime
+USER app
+
+CMD ["sh", "-c", "npm run server -- --port ${PORT:-3000}"]
